@@ -1,358 +1,3 @@
-You are helping me plan and build a portfolio website for a photographer.
-
-Goal:
-Create a clean, elegant, minimalist photography portfolio website that feels premium, loads fast, and showcases a curated body of work.
-
-Constraints:
-- The site must be free to build and free to host.
-- It should work well as a static site.
-- Avoid expensive tools, paid plugins, or complex backend dependencies.
-- The design should prioritize images, whitespace, and simplicity.
-- The portfolio should feel professional, modern, and easy to navigate.
-
-Audience:
-- Potential clients looking for a photographer.
-- People viewing the photographer’s best work.
-- The photographer wants to look polished, credible, and memorable.
-
-Primary pages:
-- Home
-- Portfolio / Galleries
-- About
-- Services or Pricing
-- Contact
-- Optional: Testimonials, FAQ, Blog, or Booking
-
-Design direction:
-- Minimalist, gallery-first layout.
-- Large imagery, clean typography, subtle transitions.
-- Mobile-first responsive design.
-- Easy navigation with clear calls to action.
-- No clutter, no heavy animations, no distracting elements.
-
-Content strategy:
-- Curate 20–30 of the strongest images total.
-- Group work into a few meaningful categories.
-- Keep text short and confident.
-- Include a short bio, specialties, location, services, and contact info.
-- Make the homepage instantly communicate style and niche.
-
-Technical direction:
-- Prefer a static site architecture.
-- Optimize images for web performance.
-- Use lazy loading where appropriate.
-- Ensure SEO basics: page titles, meta descriptions, alt text, and structured headings.
-- Include accessibility best practices.
-
-Deliverables I want from you:
-1. A recommended site structure / sitemap.
-2. A content outline for each page.
-3. A visual style guide with fonts, colors, spacing, and mood.
-4. Suggested free hosting options and the best choice for this project.
-5. A recommended tech stack for a static portfolio.
-6. A step-by-step build plan.
-7. A list of pitfalls to avoid for a photography portfolio.
-8. If helpful, ask me any clarifying questions before finalizing.
-
-Important:
-Before giving code, first give me a detailed plan and recommended structure.
-
-
-After that walk me through how i could host this on github for free.
-
-5:27 PM
-Architected comprehensive portfolio strategy and GitHub hosting walkthrough
-Photography Portfolio — Complete Build Plan
-
-Here's everything you need before writing a single line of code.
-1. Sitemap & Site Structure
-
-/                    → Home
-/portfolio           → Portfolio (gallery overview)
-  /portfolio/weddings
-  /portfolio/portraits
-  /portfolio/landscapes
-/about               → About
-/services            → Services & Pricing
-/contact             → Contact
-/testimonials        → (Optional)
-
-Keep it flat. Deep nesting kills portfolio sites.
-2. Content Outline Per Page
-
-Home
-
-    Full-bleed hero image (your single best shot) + one-line tagline
-    3–4 image teasers linking to gallery categories
-    1–2 sentence mission statement
-    CTA: "View My Work" → Portfolio
-
-Portfolio
-
-    Category cards (3–5 max) with a cover image each
-    On click → masonry or grid gallery for that category
-    6–10 images per category, curated ruthlessly
-
-About
-
-    Professional headshot
-    2–3 short paragraphs: who you are, your style, your story
-    Location + availability
-    CTA: "Work With Me" → Contact
-
-Services / Pricing
-
-    3–4 service tiers in a clean card layout
-    What's included per tier
-    Starting-from pricing (or "inquire" if you prefer)
-    FAQ accordion (3–6 common questions)
-    CTA: "Get in Touch"
-
-Contact
-
-    Simple form: Name, Email, Event type, Date, Message
-    Location/timezone info
-    Response time expectation ("I reply within 24 hours")
-    Optional: Social links
-
-3. Visual Style Guide
-
-Typography
-Role	Font	Source
-Headings	Cormorant Garamond (serif, elegant)	Google Fonts
-Body	Inter or DM Sans (clean, readable)	Google Fonts
-Accent/Label	Jost (spaced uppercase)	Google Fonts
-
-Use 2 fonts max. Never 3.
-
-Color Palette
-Name	Hex	Use
-Off-white	#F9F7F4
-	Page background
-Near-black	#1A1A1A
-	Body text
-Warm gray	#8A8A8A
-	Captions, labels
-Accent	#C9A96E
-	CTAs, links, hover states
-Pure white	#FFFFFF
-	Cards, nav background
-
-Spacing System — use multiples of 8px: 8 / 16 / 24 / 32 / 48 / 64 / 96px
-
-Mood
-
-    Lots of whitespace — images breathe
-    No gradients, no drop shadows
-    Thin borders (1px solid #eee) over box shadows
-    Subtle fade-in transitions (opacity 0.4s ease) only
-
-4. Free Hosting Options
-Option	Pros	Cons
-GitHub Pages ✅	Free, reliable, custom domain, SSL	No server-side code
-Netlify	Free tier, form handling built-in	Bandwidth limits
-Vercel	Fast CDN, easy deploys	Geared toward frameworks
-Cloudflare Pages	Fastest CDN globally, generous free tier	Slightly more setup
-
-Best choice: GitHub Pages + Netlify Forms combo. Host on GitHub Pages for simplicity and version control. Use Netlify's free form endpoint to handle the contact form without any backend.
-5. Recommended Tech Stack
-
-Keep it dead simple:
-
-HTML5                → Structure
-CSS3 (custom)        → All styling — no Bootstrap, no Tailwind
-Vanilla JavaScript   → Lightbox, lazy loading, mobile nav
-No build tools       → Just files in a folder
-
-Optional light additions:
-
-    GLightbox — free, zero-dependency image lightbox
-    Masonry.js — natural grid layouts for galleries (4KB)
-
-Do NOT use:
-
-    WordPress (overkill, slow)
-    React/Next.js (unnecessary complexity for static content)
-    jQuery (dead weight in 2026)
-
-6. Step-by-Step Build Plan
-
-Phase 1 — Foundation (Day 1)
-
-    Create folder structure: /css, /js, /images, /pages
-    Build index.html with semantic HTML (<header>, <main>, <footer>, <nav>)
-    Write style.css with CSS variables for your color/font system
-    Build the nav — hamburger menu for mobile
-
-Phase 2 — Core Pages (Days 2–3) 5. Build Home: hero image, category teasers, CTA 6. Build Portfolio: category index page + 3 gallery pages 7. Add lazy loading: loading="lazy" on all <img> tags 8. Add GLightbox to gallery pages
-
-Phase 3 — Supporting Pages (Day 4) 9. Build About page 10. Build Services/Pricing page 11. Build Contact page with Netlify Forms (<form netlify>)
-
-Phase 4 — Polish & Performance (Day 5) 12. Compress all images: use Squoosh → WebP format, aim under 200KB each 13. Add <meta> descriptions and <title> tags to every page 14. Add alt text to every image 15. Test on mobile (Chrome DevTools) 16. Run PageSpeed Insights — target 90+ score
-
-Phase 5 — Launch (Day 6) 17. Push to GitHub 18. Enable GitHub Pages 19. (Optional) Connect custom domain
-7. Pitfalls to Avoid
-
-Performance killers
-
-    Uploading raw camera files (5–20MB each) directly — always compress first
-    Not using WebP format — it's 30–50% smaller than JPG with same quality
-    Too many fonts loaded from Google Fonts
-
-Design mistakes
-
-    Putting the bio on the homepage — keep home about the work
-    Using a dark background unless your work specifically calls for it
-    Overloading galleries — 8 perfect images beat 40 mediocre ones
-    Tiny CTA buttons — they need to be obvious on mobile
-
-SEO/Accessibility gaps
-
-    Missing alt text on images (also hurts SEO)
-    No lang="en" on the <html> tag
-    Low color contrast on text
-    Images with no width/height attributes (causes layout shift)
-
-Business mistakes
-
-    No clear way to contact you above the fold
-    Hiding your location — clients want local photographers
-    No pricing signal at all — "inquire for rates" with zero context loses clients
-
-8. Clarifying Questions
-
-Before you start, I'd love to know:
-
-    Photography niche — weddings, portraits, nature, commercial, street? This shapes everything from category names to color palette to tone of copy.
-    Do you have images ready, or do we need to plan around placeholder images for now?
-    Custom domain? (e.g. janedoephoto.com) — or are you fine with username.github.io for now?
-    Contact form — do you want a simple email link, or a full form with fields?
-
-Hosting on GitHub Pages — Step by Step
-
-Here's the complete walkthrough:
-
-Step 1 — Create a GitHub account Go to github.com and sign up if you don't have one. Free accounts get unlimited public repos with Pages hosting.
-
-Step 2 — Create a new repository
-
-    Click New repository
-    Name it exactly: username.github.io (replace username with your GitHub username)
-    Set it to Public
-    Check "Add a README" — click Create repository
-
-This special name tells GitHub to treat it as your Pages site automatically.
-
-Step 3 — Upload your files Two ways to do this:
-
-Option A — Browser upload (easiest to start):
-
-    Go to your repo → click Add file → Upload files
-    Drag your index.html, /css, /js, /images folders in
-    Commit directly to main
-
-Option B — Git (recommended, lets you update easily):
-bash
-
-git clone https://github.com/username/username.github.io
-# Copy your files into that folder
-git add .
-git commit -m "Initial portfolio launch"
-git push origin main
-
-Step 4 — Enable GitHub Pages
-
-    Go to your repo → Settings → Pages
-    Under "Source," select Deploy from a branch
-    Branch: main / Folder: / (root)
-    Click Save
-
-GitHub will give you a green banner with your live URL: https://username.github.io
-
-It takes 1–2 minutes to go live the first time. Every future push auto-deploys in under 60 seconds.
-
-Step 5 — Connect a custom domain (optional but recommended)
-
-    Buy a domain at Namecheap (~$10/year for .com)
-    In your repo's Settings → Pages → Custom domain, enter www.yourdomain.com
-    At your registrar's DNS settings, add:
-        4 A records pointing to GitHub's IPs: 185.199.108.153, .109.153, .110.153, .111.153
-        1 CNAME record: www → username.github.io
-    Check "Enforce HTTPS" — GitHub provides a free SSL certificate automatically
-
-Step 6 — Handle the contact form GitHub Pages is static — no PHP, no server. The cleanest free workaround:
-
-    Sign up at Netlify (free)
-    Add netlify attribute to your form: <form name="contact" netlify>
-    Submissions go to your Netlify dashboard and can be emailed to you
-    You keep your GitHub Pages host — just point your form action to Netlify's endpoint
-
-Ready to build? Share your niche and I'll generate the full HTML/CSS starter files tailored to your specific style — complete with the color palette, fonts, and layout structure above.
-
-Just put placeholders for now I'll add more detail later after I see the first draft. Make sure it's professional as posible. Also maybe a little edgy.
-5:30 PM
-Architected dark, editorial photography portfolio with asymmetric layouts
-
-Here's your first draft. What's in it:
-
-Design choices made for "professional + edgy":
-
-    Dark theme (#0A0A0A) — photography looks better on dark, and it reads as confident rather than decorative
-    Bodoni Moda for headlines — high-contrast, fashion-editorial, a little severe in the best way
-    Syne for body — geometric, slightly unconventional, not overused
-    Red accent (#E8383D) — not apologetic gold or safe blue; it punctuates without screaming
-    Film grain texture baked in via SVG — adds tactility
-    Custom red cursor dot with a lagging ring — immediately signals this isn't a template
-    Asymmetric 12-column portfolio grid — breaks the expected even-grid monotony
-
-What's fully built:
-
-    Sticky nav with scroll-blur + mobile hamburger overlay
-    Full-viewport hero with gradient overlay and scroll indicator
-    7-image asymmetric portfolio grid with hover reveal
-    About section with offset-border image frame + stats
-    3-tier services/pricing in a ruled grid
-    Testimonials with quote styling
-    Contact section with sticky left column + Netlify-ready form
-    Footer
-
-To customize it, just swap:
-
-    JANE DOE → your name everywhere
-    Placeholder bio text in the About section
-    $000 pricing with real numbers
-    picsum.photos image URLs with your actual photos
-    hello@yourdomain.com and @yourhandle with real contact info
-
-What would you like to adjust first — the color palette, layout, typography, or content?
-Index
-Code · HTML 
-
-lets keep working on it:
-9:53 PM
-Inventoried completed features and identified enhancement opportunities
-
-Nice brief — a lot of what it describes is already in the current build. Let me check what's done vs. what's still open, then we can prioritize.
-
-What's already live:
-
-    Graph paper canvas with pan + zoom
-    Photo nodes clustered by project with ellipse rings
-    Bezier connection lines (within + cross-project)
-    Click-to-expand detail panel with tags, description, related photos
-    Project filter pills
-    Hover lift, selected glow, Locate button
-    Mobile responsive
-
-What's still on the table from your brief:
-
-What would you like to tackle next?
-
-Pick whichever combination feels right and I'll get to work on it.
-What should we work on next?
-1 of 2
-0 selected
-Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -362,18 +7,18 @@ Index · HTML
   <meta name="description" content="Photography portfolio of Jane Doe — an interactive visual map spanning portraiture, weddings, landscapes, commercial work, and fine art.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
- 
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
     :root {
       --bg:    #F8F7F5;
       --text:  #1A1A1A;
       --muted: #9A9A9A;
       --nav-h: 56px;
     }
- 
+
     html, body {
       width: 100%; height: 100%;
       overflow: hidden;
@@ -381,397 +26,770 @@ Index · HTML
       background: var(--bg);
       color: var(--text);
     }
- 
+
     /* ══════════════════════════════════
-       CANVAS WRAPPER
+       CANVAS
     ══════════════════════════════════ */
     #canvas-wrapper {
       position: fixed;
       top: var(--nav-h); left: 0; right: 0; bottom: 0;
-      overflow: hidden;
-      cursor: grab;
+      overflow: hidden; cursor: grab;
     }
     #canvas-wrapper.grabbing { cursor: grabbing; }
- 
+
     #canvas {
-      position: absolute;
-      top: 0; left: 0;
-      width: 3000px; height: 2400px;
+      position: absolute; top: 0; left: 0;
+      width: 3200px; height: 2600px;
       transform-origin: 0 0;
       will-change: transform;
       background-color: var(--bg);
       background-image:
-        linear-gradient(rgba(0,0,0,0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.055) 1px, transparent 1px),
-        linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+        linear-gradient(rgba(0,0,0,0.052) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.052) 1px, transparent 1px),
+        linear-gradient(rgba(0,0,0,0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.024) 1px, transparent 1px);
       background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
     }
- 
-    /* ══════════════════════════════════
-       SVG LAYERS
-    ══════════════════════════════════ */
+
     .canvas-svg {
       position: absolute; top: 0; left: 0;
-      width: 3000px; height: 2400px;
+      width: 3200px; height: 2600px;
       pointer-events: none;
     }
- 
+
     /* ══════════════════════════════════
-       PHOTO NODES
+       NODES
     ══════════════════════════════════ */
     .photo-node {
       position: absolute;
-      width: 188px;
-      background: #FFFFFF;
+      width: 192px;
+      background: #FFF;
       border: 1px solid rgba(0,0,0,0.09);
       border-radius: 3px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 14px rgba(0,0,0,0.04);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 3px 12px rgba(0,0,0,0.04);
       cursor: pointer;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%,-50%);
       will-change: box-shadow, transform;
-      transition: box-shadow .28s ease, border-color .28s ease, transform .28s ease;
+      transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease, opacity .35s ease;
       overflow: hidden;
     }
     .photo-node:hover {
-      box-shadow: 0 6px 20px rgba(0,0,0,0.11), 0 14px 44px rgba(0,0,0,0.07);
-      border-color: rgba(0,0,0,0.14);
-      transform: translate(-50%, -50%) scale(1.03);
+      box-shadow: 0 6px 22px rgba(0,0,0,0.11), 0 16px 48px rgba(0,0,0,0.07);
+      transform: translate(-50%,-50%) scale(1.035);
+      border-color: rgba(0,0,0,0.15);
       z-index: 10 !important;
-      transition-duration: .18s;
+      transition-duration: .16s;
     }
     .photo-node.selected {
-      border-color: var(--proj-color, #555);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1), 0 14px 44px rgba(0,0,0,0.07), 0 0 0 3px var(--proj-glow, rgba(80,80,80,.14));
+      border-color: var(--pc, #555);
+      box-shadow: 0 6px 22px rgba(0,0,0,0.1), 0 16px 48px rgba(0,0,0,0.07),
+                  0 0 0 3px var(--pg, rgba(80,80,80,.15));
       z-index: 20 !important;
     }
-    .node-img-wrap {
-      width: 100%; aspect-ratio: 4/3;
-      overflow: hidden; background: #ECEAE6;
-    }
-    .node-img-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
+    .photo-node.dimmed { opacity: 0.12; pointer-events: none; }
+
+    .node-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #ECEAE6; }
+    .node-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
       transition: transform .45s ease;
     }
-    .photo-node:hover .node-img-wrap img { transform: scale(1.07); }
+    .photo-node:hover .node-img img { transform: scale(1.07); }
+
     .node-meta {
-      padding: 10px 12px 11px;
+      padding: 9px 11px 10px;
       border-top: 1px solid rgba(0,0,0,0.05);
     }
     .node-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13px; font-weight: 500;
-      color: #1A1A1A; line-height: 1.25;
-      margin-bottom: 5px;
+      font-size: 12.5px; font-weight: 500; color: #1A1A1A;
+      line-height: 1.25; margin-bottom: 4px;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .node-proj {
       display: flex; align-items: center; gap: 5px;
-      font-size: 9.5px; font-weight: 500;
-      letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted);
+      font-size: 9px; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
     }
     .node-proj-dot {
       width: 5px; height: 5px; border-radius: 50%;
-      background: var(--proj-color, #999); flex-shrink: 0;
+      background: var(--pc,#999); flex-shrink: 0;
     }
- 
+
     /* ══════════════════════════════════
        NAV
     ══════════════════════════════════ */
     #nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
       height: var(--nav-h);
       display: flex; align-items: center;
-      padding: 0 24px;
+      padding: 0 22px;
       background: rgba(248,247,245,0.93);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(0,0,0,0.08);
+      gap: 0;
     }
     #nav-logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 16px; font-weight: 500;
-      letter-spacing: 0.08em; color: var(--text);
-      cursor: pointer; flex-shrink: 0;
-      margin-right: 22px; white-space: nowrap;
+      font-size: 16px; font-weight: 500; letter-spacing: .08em;
+      color: var(--text); cursor: pointer; flex-shrink: 0;
+      margin-right: 20px; white-space: nowrap;
     }
     #nav-logo em { font-style: italic; font-weight: 300; }
-    #nav-divider {
+
+    .nav-sep {
       width: 1px; height: 16px;
-      background: rgba(0,0,0,0.12);
-      margin-right: 22px; flex-shrink: 0;
+      background: rgba(0,0,0,0.12); margin-right: 20px; flex-shrink: 0;
     }
+
     #nav-filters {
-      display: flex; align-items: center; gap: 5px;
-      flex: 1; overflow: hidden;
+      display: flex; align-items: center; gap: 4px;
+      flex: 1; overflow: hidden; min-width: 0;
     }
-    .filter-btn {
+
+    /* Tag filter badge */
+    #tag-badge {
+      display: none;
+      align-items: center; gap: 5px;
+      height: 25px; padding: 0 9px 0 11px;
+      border-radius: 100px;
+      font-size: 10px; font-weight: 500; letter-spacing: .04em;
+      background: var(--text); color: white; border: 1px solid var(--text);
+      flex-shrink: 0; white-space: nowrap;
+    }
+    #tag-badge.visible { display: flex; }
+    #tag-badge-clear {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; cursor: pointer; line-height: 1;
+      transition: background .15s;
+    }
+    #tag-badge-clear:hover { background: rgba(255,255,255,.4); }
+
+    .pill {
       flex-shrink: 0;
       display: inline-flex; align-items: center; gap: 5px;
-      height: 27px; padding: 0 12px;
+      height: 25px; padding: 0 11px;
       border-radius: 100px;
-      font-size: 10.5px; font-weight: 500; letter-spacing: 0.04em;
+      font-size: 10px; font-weight: 500; letter-spacing: .04em;
       border: 1px solid rgba(0,0,0,0.11);
       background: white; color: var(--muted);
       cursor: pointer; transition: all .18s ease;
       white-space: nowrap; font-family: 'DM Sans', sans-serif;
     }
-    .filter-btn:hover { border-color: rgba(0,0,0,0.24); color: var(--text); }
-    .filter-btn.active { background: var(--text); border-color: var(--text); color: white; }
-    .filter-btn.proj-btn.active { background: var(--btn-color); border-color: var(--btn-color); }
-    .btn-dot {
+    .pill:hover { border-color: rgba(0,0,0,.24); color: var(--text); }
+    .pill.active { background: var(--text); border-color: var(--text); color: white; }
+    .pill.proj.active { background: var(--pc2); border-color: var(--pc2); color: white; }
+    .pill .dot {
       width: 5px; height: 5px; border-radius: 50%;
-      background: var(--btn-color); opacity: 0.9; flex-shrink: 0;
+      background: var(--pc2); flex-shrink: 0;
     }
-    .filter-btn.proj-btn.active .btn-dot { background: rgba(255,255,255,0.8); }
+    .pill.proj.active .dot { background: rgba(255,255,255,.75); }
+
     #nav-right {
       margin-left: auto; flex-shrink: 0;
-      display: flex; align-items: center; gap: 5px;
+      display: flex; align-items: center; gap: 4px; padding-left: 14px;
     }
-    .ctrl-btn {
-      width: 27px; height: 27px;
-      border: 1px solid rgba(0,0,0,0.11); border-radius: 4px;
-      background: white; color: var(--text);
-      font-size: 14px; line-height: 1;
+    .nav-page-btn {
+      height: 25px; padding: 0 13px;
+      border-radius: 100px;
+      font-size: 10px; font-weight: 500; letter-spacing: .04em;
+      border: 1px solid rgba(0,0,0,.11);
+      background: white; color: var(--muted);
+      cursor: pointer; transition: all .18s;
+      font-family: 'DM Sans', sans-serif; white-space: nowrap;
+    }
+    .nav-page-btn:hover { background: var(--text); color: white; border-color: var(--text); }
+
+    .ctrl {
+      width: 25px; height: 25px;
+      border: 1px solid rgba(0,0,0,.11); border-radius: 4px;
+      background: white; color: var(--text); font-size: 13px; line-height: 1;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer; transition: all .18s; flex-shrink: 0;
     }
-    .ctrl-btn:hover { background: var(--text); color: white; border-color: var(--text); }
- 
+    .ctrl:hover { background: var(--text); color: white; border-color: var(--text); }
+
     /* ══════════════════════════════════
        DETAIL PANEL
     ══════════════════════════════════ */
     #detail-panel {
-      position: fixed;
-      top: var(--nav-h); right: 0; bottom: 0;
-      width: 385px;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-left: 1px solid rgba(0,0,0,0.08);
-      z-index: 150;
+      position: fixed; top: var(--nav-h); right: 0; bottom: 0; width: 400px;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(0,0,0,.08); z-index: 200;
       display: flex; flex-direction: column;
       transform: translateX(100%);
-      transition: transform .42s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform .42s cubic-bezier(.22,1,.36,1);
       overflow: hidden;
     }
     #detail-panel.open {
       transform: translateX(0);
-      box-shadow: -10px 0 44px rgba(0,0,0,0.06);
+      box-shadow: -10px 0 44px rgba(0,0,0,.06);
     }
-    #panel-header { position: relative; flex-shrink: 0; }
+
     #panel-img-wrap {
+      position: relative; flex-shrink: 0;
       width: 100%; aspect-ratio: 4/3;
       overflow: hidden; background: #ECEAE6;
     }
     #panel-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    #panel-close {
-      position: absolute; top: 11px; left: 11px;
-      width: 29px; height: 29px; border-radius: 50%;
-      background: rgba(255,255,255,0.9); backdrop-filter: blur(8px);
-      border: 1px solid rgba(0,0,0,0.1);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; color: var(--text); font-size: 13px;
-      transition: all .18s;
-    }
-    #panel-close:hover { background: var(--text); color: white; }
-    #panel-locate {
-      position: absolute; top: 11px; right: 11px;
-      height: 29px; padding: 0 11px; border-radius: 100px;
-      background: rgba(255,255,255,0.9); backdrop-filter: blur(8px);
-      border: 1px solid rgba(0,0,0,0.1);
-      display: flex; align-items: center; gap: 5px;
+
+    #panel-close, #panel-locate {
+      position: absolute; top: 11px;
+      border: 1px solid rgba(0,0,0,.1);
+      background: rgba(255,255,255,.9); backdrop-filter: blur(8px);
       cursor: pointer; color: var(--text);
-      font-size: 10px; font-weight: 500;
-      letter-spacing: 0.07em; text-transform: uppercase;
       font-family: 'DM Sans', sans-serif; transition: all .18s;
     }
+    #panel-close {
+      left: 11px; width: 29px; height: 29px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 12px;
+    }
+    #panel-close:hover { background: var(--text); color: white; }
+
+    #panel-locate {
+      right: 11px; height: 27px; padding: 0 11px; border-radius: 100px;
+      display: flex; align-items: center; gap: 5px;
+      font-size: 9.5px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+    }
     #panel-locate:hover { background: var(--text); color: white; }
+
     #panel-body {
-      padding: 22px 24px 36px;
-      overflow-y: auto; flex: 1;
+      padding: 20px 22px 36px; overflow-y: auto; flex: 1;
     }
     #panel-body::-webkit-scrollbar { width: 3px; }
-    #panel-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 2px; }
+    #panel-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,.08); border-radius: 2px; }
+
     #panel-badge {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 3px 10px; border-radius: 100px;
-      font-size: 9.5px; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      border: 1px solid; margin-bottom: 12px;
+      font-size: 9px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      border: 1px solid; margin-bottom: 11px;
     }
-    #panel-badge .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    #panel-badge .bd { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
     #panel-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 26px; font-weight: 400;
-      line-height: 1.2; color: var(--text); margin-bottom: 13px;
+      font-size: 26px; font-weight: 400; line-height: 1.18;
+      color: var(--text); margin-bottom: 10px;
     }
-    #panel-desc { font-size: 13px; line-height: 1.78; color: #666; margin-bottom: 24px; }
-    .panel-section { margin-bottom: 22px; }
-    .panel-label {
-      font-size: 9.5px; font-weight: 500;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 9px;
+
+    #panel-desc { font-size: 12.5px; line-height: 1.8; color: #666; margin-bottom: 20px; }
+
+    .p-section { margin-bottom: 20px; }
+    .p-label {
+      font-size: 9px; font-weight: 500; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 9px;
     }
+
+    /* Meta grid */
+    #panel-meta {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border: 1px solid rgba(0,0,0,.07); border-radius: 3px;
+      overflow: hidden; margin-bottom: 20px;
+    }
+    .meta-item {
+      padding: 10px 13px;
+      border-right: 1px solid rgba(0,0,0,.07);
+      border-bottom: 1px solid rgba(0,0,0,.07);
+    }
+    .meta-item:nth-child(2n) { border-right: none; }
+    .meta-item:nth-last-child(-n+2) { border-bottom: none; }
+    .meta-key {
+      font-size: 8.5px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 3px;
+    }
+    .meta-val { font-size: 11.5px; color: var(--text); }
+
+    /* Tags */
     #panel-tags { display: flex; flex-wrap: wrap; gap: 5px; }
     .tag-chip {
-      padding: 4px 10px; border-radius: 100px; font-size: 10.5px;
-      border: 1px solid rgba(0,0,0,0.1); color: #555;
+      padding: 4px 10px; border-radius: 100px; font-size: 10px; font-weight: 400;
+      border: 1px solid rgba(0,0,0,.1); color: #555;
       cursor: pointer; transition: all .18s; background: white;
       font-family: 'DM Sans', sans-serif;
     }
     .tag-chip:hover { background: var(--text); color: white; border-color: var(--text); }
-    #panel-related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .rel-thumb {
-      aspect-ratio: 4/3; overflow: hidden;
-      border-radius: 2px; border: 1px solid rgba(0,0,0,0.08);
-      cursor: pointer; position: relative;
+    .tag-chip.active-tag { background: var(--text); color: white; border-color: var(--text); }
+
+    /* Related */
+    #panel-related { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+    .rel-t {
+      aspect-ratio: 4/3; overflow: hidden; border-radius: 2px;
+      border: 1px solid rgba(0,0,0,.08); cursor: pointer; position: relative;
     }
-    .rel-thumb img {
+    .rel-t img {
       width: 100%; height: 100%; object-fit: cover;
       transition: transform .3s, opacity .3s;
     }
-    .rel-thumb:hover img { transform: scale(1.1); opacity: 0.8; }
-    .rel-label {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 6px 6px 5px;
+    .rel-t:hover img { transform: scale(1.1); opacity: .8; }
+    .rel-t-lbl {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 5px 6px 4px;
       background: linear-gradient(to top, rgba(0,0,0,.55), transparent);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 10px; color: white; opacity: 0; transition: opacity .22s;
+      font-family: 'Cormorant Garamond', serif; font-size: 10px; color: white;
+      opacity: 0; transition: opacity .22s;
     }
-    .rel-thumb:hover .rel-label { opacity: 1; }
- 
+    .rel-t:hover .rel-t-lbl { opacity: 1; }
+
+    /* ══════════════════════════════════
+       ABOUT OVERLAY
+    ══════════════════════════════════ */
+    .overlay {
+      position: fixed; inset: var(--nav-h) 0 0 0;
+      background: rgba(248,247,245,.97);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      z-index: 250;
+      opacity: 0; pointer-events: none;
+      transition: opacity .45s ease;
+      overflow-y: auto;
+    }
+    .overlay.open { opacity: 1; pointer-events: all; }
+
+    .overlay-close {
+      position: fixed; top: calc(var(--nav-h) + 22px); right: 28px;
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.12); background: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; cursor: pointer; color: var(--text);
+      transition: all .18s; z-index: 10;
+    }
+    .overlay-close:hover { background: var(--text); color: white; }
+
+    /* About layout */
+    #about-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 64px 56px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 88px; align-items: start;
+      min-height: calc(100vh - var(--nav-h));
+    }
+    .about-img-frame {
+      position: relative; aspect-ratio: 3/4;
+      overflow: hidden; background: #ECEAE6;
+      border: 1px solid rgba(0,0,0,.07);
+    }
+    .about-img-frame::before {
+      content: ''; position: absolute;
+      inset: -16px -16px auto auto;
+      width: 100%; height: 100%;
+      border: 1px solid rgba(0,0,0,.08); z-index: -1;
+    }
+    .about-img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .about-right { padding-top: 12px; }
+    .about-eyebrow {
+      font-size: 9px; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 18px;
+    }
+    .about-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5rem); font-weight: 400; line-height: .92;
+      letter-spacing: -.02em; margin-bottom: 32px;
+    }
+    .about-name em { font-style: italic; }
+    .about-bio {
+      font-size: 13.5px; line-height: 1.82; color: #555;
+      margin-bottom: 36px;
+    }
+    .about-bio p + p { margin-top: 16px; }
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      border-top: 1px solid rgba(0,0,0,.08); padding-top: 32px;
+      margin-bottom: 40px;
+    }
+    .astat { padding-right: 20px; }
+    .astat + .astat { padding-left: 20px; border-left: 1px solid rgba(0,0,0,.08); }
+    .astat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 400; line-height: 1;
+    }
+    .astat-l {
+      font-size: 9px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted); margin-top: 5px;
+    }
+    .about-availability {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 11px; color: var(--muted);
+    }
+    .avail-dot { width: 7px; height: 7px; border-radius: 50%; background: #4E8A6A; flex-shrink: 0; }
+
+    /* Contact layout */
+    #contact-inner {
+      max-width: 1000px; margin: 0 auto;
+      padding: 64px 56px;
+      display: grid; grid-template-columns: 1fr 1.3fr;
+      gap: 88px; align-items: start;
+      min-height: calc(100vh - var(--nav-h));
+    }
+    .contact-left { position: sticky; top: 64px; }
+    .contact-eyebrow {
+      font-size: 9px; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
+    }
+    .contact-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 400;
+      line-height: .95; margin-bottom: 24px;
+    }
+    .contact-heading em { font-style: italic; }
+    .contact-body { font-size: 13px; line-height: 1.8; color: #666; margin-bottom: 36px; }
+    .contact-details { display: flex; flex-direction: column; gap: 22px; }
+    .cd-item {}
+    .cd-key {
+      font-size: 8.5px; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+    }
+    .cd-val { font-size: 13px; }
+
+    /* Form */
+    .cf { display: flex; flex-direction: column; }
+    .fg {
+      position: relative;
+      border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+    .fg:first-child { border-top: 1px solid rgba(0,0,0,.1); }
+    .fg label {
+      position: absolute; top: 18px; left: 0;
+      font-size: 8.5px; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); pointer-events: none;
+      transition: color .2s;
+    }
+    .fg:focus-within label { color: var(--text); }
+    .fg input, .fg select, .fg textarea {
+      width: 100%; background: none; border: none; outline: none;
+      color: var(--text); font-family: 'DM Sans', sans-serif;
+      font-size: 13px; padding: 40px 0 14px; cursor: pointer;
+    }
+    .fg select { appearance: none; }
+    .fg select option { background: #fff; }
+    .fg textarea { resize: none; min-height: 110px; cursor: auto; }
+    .cf-foot {
+      margin-top: 28px; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .cf-note { font-size: 10px; color: var(--muted); }
+    .cf-submit {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--text); color: white; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase;
+      padding: 14px 28px; cursor: pointer;
+      transition: background .18s; border-radius: 2px;
+    }
+    .cf-submit:hover { background: #333; }
+    .cf-submit svg { transition: transform .2s; }
+    .cf-submit:hover svg { transform: translateX(4px); }
+
     /* ══════════════════════════════════
        HUD
     ══════════════════════════════════ */
     #canvas-hint {
       position: fixed; bottom: 20px; left: 50%;
       transform: translateX(-50%);
-      font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
       color: var(--muted);
-      background: rgba(255,255,255,0.9); backdrop-filter: blur(8px);
+      background: rgba(255,255,255,.9); backdrop-filter: blur(8px);
       padding: 7px 18px; border-radius: 100px;
-      border: 1px solid rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,.08);
       pointer-events: none; z-index: 100; transition: opacity 1.4s ease;
     }
     #canvas-hint.gone { opacity: 0; }
     #zoom-pill {
       position: fixed; bottom: 20px; right: 20px;
-      font-size: 10px; letter-spacing: 0.06em;
-      color: var(--muted);
-      background: rgba(255,255,255,0.9); backdrop-filter: blur(8px);
+      font-size: 10px; letter-spacing: .06em; color: var(--muted);
+      background: rgba(255,255,255,.9); backdrop-filter: blur(8px);
       padding: 5px 11px; border-radius: 4px;
-      border: 1px solid rgba(0,0,0,0.08);
-      z-index: 100; user-select: none;
+      border: 1px solid rgba(0,0,0,.08); z-index: 100; user-select: none;
     }
- 
+
+    /* ══════════════════════════════════
+       CONNECTION ANIMATION
+    ══════════════════════════════════ */
+    @keyframes flow {
+      from { stroke-dashoffset: 24; }
+      to   { stroke-dashoffset: 0; }
+    }
+    .conn-flow { animation: flow 1.2s linear infinite; }
+
     /* ══════════════════════════════════
        MOBILE
     ══════════════════════════════════ */
-    @media (max-width: 760px) {
+    @media (max-width: 800px) {
       #detail-panel { width: 100%; }
-      #nav-filters  { display: none; }
+      #nav-filters { display: none; }
+      #about-inner, #contact-inner { grid-template-columns: 1fr; gap: 48px; padding: 40px 24px; }
+      .contact-left { position: static; }
     }
   </style>
 </head>
 <body>
- 
+
+<!-- ═══════════════ NAV ═══════════════ -->
 <nav id="nav">
-  <div id="nav-logo" role="button" tabindex="0" aria-label="Reset canvas view">Jane <em>Doe</em></div>
-  <div id="nav-divider" aria-hidden="true"></div>
-  <div id="nav-filters" role="group" aria-label="Filter by project">
-    <button class="filter-btn active" data-filter="all">All Work</button>
+  <div id="nav-logo" role="button" tabindex="0" aria-label="Reset view">Jane <em>Doe</em></div>
+  <div class="nav-sep"></div>
+  <div id="nav-filters" role="group" aria-label="Filters">
+    <button class="pill active" data-filter="all">All Work</button>
   </div>
   <div id="nav-right">
-    <button class="ctrl-btn" id="btn-zi" title="Zoom in"   aria-label="Zoom in">+</button>
-    <button class="ctrl-btn" id="btn-zo" title="Zoom out"  aria-label="Zoom out">−</button>
-    <button class="ctrl-btn" id="btn-r"  title="Reset view" aria-label="Reset view" style="font-size:11px">↺</button>
+    <div id="tag-badge" role="status">
+      <span id="tag-badge-text"></span>
+      <span id="tag-badge-clear" aria-label="Clear tag filter">✕</span>
+    </div>
+    <button class="nav-page-btn" id="btn-about">About</button>
+    <button class="nav-page-btn" id="btn-contact">Contact</button>
+    <div class="nav-sep" style="margin-left:6px;margin-right:6px;"></div>
+    <button class="ctrl" id="btn-zi" title="Zoom in">+</button>
+    <button class="ctrl" id="btn-zo" title="Zoom out">−</button>
+    <button class="ctrl" id="btn-r"  title="Reset view" style="font-size:11px">↺</button>
   </div>
 </nav>
- 
-<div id="canvas-wrapper" role="main" aria-label="Interactive photography canvas">
+
+<!-- ═══════════════ CANVAS ═══════════════ -->
+<div id="canvas-wrapper">
   <div id="canvas">
-    <svg id="svg-clusters"    class="canvas-svg" aria-hidden="true"></svg>
+    <svg id="svg-labels"      class="canvas-svg" aria-hidden="true"></svg>
     <svg id="svg-connections" class="canvas-svg" aria-hidden="true"></svg>
   </div>
 </div>
- 
+
+<!-- ═══════════════ DETAIL PANEL ═══════════════ -->
 <aside id="detail-panel" aria-label="Photo detail" aria-hidden="true">
-  <div id="panel-header">
-    <div id="panel-img-wrap">
-      <img id="panel-img" src="" alt="" width="770" height="578">
-    </div>
-    <button id="panel-close" aria-label="Close panel">✕</button>
-    <button id="panel-locate" aria-label="Pan canvas to this photo">
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-        <circle cx="5" cy="5" r="3.2" stroke="currentColor" stroke-width="1.1"/>
-        <line x1="5" y1="0" x2="5" y2="1.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
-        <line x1="5" y1="8.5" x2="5" y2="10" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
-        <line x1="0" y1="5" x2="1.5" y2="5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
-        <line x1="8.5" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+  <div id="panel-img-wrap">
+    <img id="panel-img" src="" alt="" width="800" height="600">
+    <button id="panel-close" aria-label="Close">✕</button>
+    <button id="panel-locate" aria-label="Pan to photo">
+      <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <circle cx="5" cy="5" r="3" stroke="currentColor" stroke-width="1.2"/>
+        <line x1="5" y1="0" x2="5" y2="1.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="5" y1="8.2" x2="5" y2="10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="0" y1="5" x2="1.8" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="8.2" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
       </svg>
       Locate
     </button>
   </div>
   <div id="panel-body">
-    <div id="panel-badge"><span class="badge-dot"></span><span id="badge-text"></span></div>
+    <div id="panel-badge"><span class="bd"></span><span id="badge-text"></span></div>
     <h2 id="panel-title"></h2>
     <p  id="panel-desc"></p>
-    <div class="panel-section">
-      <p class="panel-label">Tags</p>
+
+    <div id="panel-meta">
+      <div class="meta-item"><p class="meta-key">Location</p><p class="meta-val" id="m-loc">—</p></div>
+      <div class="meta-item"><p class="meta-key">Year</p><p class="meta-val" id="m-yr">—</p></div>
+      <div class="meta-item"><p class="meta-key">Camera</p><p class="meta-val" id="m-cam">—</p></div>
+      <div class="meta-item"><p class="meta-key">Format</p><p class="meta-val" id="m-fmt">—</p></div>
+    </div>
+
+    <div class="p-section">
+      <p class="p-label">Tags — click to filter</p>
       <div id="panel-tags"></div>
     </div>
-    <div class="panel-section" id="related-section">
-      <p class="panel-label">Related</p>
+    <div class="p-section" id="related-section">
+      <p class="p-label">Related</p>
       <div id="panel-related"></div>
     </div>
   </div>
 </aside>
- 
+
+<!-- ═══════════════ ABOUT OVERLAY ═══════════════ -->
+<div id="about-overlay" class="overlay" aria-hidden="true">
+  <button class="overlay-close" id="about-close" aria-label="Close About">✕</button>
+  <div id="about-inner">
+    <div class="about-img-frame">
+      <img src="https://picsum.photos/seed/janedoeportrait/600/800" alt="Jane Doe" width="600" height="800" loading="lazy">
+    </div>
+    <div class="about-right">
+      <p class="about-eyebrow">The Photographer</p>
+      <h2 class="about-name">Jane<br><em>Doe</em></h2>
+      <div class="about-bio">
+        <p>Placeholder — Introduce yourself here. Your style, your background, what drives your work. Keep it direct and confident. Don't explain photography — embody it.</p>
+        <p>Second paragraph. Your philosophy — how you approach a shoot, what you believe makes an image last. Clients want to know who they're hiring, not just what you shoot.</p>
+        <p>Based in New York. Available for travel worldwide. Specialising in [your disciplines].</p>
+      </div>
+      <div class="about-stats">
+        <div class="astat">
+          <p class="astat-n">8+</p>
+          <p class="astat-l">Years</p>
+        </div>
+        <div class="astat">
+          <p class="astat-n">340</p>
+          <p class="astat-l">Projects</p>
+        </div>
+        <div class="astat">
+          <p class="astat-n">12</p>
+          <p class="astat-l">Countries</p>
+        </div>
+      </div>
+      <div class="about-availability">
+        <span class="avail-dot"></span>
+        Currently accepting commissions for 2025–2026
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTACT OVERLAY ═══════════════ -->
+<div id="contact-overlay" class="overlay" aria-hidden="true">
+  <button class="overlay-close" id="contact-close" aria-label="Close Contact">✕</button>
+  <div id="contact-inner">
+    <div class="contact-left">
+      <p class="contact-eyebrow">Get In Touch</p>
+      <h2 class="contact-heading">Let's make<br><em>something.</em></h2>
+      <p class="contact-body">Whether you have a full brief or just a feeling — reach out. I reply within 24 hours and love a good conversation about a creative idea.</p>
+      <div class="contact-details">
+        <div class="cd-item">
+          <p class="cd-key">Email</p>
+          <p class="cd-val">hello@yourdomain.com</p>
+        </div>
+        <div class="cd-item">
+          <p class="cd-key">Based In</p>
+          <p class="cd-val">New York, NY — Available Worldwide</p>
+        </div>
+        <div class="cd-item">
+          <p class="cd-key">Response</p>
+          <p class="cd-val">Within 24 hours</p>
+        </div>
+        <div class="cd-item">
+          <p class="cd-key">Follow</p>
+          <p class="cd-val">@yourhandle</p>
+        </div>
+      </div>
+    </div>
+    <form class="cf" name="contact" netlify>
+      <input type="hidden" name="form-name" value="contact">
+      <div class="fg">
+        <label for="f-name">Full Name</label>
+        <input type="text"  id="f-name"    name="name"    autocomplete="name"  required>
+      </div>
+      <div class="fg">
+        <label for="f-email">Email Address</label>
+        <input type="email" id="f-email"   name="email"   autocomplete="email" required>
+      </div>
+      <div class="fg">
+        <label for="f-type">Project Type</label>
+        <select id="f-type" name="type">
+          <option value=""></option>
+          <option>Wedding</option>
+          <option>Portrait Session</option>
+          <option>Commercial / Brand</option>
+          <option>Editorial / Fashion</option>
+          <option>Fine Art</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label for="f-date">Preferred Date</label>
+        <input type="text" id="f-date" name="date" autocomplete="off">
+      </div>
+      <div class="fg">
+        <label for="f-msg">Your Message</label>
+        <textarea id="f-msg" name="message" required></textarea>
+      </div>
+      <div class="cf-foot">
+        <span class="cf-note">All enquiries welcome.</span>
+        <button type="submit" class="cf-submit">
+          Send
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════ HUD ═══════════════ -->
 <div id="canvas-hint" aria-hidden="true">Drag to explore &nbsp;·&nbsp; Click to discover</div>
 <div id="zoom-pill"   aria-live="polite">85%</div>
- 
+
 <script>
-/* ═══════════════════════════════════════════
+/* ═══════════════════════════════════════
    DATA
-═══════════════════════════════════════════ */
+═══════════════════════════════════════ */
 const PROJECTS = {
-  portraits:  { name:'Portraiture', color:'#B0705A', rgb:'176,112,90',  bg:'rgba(176,112,90,0.06)'  },
-  weddings:   { name:'Weddings',    color:'#9E8838', rgb:'158,136,56',  bg:'rgba(158,136,56,0.06)'  },
-  landscapes: { name:'Landscapes',  color:'#4E8A6A', rgb:'78,138,106',  bg:'rgba(78,138,106,0.06)'  },
-  commercial: { name:'Commercial',  color:'#4E72B0', rgb:'78,114,176',  bg:'rgba(78,114,176,0.06)'  },
-  fineart:    { name:'Fine Art',    color:'#8A5EAA', rgb:'138,94,170',  bg:'rgba(138,94,170,0.06)'  },
+  portraits:  { name:'Portraiture', color:'#B0705A', rgb:'176,112,90'  },
+  weddings:   { name:'Weddings',    color:'#9E8838', rgb:'158,136,56'  },
+  landscapes: { name:'Landscapes',  color:'#4E8A6A', rgb:'78,138,106'  },
+  commercial: { name:'Commercial',  color:'#4E72B0', rgb:'78,114,176'  },
+  fineart:    { name:'Fine Art',    color:'#8A5EAA', rgb:'138,94,170'  },
 };
- 
+
 const PHOTOS = [
   /* ── PORTRAITURE ── */
-  { id:'p1', project:'portraits',  pos:{x:308,y:308}, title:'Emma, Golden Hour',   desc:'Placeholder — Describe the shoot, the light, the moment. What made this image worth keeping? Replace with your real story — specific details make it memorable.',      tags:['portrait','studio','natural light','editorial'], related:['p2','p3','f1'], seed:'portA1x' },
-  { id:'p2', project:'portraits',  pos:{x:488,y:262}, title:'Marco, Noon Light',   desc:'Placeholder — A brief story about this image or subject. Keep it personal and direct.',                                                                               tags:['portrait','street','black and white'],           related:['p1','p4'],      seed:'portB2y' },
-  { id:'p3', project:'portraits',  pos:{x:352,y:472}, title:'Self, Series I',       desc:'Placeholder — Fine art self-portraiture exploring identity. Part of an ongoing series.',                                                                              tags:['portrait','fine art','self-portrait'],           related:['p1','f2'],      seed:'portC3z' },
-  { id:'p4', project:'portraits',  pos:{x:518,y:438}, title:'Unnamed, Blue',        desc:'Placeholder — Describe the atmosphere and intent. The more specific, the more memorable.',                                                                            tags:['portrait','studio','blue','minimal'],            related:['p2','p3'],      seed:'portD4w' },
+  { id:'p1', project:'portraits',  pos:{x:308,y:308},  title:'Emma, Golden Hour',    desc:'Placeholder — Describe the shoot, the light, the moment. What made this image worth keeping? Replace with your real story.',
+    meta:{ loc:'New York', yr:'2024', cam:'Canon R5', fmt:'Digital' },
+    tags:['portrait','studio','natural light','editorial'], related:['p2','p3','f1'], seed:'portA1x' },
+  { id:'p2', project:'portraits',  pos:{x:488,y:262},  title:'Marco, Noon Light',    desc:'Placeholder — A brief story about this image or subject. Keep it personal and direct.',
+    meta:{ loc:'Brooklyn', yr:'2023', cam:'Leica M11', fmt:'Digital' },
+    tags:['portrait','street','black and white'],           related:['p1','p4'],      seed:'portB2y' },
+  { id:'p3', project:'portraits',  pos:{x:352,y:472},  title:'Self, Series I',        desc:'Placeholder — Fine art self-portraiture exploring identity. Part of an ongoing series.',
+    meta:{ loc:'Studio', yr:'2023', cam:'Hasselblad X2D', fmt:'Medium Format' },
+    tags:['portrait','fine art','self-portrait'],           related:['p1','f2'],      seed:'portC3z' },
+  { id:'p4', project:'portraits',  pos:{x:518,y:438},  title:'Unnamed, Blue',         desc:'Placeholder — Describe the atmosphere and intent. The more specific, the more memorable.',
+    meta:{ loc:'Studio', yr:'2024', cam:'Canon R5', fmt:'Digital' },
+    tags:['portrait','studio','blue','minimal'],            related:['p2','p3'],      seed:'portD4w' },
+
   /* ── WEDDINGS ── */
-  { id:'w1', project:'weddings',   pos:{x:998,y:342}, title:'The First Look',       desc:'Placeholder — The moment before anything is said. Replace with a real anecdote from the day.',                                                                        tags:['wedding','ceremony','emotion','documentary'],    related:['w2','w3'],      seed:'wedA1a'  },
-  { id:'w2', project:'weddings',   pos:{x:1178,y:292},title:'Reception, Evening',   desc:'Placeholder — When the night takes over and everyone forgets the camera is there.',                                                                                   tags:['wedding','reception','available light'],         related:['w1','w4'],      seed:'wedB2b'  },
-  { id:'w3', project:'weddings',   pos:{x:1148,y:502},title:'Garden Ceremony',      desc:'Placeholder — Outdoor ceremony in soft afternoon light. Describe the setting and what made it particular.',                                                           tags:['wedding','outdoor','ceremony','golden hour'],    related:['w1','w2'],      seed:'wedC3c'  },
-  { id:'w4', project:'weddings',   pos:{x:952,y:508}, title:'Table, Before',        desc:'Placeholder — Details matter. The quiet before the guests arrive.',                                                                                                   tags:['wedding','detail','still life'],                 related:['w2','c1'],      seed:'wedD4d'  },
+  { id:'w1', project:'weddings',   pos:{x:998,y:342},  title:'The First Look',        desc:'Placeholder — The moment before anything is said. Replace with a real anecdote from the day.',
+    meta:{ loc:'Hudson Valley', yr:'2024', cam:'Sony A1', fmt:'Digital' },
+    tags:['wedding','ceremony','emotion','documentary'],    related:['w2','w3'],      seed:'wedA1a'  },
+  { id:'w2', project:'weddings',   pos:{x:1178,y:292}, title:'Reception, Evening',    desc:'Placeholder — When the night takes over and everyone forgets the camera is there.',
+    meta:{ loc:'Manhattan', yr:'2023', cam:'Canon R5', fmt:'Digital' },
+    tags:['wedding','reception','available light'],         related:['w1','w4'],      seed:'wedB2b'  },
+  { id:'w3', project:'weddings',   pos:{x:1148,y:502}, title:'Garden Ceremony',       desc:'Placeholder — Outdoor ceremony in soft afternoon light. Describe the setting.',
+    meta:{ loc:'Hamptons', yr:'2024', cam:'Sony A1', fmt:'Digital' },
+    tags:['wedding','outdoor','ceremony','golden hour'],    related:['w1','w2'],      seed:'wedC3c'  },
+  { id:'w4', project:'weddings',   pos:{x:952,y:508},  title:'Table, Before',         desc:'Placeholder — Details matter. The quiet before the guests arrive.',
+    meta:{ loc:'Brooklyn', yr:'2023', cam:'Canon R5', fmt:'Digital' },
+    tags:['wedding','detail','still life'],                 related:['w2','c1'],      seed:'wedD4d'  },
+
   /* ── LANDSCAPES ── */
-  { id:'l1', project:'landscapes', pos:{x:672,y:1018},title:'Desert, Dawn',         desc:'Placeholder — Five hours before anyone else arrived. The silence before the light changed everything.',                                                                tags:['landscape','desert','dawn','long exposure'],     related:['l2','l3'],      seed:'lanA1e'  },
-  { id:'l2', project:'landscapes', pos:{x:858,y:975}, title:'Fog, Coast',           desc:"Placeholder — Pacific coast in mid-October. The fog never fully lifted, which turned out to be the whole point.",                                                    tags:['landscape','coastal','fog','moody'],             related:['l1','f1'],      seed:'lanB2f'  },
-  { id:'l3', project:'landscapes', pos:{x:735,y:1185},title:'Mountain, Last Light', desc:"Placeholder — The last thirty seconds of light before full dark. You either have it or you don't.",                                                                  tags:['landscape','mountain','dusk','golden hour'],     related:['l1','l4'],      seed:'lanC3g'  },
-  { id:'l4', project:'landscapes', pos:{x:898,y:1148},title:'River, Autumn',        desc:'Placeholder — The river always changes; autumn makes it undeniably dramatic.',                                                                                        tags:['landscape','river','autumn','color'],            related:['l3','l2'],      seed:'lanD4h'  },
+  { id:'l1', project:'landscapes', pos:{x:672,y:1018}, title:'Desert, Dawn',          desc:'Placeholder — Five hours before anyone else arrived. The silence before the light changed everything.',
+    meta:{ loc:'Utah', yr:'2022', cam:'Phase One', fmt:'Medium Format' },
+    tags:['landscape','desert','dawn','long exposure'],     related:['l2','l3'],      seed:'lanA1e'  },
+  { id:'l2', project:'landscapes', pos:{x:858,y:975},  title:'Fog, Coast',            desc:"Placeholder — Pacific coast in mid-October. The fog never fully lifted, which turned out to be the point.",
+    meta:{ loc:'Oregon Coast', yr:'2023', cam:'Phase One', fmt:'Medium Format' },
+    tags:['landscape','coastal','fog','moody'],             related:['l1','f1'],      seed:'lanB2f'  },
+  { id:'l3', project:'landscapes', pos:{x:735,y:1185}, title:'Mountain, Last Light',  desc:"Placeholder — The last thirty seconds of light before full dark.",
+    meta:{ loc:'Colorado', yr:'2022', cam:'Canon R5', fmt:'Digital' },
+    tags:['landscape','mountain','dusk','golden hour'],     related:['l1','l4'],      seed:'lanC3g'  },
+  { id:'l4', project:'landscapes', pos:{x:898,y:1148}, title:'River, Autumn',         desc:'Placeholder — The river always changes; autumn makes it dramatic.',
+    meta:{ loc:'Vermont', yr:'2023', cam:'Phase One', fmt:'Medium Format' },
+    tags:['landscape','river','autumn','color'],            related:['l3','l2'],      seed:'lanD4h'  },
+
   /* ── COMMERCIAL ── */
-  { id:'c1', project:'commercial', pos:{x:1445,y:822},title:'Brand, Minimal',       desc:'Placeholder — Product photography for a skincare brand. The object is the story; the background disappears.',                                                        tags:['commercial','product','minimal','studio'],       related:['c2','c3'],      seed:'comA1i'  },
-  { id:'c2', project:'commercial', pos:{x:1618,y:778},title:'Campaign, Spring',     desc:'Placeholder — Lifestyle campaign for an outdoor clothing brand. Real locations, natural light, no stylists.',                                                        tags:['commercial','lifestyle','campaign','outdoor'],   related:['c1','c4'],      seed:'comB2j'  },
-  { id:'c3', project:'commercial', pos:{x:1508,y:985},title:'Interior, Restaurant', desc:'Placeholder — Architectural and food photography. The space tells the story before the food arrives.',                                                                tags:['commercial','interior','food','architecture'],   related:['c1','c2'],      seed:'comC3k'  },
-  { id:'c4', project:'commercial', pos:{x:1678,y:955},title:'Portrait, Corporate',  desc:"Placeholder — Executive portraits that feel human, not corporate. The brief is always the same; the outcome never is.",                                              tags:['commercial','portrait','corporate'],             related:['c2','p1'],      seed:'comD4l'  },
+  { id:'c1', project:'commercial', pos:{x:1445,y:822}, title:'Brand, Minimal',        desc:'Placeholder — Product photography for a skincare brand. The object is the story.',
+    meta:{ loc:'Studio NY', yr:'2024', cam:'Hasselblad X2D', fmt:'Medium Format' },
+    tags:['commercial','product','minimal','studio'],       related:['c2','c3'],      seed:'comA1i'  },
+  { id:'c2', project:'commercial', pos:{x:1618,y:778}, title:'Campaign, Spring',      desc:'Placeholder — Lifestyle campaign for an outdoor clothing brand. Real locations, natural light.',
+    meta:{ loc:'Catskills', yr:'2024', cam:'Sony A1', fmt:'Digital' },
+    tags:['commercial','lifestyle','campaign','outdoor'],   related:['c1','c4'],      seed:'comB2j'  },
+  { id:'c3', project:'commercial', pos:{x:1508,y:985}, title:'Interior, Restaurant',  desc:'Placeholder — Architectural and food photography. The space tells the story before the food arrives.',
+    meta:{ loc:'Manhattan', yr:'2023', cam:'Canon R5', fmt:'Digital' },
+    tags:['commercial','interior','food','architecture'],   related:['c1','c2'],      seed:'comC3k'  },
+  { id:'c4', project:'commercial', pos:{x:1678,y:955}, title:'Portrait, Corporate',   desc:"Placeholder — Executive portraits that feel human, not corporate.",
+    meta:{ loc:'Midtown NY', yr:'2024', cam:'Canon R5', fmt:'Digital' },
+    tags:['commercial','portrait','corporate'],             related:['c2','p1'],      seed:'comD4l'  },
+
   /* ── FINE ART ── */
-  { id:'f1', project:'fineart',    pos:{x:1178,y:1345},title:'Threshold I',         desc:'Placeholder — An ongoing series about in-between spaces and liminal moments. Where you are just before something changes.',                                           tags:['fine art','series','abstract','conceptual'],     related:['f2','f3','p1'], seed:'artA1m'  },
-  { id:'f2', project:'fineart',    pos:{x:1342,y:1298},title:'Threshold II',        desc:'Placeholder — Second part of the Threshold series. Different light, same unresolved question.',                                                                      tags:['fine art','series','light','conceptual'],        related:['f1','f4','l2'], seed:'artB2n'  },
-  { id:'f3', project:'fineart',    pos:{x:1235,y:1495},title:'Untitled, 2023',      desc:"Placeholder — No title because the image should do all the talking. If you need to explain it, it isn't finished.",                                                  tags:['fine art','abstract','monochrome'],              related:['f1','f4'],      seed:'artC3o'  },
-  { id:'f4', project:'fineart',    pos:{x:1382,y:1462},title:'Still, No. 7',        desc:'Placeholder — Part of a stillness study. Slowness as a subject, patience as a method.',                                                                              tags:['fine art','still life','minimal','color theory'],related:['f2','f3'],      seed:'artD4p'  },
+  { id:'f1', project:'fineart',    pos:{x:1178,y:1345},title:'Threshold I',           desc:'Placeholder — An ongoing series about in-between spaces and liminal moments.',
+    meta:{ loc:'New York', yr:'2023', cam:'Leica M11', fmt:'Digital' },
+    tags:['fine art','series','abstract','conceptual'],     related:['f2','f3','p1'], seed:'artA1m'  },
+  { id:'f2', project:'fineart',    pos:{x:1342,y:1298},title:'Threshold II',          desc:'Placeholder — Second part of the Threshold series. Different light, same unresolved question.',
+    meta:{ loc:'New York', yr:'2023', cam:'Leica M11', fmt:'Digital' },
+    tags:['fine art','series','light','conceptual'],        related:['f1','f4','l2'], seed:'artB2n'  },
+  { id:'f3', project:'fineart',    pos:{x:1235,y:1495},title:'Untitled, 2023',        desc:"Placeholder — No title because the image should do all the talking.",
+    meta:{ loc:'Studio', yr:'2023', cam:'Hasselblad X2D', fmt:'Medium Format' },
+    tags:['fine art','abstract','monochrome'],              related:['f1','f4'],      seed:'artC3o'  },
+  { id:'f4', project:'fineart',    pos:{x:1382,y:1462},title:'Still, No. 7',          desc:'Placeholder — Part of a stillness study. Slowness as a subject, patience as a method.',
+    meta:{ loc:'Studio', yr:'2024', cam:'Hasselblad X2D', fmt:'Medium Format' },
+    tags:['fine art','still life','minimal','color theory'],related:['f2','f3'],      seed:'artD4p'  },
 ];
- 
+
 const CONNECTIONS = [
   ['p1','p2'],['p1','p3'],['p2','p4'],['p3','p4'],
   ['w1','w2'],['w1','w3'],['w2','w4'],['w3','w4'],
@@ -780,151 +798,206 @@ const CONNECTIONS = [
   ['f1','f2'],['f1','f3'],['f2','f4'],['f3','f4'],
   ['p1','f1'],['p3','f2'],['l2','f1'],['w4','c1'],['c4','p1'],
 ];
- 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════
    STATE
-═══════════════════════════════════════════ */
+═══════════════════════════════════════ */
 let tx = 0, ty = 0, sc = 0.85;
 let panning = false, ps = {};
-let selectedId = null, activeFilter = 'all';
+let selectedId = null;
+let activeFilter = 'all';   // project filter
+let activeTag    = null;    // tag filter
 const byId = {};
 PHOTOS.forEach(p => byId[p.id] = p);
- 
-/* ═══════════════════════════════════════════
-   BOOT
-═══════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  buildFilters();
-  renderClusters();
+  buildFilterPills();
+  renderLabels();
   renderConnections(null);
   renderNodes();
   initInteraction();
   initControls();
+  initOverlays();
+
   tx = window.innerWidth / 2 - 978 * sc;
   ty = (window.innerHeight - 56) / 2 - 870 * sc;
   applyT();
+
   setTimeout(() => document.getElementById('canvas-hint').classList.add('gone'), 4500);
 });
- 
-/* ═══════════════════════════════════════════
-   FILTERS
-═══════════════════════════════════════════ */
-function buildFilters() {
+
+/* ═══════════════════════════════════════
+   FILTER PILLS
+═══════════════════════════════════════ */
+function buildFilterPills() {
   const bar = document.getElementById('nav-filters');
   Object.entries(PROJECTS).forEach(([key, proj]) => {
     const btn = document.createElement('button');
-    btn.className = 'filter-btn proj-btn';
+    btn.className = 'pill proj';
     btn.dataset.filter = key;
-    btn.style.setProperty('--btn-color', proj.color);
-    btn.innerHTML = `<span class="btn-dot"></span>${proj.name}`;
-    btn.addEventListener('click', () => applyFilter(key, btn));
+    btn.style.setProperty('--pc2', proj.color);
+    btn.innerHTML = `<span class="dot"></span>${proj.name}`;
+    btn.addEventListener('click', () => setProjectFilter(key, btn));
     bar.appendChild(btn);
   });
   bar.querySelector('[data-filter="all"]').addEventListener('click', function() {
-    applyFilter('all', this);
+    setProjectFilter('all', this);
   });
 }
- 
-function applyFilter(filter, btn) {
+
+function setProjectFilter(filter, btn) {
   activeFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  activeTag = null;
+  hideBadge();
+  document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.photo-node').forEach(n => {
-    const show = filter === 'all' || byId[n.dataset.id].project === filter;
-    n.style.opacity = show ? '1' : '0.14';
-    n.style.pointerEvents = show ? '' : 'none';
-  });
+  applyVisibility();
   renderConnections(selectedId);
 }
- 
-/* ═══════════════════════════════════════════
-   CLUSTERS
-═══════════════════════════════════════════ */
-function renderClusters() {
-  const svg = document.getElementById('svg-clusters');
-  svg.innerHTML = '';
-  const HW = 96, HH = 98, PAD = 58;
-  const groups = {};
-  PHOTOS.forEach(p => (groups[p.project] = groups[p.project] || []).push(p));
- 
-  Object.entries(groups).forEach(([key, photos]) => {
-    const proj = PROJECTS[key];
-    const minX = Math.min(...photos.map(p => p.pos.x)) - HW - PAD;
-    const maxX = Math.max(...photos.map(p => p.pos.x)) + HW + PAD;
-    const minY = Math.min(...photos.map(p => p.pos.y)) - HH - PAD;
-    const maxY = Math.max(...photos.map(p => p.pos.y)) + HH + PAD;
-    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
-    const rx = (maxX - minX) / 2, ry = (maxY - minY) / 2;
- 
-    const el = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
-    el.setAttribute('cx', cx); el.setAttribute('cy', cy);
-    el.setAttribute('rx', rx); el.setAttribute('ry', ry);
-    el.setAttribute('fill', proj.bg);
-    el.setAttribute('stroke', proj.color);
-    el.setAttribute('stroke-width', '1');
-    el.setAttribute('stroke-opacity', '0.22');
-    el.setAttribute('stroke-dasharray', '5 7');
-    svg.appendChild(el);
- 
-    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    label.setAttribute('x', cx);
-    label.setAttribute('y', minY - 13);
-    label.setAttribute('text-anchor', 'middle');
-    label.setAttribute('font-family', 'DM Sans, sans-serif');
-    label.setAttribute('font-size', '9.5');
-    label.setAttribute('font-weight', '500');
-    label.setAttribute('letter-spacing', '2.5');
-    label.setAttribute('fill', proj.color);
-    label.setAttribute('fill-opacity', '0.52');
-    label.textContent = proj.name.toUpperCase();
-    svg.appendChild(label);
+
+/* ═══════════════════════════════════════
+   TAG FILTER
+═══════════════════════════════════════ */
+function setTagFilter(tag) {
+  // If same tag, clear
+  if (activeTag === tag) { clearTagFilter(); return; }
+  activeTag = tag;
+  activeFilter = 'all';
+  document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
+  document.querySelector('[data-filter="all"]').classList.add('active');
+  showBadge(tag);
+  applyVisibility();
+  renderConnections(selectedId);
+  // Highlight tag chip
+  document.querySelectorAll('.tag-chip').forEach(c => {
+    c.classList.toggle('active-tag', c.dataset.tag === tag);
   });
 }
- 
-/* ═══════════════════════════════════════════
-   CONNECTIONS
-═══════════════════════════════════════════ */
+
+function clearTagFilter() {
+  activeTag = null;
+  hideBadge();
+  applyVisibility();
+  renderConnections(selectedId);
+  document.querySelectorAll('.tag-chip').forEach(c => c.classList.remove('active-tag'));
+}
+
+function showBadge(tag) {
+  const b = document.getElementById('tag-badge');
+  document.getElementById('tag-badge-text').textContent = '# ' + tag;
+  b.classList.add('visible');
+}
+function hideBadge() {
+  document.getElementById('tag-badge').classList.remove('visible');
+}
+
+/* ═══════════════════════════════════════
+   VISIBILITY
+═══════════════════════════════════════ */
+function photoVisible(photo) {
+  const matchProj = activeFilter === 'all' || photo.project === activeFilter;
+  const matchTag  = !activeTag || photo.tags.includes(activeTag);
+  return matchProj && matchTag;
+}
+
+function applyVisibility() {
+  document.querySelectorAll('.photo-node').forEach(n => {
+    const p = byId[n.dataset.id];
+    if (photoVisible(p)) {
+      n.classList.remove('dimmed');
+      n.style.pointerEvents = '';
+    } else {
+      n.classList.add('dimmed');
+      n.style.pointerEvents = 'none';
+    }
+  });
+}
+
+/* ═══════════════════════════════════════
+   CLUSTER LABELS (no rings)
+═══════════════════════════════════════ */
+function renderLabels() {
+  const svg = document.getElementById('svg-labels');
+  svg.innerHTML = '';
+  const HW = 96, HH = 98;
+  const groups = {};
+  PHOTOS.forEach(p => (groups[p.project] = groups[p.project] || []).push(p));
+
+  Object.entries(groups).forEach(([key, photos]) => {
+    const proj = PROJECTS[key];
+    // Place label above the topmost photo in the group
+    const minY = Math.min(...photos.map(p => p.pos.y)) - HH;
+    const cx   = photos.reduce((s, p) => s + p.pos.x, 0) / photos.length;
+
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', cx);
+    t.setAttribute('y', minY - 16);
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('font-family', 'DM Sans, sans-serif');
+    t.setAttribute('font-size', '9');
+    t.setAttribute('font-weight', '600');
+    t.setAttribute('letter-spacing', '3');
+    t.setAttribute('fill', proj.color);
+    t.setAttribute('fill-opacity', '0.45');
+    t.textContent = proj.name.toUpperCase();
+    svg.appendChild(t);
+  });
+}
+
+/* ═══════════════════════════════════════
+   CONNECTIONS  (stronger, animated on active)
+═══════════════════════════════════════ */
 function renderConnections(activeId) {
   const svg = document.getElementById('svg-connections');
   svg.innerHTML = '';
+
   CONNECTIONS.forEach(([id1, id2]) => {
     const a = byId[id1], b = byId[id2];
     if (!a || !b) return;
+
     const sameProj = a.project === b.project;
     const lit = activeId && (a.id === activeId || b.id === activeId);
-    if (activeFilter !== 'all' && a.project !== activeFilter && b.project !== activeFilter) return;
- 
+
+    // Both must be visible for line to show
+    if (!photoVisible(a) || !photoVisible(b)) return;
+
     const mx = (a.pos.x + b.pos.x) / 2, my = (a.pos.y + b.pos.y) / 2;
-    const dx = b.pos.x - a.pos.x, dy = b.pos.y - a.pos.y;
+    const dx = b.pos.x - a.pos.x,       dy = b.pos.y - a.pos.y;
     const len = Math.sqrt(dx*dx + dy*dy) || 1;
-    const bend = Math.min(len * 0.17, 36);
-    const cpx = mx - (dy / len) * bend, cpy = my + (dx / len) * bend;
- 
+    const bend = Math.min(len * 0.16, 40);
+    const cpx = mx - (dy/len)*bend, cpy = my + (dx/len)*bend;
+
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', `M${a.pos.x} ${a.pos.y} Q${cpx} ${cpy} ${b.pos.x} ${b.pos.y}`);
     path.setAttribute('fill', 'none');
- 
+
     if (lit) {
-      path.setAttribute('stroke', PROJECTS[a.project]?.color || '#555');
-      path.setAttribute('stroke-width', '1.6');
-      path.setAttribute('stroke-opacity', '0.5');
+      const proj = PROJECTS[a.project];
+      path.setAttribute('stroke', proj?.color || '#444');
+      path.setAttribute('stroke-width', '1.8');
+      path.setAttribute('stroke-opacity', '0.65');
+      path.setAttribute('stroke-dasharray', '6 6');
+      path.classList.add('conn-flow');
     } else if (sameProj) {
-      path.setAttribute('stroke', '#B0B0B0');
-      path.setAttribute('stroke-width', '1');
-      path.setAttribute('stroke-opacity', '0.22');
+      path.setAttribute('stroke', '#999');
+      path.setAttribute('stroke-width', '1.1');
+      path.setAttribute('stroke-opacity', '0.38');
     } else {
-      path.setAttribute('stroke', '#CCCCCC');
-      path.setAttribute('stroke-width', '0.8');
-      path.setAttribute('stroke-opacity', '0.16');
-      path.setAttribute('stroke-dasharray', '3 6');
+      path.setAttribute('stroke', '#BBBBBB');
+      path.setAttribute('stroke-width', '0.9');
+      path.setAttribute('stroke-opacity', '0.28');
+      path.setAttribute('stroke-dasharray', '3 7');
     }
     svg.appendChild(path);
   });
 }
- 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════
    NODES
-═══════════════════════════════════════════ */
+═══════════════════════════════════════ */
 function renderNodes() {
   const canvas = document.getElementById('canvas');
   PHOTOS.forEach((photo, i) => {
@@ -933,182 +1006,184 @@ function renderNodes() {
     node.className = 'photo-node';
     node.id = `node-${photo.id}`;
     node.dataset.id = photo.id;
-    node.style.left  = photo.pos.x + 'px';
-    node.style.top   = photo.pos.y + 'px';
+    node.style.left   = photo.pos.x + 'px';
+    node.style.top    = photo.pos.y + 'px';
     node.style.zIndex = 2 + i;
-    node.style.setProperty('--proj-color', proj.color);
-    node.style.setProperty('--proj-glow', `rgba(${proj.rgb},0.16)`);
-    node.setAttribute('role', 'button');
-    node.setAttribute('tabindex', '0');
+    node.style.setProperty('--pc', proj.color);
+    node.style.setProperty('--pg', `rgba(${proj.rgb},.16)`);
+    node.setAttribute('role','button');
+    node.setAttribute('tabindex','0');
     node.setAttribute('aria-label', `${photo.title} — ${proj.name}`);
     node.innerHTML = `
-      <div class="node-img-wrap">
-        <img src="https://picsum.photos/seed/${photo.seed}/376/282"
-             alt="${photo.title}" width="376" height="282"
+      <div class="node-img">
+        <img src="https://picsum.photos/seed/${photo.seed}/384/288"
+             alt="${photo.title}" width="384" height="288"
              loading="${i < 8 ? 'eager' : 'lazy'}">
       </div>
       <div class="node-meta">
         <p class="node-title">${photo.title}</p>
-        <span class="node-proj" style="--proj-color:${proj.color}">
+        <span class="node-proj" style="--pc:${proj.color}">
           <span class="node-proj-dot"></span>${proj.name}
         </span>
-      </div>
-    `;
+      </div>`;
     node.addEventListener('click', e => { e.stopPropagation(); openDetail(photo); });
     node.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') openDetail(photo); });
     canvas.appendChild(node);
   });
 }
- 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════
    DETAIL PANEL
-═══════════════════════════════════════════ */
+═══════════════════════════════════════ */
 function openDetail(photo) {
   const proj = PROJECTS[photo.project];
   selectedId = photo.id;
   renderConnections(photo.id);
   document.querySelectorAll('.photo-node').forEach(n => n.classList.remove('selected'));
   document.getElementById(`node-${photo.id}`)?.classList.add('selected');
- 
-  document.getElementById('panel-img').src = `https://picsum.photos/seed/${photo.seed}/770/578`;
-  document.getElementById('panel-img').alt = photo.title;
- 
+
+  document.getElementById('panel-img').src = `https://picsum.photos/seed/${photo.seed}/800/600`;
+  document.getElementById('panel-img').alt  = photo.title;
+
   const badge = document.getElementById('panel-badge');
   badge.style.color = proj.color;
-  badge.style.borderColor = proj.color + '40';
-  badge.style.background = proj.bg;
+  badge.style.borderColor = proj.color + '44';
+  badge.style.background  = `rgba(${proj.rgb},.07)`;
   document.getElementById('badge-text').textContent = proj.name;
+
   document.getElementById('panel-title').textContent = photo.title;
   document.getElementById('panel-desc').textContent  = photo.desc;
- 
+
+  // Meta
+  document.getElementById('m-loc').textContent = photo.meta?.loc || '—';
+  document.getElementById('m-yr').textContent  = photo.meta?.yr  || '—';
+  document.getElementById('m-cam').textContent = photo.meta?.cam || '—';
+  document.getElementById('m-fmt').textContent = photo.meta?.fmt || '—';
+
+  // Tags
   document.getElementById('panel-tags').innerHTML =
-    photo.tags.map(t => `<button class="tag-chip"># ${t}</button>`).join('');
- 
-  const relEl = document.getElementById('panel-related');
+    photo.tags.map(t => `
+      <button class="tag-chip${activeTag===t?' active-tag':''}" data-tag="${t}"># ${t}</button>
+    `).join('');
+  document.querySelectorAll('.tag-chip').forEach(chip => {
+    chip.addEventListener('click', () => setTagFilter(chip.dataset.tag));
+  });
+
+  // Related
+  const relEl  = document.getElementById('panel-related');
   const relSec = document.getElementById('related-section');
-  const rels = photo.related.map(id => byId[id]).filter(Boolean);
+  const rels   = photo.related.map(id => byId[id]).filter(Boolean);
   if (rels.length) {
     relSec.style.display = '';
     relEl.innerHTML = rels.map(r => `
-      <div class="rel-thumb" data-id="${r.id}" role="button" tabindex="0" title="${r.title}">
-        <img src="https://picsum.photos/seed/${r.seed}/240/180" alt="${r.title}" loading="lazy" width="240" height="180">
-        <div class="rel-label">${r.title}</div>
+      <div class="rel-t" data-id="${r.id}" role="button" tabindex="0" title="${r.title}">
+        <img src="https://picsum.photos/seed/${r.seed}/240/180"
+             alt="${r.title}" loading="lazy" width="240" height="180">
+        <div class="rel-t-lbl">${r.title}</div>
       </div>`).join('');
-    relEl.querySelectorAll('.rel-thumb').forEach(t => {
+    relEl.querySelectorAll('.rel-t').forEach(t => {
       const go = () => { const rp = byId[t.dataset.id]; panTo(rp, 520, () => openDetail(rp)); };
       t.addEventListener('click', go);
       t.addEventListener('keydown', e => { if (e.key==='Enter') go(); });
     });
   } else { relSec.style.display = 'none'; }
- 
+
   const panel = document.getElementById('detail-panel');
   panel.classList.add('open');
-  panel.setAttribute('aria-hidden', 'false');
-  document.getElementById('panel-locate').onclick = () => panTo(photo, 520);
+  panel.setAttribute('aria-hidden','false');
+  document.getElementById('panel-locate').onclick = () => panTo(photo, 500);
 }
- 
+
 function closeDetail() {
   selectedId = null;
-  const panel = document.getElementById('detail-panel');
-  panel.classList.remove('open');
-  panel.setAttribute('aria-hidden', 'true');
+  document.getElementById('detail-panel').classList.remove('open');
+  document.getElementById('detail-panel').setAttribute('aria-hidden','true');
   document.querySelectorAll('.photo-node').forEach(n => n.classList.remove('selected'));
   renderConnections(null);
 }
- 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════
    PAN TO PHOTO
-═══════════════════════════════════════════ */
+═══════════════════════════════════════ */
 function panTo(photo, dur, onDone) {
   const vw = window.innerWidth, vh = window.innerHeight - 56;
-  const panelW = document.getElementById('detail-panel').classList.contains('open') ? 385 : 0;
-  animPan((vw - panelW) / 2 - photo.pos.x * sc, vh / 2 - photo.pos.y * sc, dur, onDone);
+  const pw = document.getElementById('detail-panel').classList.contains('open') ? 400 : 0;
+  animPan((vw - pw) / 2 - photo.pos.x * sc, vh / 2 - photo.pos.y * sc, dur, onDone);
 }
- 
-function animPan(toX, toY, dur, onDone) {
+
+function animPan(toX, toY, dur, cb) {
   const fX = tx, fY = ty, t0 = performance.now();
   const tick = now => {
     const t = Math.min((now - t0) / dur, 1);
     const e = t < .5 ? 2*t*t : -1+(4-2*t)*t;
-    tx = fX + (toX - fX) * e;
-    ty = fY + (toY - fY) * e;
+    tx = fX + (toX-fX)*e; ty = fY + (toY-fY)*e;
     applyT();
-    if (t < 1) requestAnimationFrame(tick);
-    else if (onDone) onDone();
+    if (t < 1) requestAnimationFrame(tick); else cb?.();
   };
   requestAnimationFrame(tick);
 }
- 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════
    TRANSFORM
-═══════════════════════════════════════════ */
+═══════════════════════════════════════ */
 function applyT() {
   document.getElementById('canvas').style.transform = `translate(${tx}px,${ty}px) scale(${sc})`;
-  document.getElementById('zoom-pill').textContent  = Math.round(sc * 100) + '%';
+  document.getElementById('zoom-pill').textContent  = Math.round(sc*100) + '%';
 }
- 
-/* ═══════════════════════════════════════════
-   INTERACTION
-═══════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════
+   PAN + ZOOM
+═══════════════════════════════════════ */
 function initInteraction() {
   const wrap = document.getElementById('canvas-wrapper');
- 
+
   wrap.addEventListener('mousedown', e => {
     if (e.target.closest('.photo-node')) return;
-    panning = true;
-    ps = { x: e.clientX, y: e.clientY, ox: tx, oy: ty };
+    panning = true; ps = { x:e.clientX, y:e.clientY, ox:tx, oy:ty };
     wrap.classList.add('grabbing');
     document.getElementById('canvas-hint').classList.add('gone');
   });
   window.addEventListener('mousemove', e => {
     if (!panning) return;
-    tx = ps.ox + (e.clientX - ps.x);
-    ty = ps.oy + (e.clientY - ps.y);
-    applyT();
+    tx = ps.ox + (e.clientX-ps.x); ty = ps.oy + (e.clientY-ps.y); applyT();
   });
   window.addEventListener('mouseup', () => {
     panning = false;
     document.getElementById('canvas-wrapper').classList.remove('grabbing');
   });
- 
+
   wrap.addEventListener('wheel', e => {
     e.preventDefault();
-    const dir   = e.deltaY < 0 ? 1 : -1;
-    const newSc = Math.min(Math.max(sc * (1 + dir * 0.09), 0.22), 3.2);
-    const rect  = wrap.getBoundingClientRect();
-    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-    tx = mx - (mx - tx) * (newSc / sc);
-    ty = my - (my - ty) * (newSc / sc);
-    sc = newSc; applyT();
-  }, { passive: false });
- 
+    const dir = e.deltaY < 0 ? 1 : -1;
+    const ns  = Math.min(Math.max(sc*(1+dir*0.09), 0.22), 3.2);
+    const r   = wrap.getBoundingClientRect();
+    const mx  = e.clientX - r.left, my = e.clientY - r.top;
+    tx = mx - (mx-tx)*(ns/sc); ty = my - (my-ty)*(ns/sc); sc = ns; applyT();
+  }, { passive:false });
+
   let lt = null;
   wrap.addEventListener('touchstart', e => {
-    if (e.touches.length === 1) lt = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-  }, { passive: true });
+    if (e.touches.length===1) lt = {x:e.touches[0].clientX, y:e.touches[0].clientY};
+  }, {passive:true});
   wrap.addEventListener('touchmove', e => {
-    if (e.touches.length === 1 && lt) {
-      tx += e.touches[0].clientX - lt.x;
-      ty += e.touches[0].clientY - lt.y;
-      lt = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      applyT();
+    if (e.touches.length===1 && lt) {
+      tx += e.touches[0].clientX - lt.x; ty += e.touches[0].clientY - lt.y;
+      lt = {x:e.touches[0].clientX, y:e.touches[0].clientY}; applyT();
     }
-  }, { passive: true });
+  }, {passive:true});
   wrap.addEventListener('touchend', () => lt = null);
- 
+
   wrap.addEventListener('click', e => { if (!e.target.closest('.photo-node')) closeDetail(); });
 }
- 
-/* ═══════════════════════════════════════════
+
+/* ═══════════════════════════════════════
    CONTROLS
-═══════════════════════════════════════════ */
+═══════════════════════════════════════ */
 function initControls() {
   const zoom = f => {
-    const newSc = Math.min(Math.max(sc * f, 0.22), 3.2);
-    const cx = window.innerWidth / 2, cy = (window.innerHeight - 56) / 2;
-    tx = cx - (cx - tx) * (newSc / sc);
-    ty = cy - (cy - ty) * (newSc / sc);
-    sc = newSc; applyT();
+    const ns = Math.min(Math.max(sc*f, 0.22), 3.2);
+    const cx = window.innerWidth/2, cy = (window.innerHeight-56)/2;
+    tx = cx-(cx-tx)*(ns/sc); ty = cy-(cy-ty)*(ns/sc); sc = ns; applyT();
   };
   document.getElementById('btn-zi').addEventListener('click', () => zoom(1.22));
   document.getElementById('btn-zo').addEventListener('click', () => zoom(1/1.22));
@@ -1116,25 +1191,48 @@ function initControls() {
   document.getElementById('panel-close').addEventListener('click', closeDetail);
   document.getElementById('nav-logo').addEventListener('click', resetView);
   document.getElementById('nav-logo').addEventListener('keydown', e => { if (e.key==='Enter') resetView(); });
+  document.getElementById('tag-badge-clear').addEventListener('click', clearTagFilter);
 }
- 
+
 function resetView() {
-  const toX = window.innerWidth / 2 - 978 * 0.85;
-  const toY = (window.innerHeight - 56) / 2 - 870 * 0.85;
+  const toX = window.innerWidth/2 - 978*0.85;
+  const toY = (window.innerHeight-56)/2 - 870*0.85;
   const fSc = sc, fX = tx, fY = ty, dur = 680, t0 = performance.now();
   const tick = now => {
-    const t = Math.min((now - t0) / dur, 1);
+    const t = Math.min((now-t0)/dur, 1);
     const e = t < .5 ? 2*t*t : -1+(4-2*t)*t;
-    sc = fSc + (0.85 - fSc) * e;
-    tx = fX + (toX - fX) * e;
-    ty = fY + (toY - fY) * e;
-    applyT();
-    if (t < 1) requestAnimationFrame(tick);
+    sc = fSc+(0.85-fSc)*e; tx = fX+(toX-fX)*e; ty = fY+(toY-fY)*e; applyT();
+    if (t<1) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
+}
+
+/* ═══════════════════════════════════════
+   OVERLAYS (About + Contact)
+═══════════════════════════════════════ */
+function initOverlays() {
+  const openOverlay = id => {
+    document.getElementById(id).classList.add('open');
+    document.getElementById(id).setAttribute('aria-hidden','false');
+  };
+  const closeOverlay = id => {
+    document.getElementById(id).classList.remove('open');
+    document.getElementById(id).setAttribute('aria-hidden','true');
+  };
+
+  document.getElementById('btn-about').addEventListener('click',   () => openOverlay('about-overlay'));
+  document.getElementById('btn-contact').addEventListener('click', () => openOverlay('contact-overlay'));
+  document.getElementById('about-close').addEventListener('click',   () => closeOverlay('about-overlay'));
+  document.getElementById('contact-close').addEventListener('click', () => closeOverlay('contact-overlay'));
+
+  // Esc key closes any open overlay
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    closeOverlay('about-overlay');
+    closeOverlay('contact-overlay');
+    closeDetail();
+  });
 }
 </script>
 </body>
 </html>
- 
-
