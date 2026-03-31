@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JANE DOE — Photographer</title>
+  <meta name="description" content="Jane Doe is a contemporary photographer based in New York, specializing in editorial portraiture, weddings, and fine art photography.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,900;1,400;1,600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===========================
+       CSS VARIABLES
+    =========================== */
+    :root {
+      --bg:          #0A0A0A;
+      --bg-2:        #111111;
+      --text:        #F2F0EB;
+      --text-muted:  #6B6B6B;
+      --accent:      #E8383D;
+      --border:      #1E1E1E;
+      --font-display:'Bodoni Moda', serif;
+      --font-body:   'Syne', sans-serif;
+      --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition:  0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ===========================
+       RESET & BASE
+    =========================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* Film grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.45;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ===========================
+       CUSTOM CURSOR
+    =========================== */
+    .cursor {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: width .3s, height .3s, background .3s;
+      will-change: transform;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1px solid rgba(242,240,235,.35); border-radius: 50%;
+      pointer-events: none; z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: width .3s, height .3s, border-color .3s;
+      will-change: transform;
+    }
+    body.hovering .cursor { width: 4px; height: 4px; }
+    body.hovering .cursor-ring { width: 56px; height: 56px; border-color: var(--accent); }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 56px;
+      transition: background .4s, backdrop-filter .4s;
+    }
+    nav::after {
+      content: ''; position: absolute; bottom: 0; left: 56px; right: 56px;
+      height: 1px; background: var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display); font-size: 1.1rem;
+      font-weight: 600; letter-spacing: .05em;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
+    .nav-links a {
+      font-size: .68rem; font-weight: 500; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--text-muted);
+      transition: color var(--transition); position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: var(--accent);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      color: var(--bg) !important;
+      background: var(--text);
+      padding: 10px 24px;
+      transition: background var(--transition), color var(--transition) !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--accent) !important; color: var(--text) !important; }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: none; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 1px;
+      background: var(--text); transition: var(--transition);
+    }
+
+    /* Mobile overlay */
+    .nav-mobile {
+      position: fixed; inset: 0; background: var(--bg); z-index: 999;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 48px;
+      opacity: 0; pointer-events: none; transition: opacity .4s;
+    }
+    .nav-mobile.open { opacity: 1; pointer-events: all; }
+    .nav-mobile a {
+      font-family: var(--font-display); font-size: 3rem;
+      font-weight: 400; transition: color .3s;
+    }
+    .nav-mobile a:hover { color: var(--accent); }
+
+    /* ===========================
+       HERO
+    =========================== */
+    #home {
+      position: relative; height: 100vh; min-height: 700px;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; overflow: hidden;
+    }
+    .hero-image { position: absolute; inset: 0; z-index: 0; }
+    .hero-image::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,10,.15) 0%,
+        rgba(10,10,10,0)   30%,
+        rgba(10,10,10,.55) 65%,
+        rgba(10,10,10,.96) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      padding: 0 56px 72px;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: flex-end; gap: 48px;
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 10vw, 10rem);
+      font-weight: 900; line-height: .88; letter-spacing: -.03em;
+    }
+    .hero-headline em { font-style: italic; font-weight: 400; color: var(--accent); }
+    .hero-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 20px; padding-bottom: 6px; }
+    .hero-tagline {
+      font-size: .68rem; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--text-muted); text-align: right; line-height: 2;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: .68rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase;
+      border: 1px solid rgba(242,240,235,.25); padding: 15px 30px;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .hero-cta:hover { border-color: var(--accent); background: rgba(232,56,61,.1); }
+    .hero-cta svg { transition: transform var(--transition); }
+    .hero-cta:hover svg { transform: translateX(5px); }
+
+    .hero-scroll {
+      position: absolute; bottom: 72px; left: 50%;
+      transform: translateX(-50%); z-index: 1;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 10px;
+      font-size: .58rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .hero-scroll-line {
+      width: 1px; height: 52px;
+      background: linear-gradient(to bottom, var(--text-muted), transparent);
+      animation: scrollPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: .3; transform: scaleY(1); }
+      50%       { opacity: 1; transform: scaleY(.65); }
+    }
+
+    /* ===========================
+       SECTION UTILITIES
+    =========================== */
+    section { padding: 128px 56px; }
+
+    .section-label {
+      font-size: .62rem; font-weight: 600;
+      letter-spacing: .28em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .section-label::before {
+      content: ''; width: 28px; height: 1px; background: var(--accent);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      font-weight: 900; line-height: .95; letter-spacing: -.025em;
+    }
+    .section-title em { font-style: italic; font-weight: 400; }
+
+    /* ===========================
+       PORTFOLIO
+    =========================== */
+    #portfolio { border-top: 1px solid var(--border); }
+    .portfolio-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; margin-bottom: 64px;
+    }
+    .portfolio-header-right {
+      font-size: .7rem; color: var(--text-muted);
+      letter-spacing: .06em; text-align: right; line-height: 2;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .portfolio-item {
+      position: relative; overflow: hidden; background: var(--bg-2);
+    }
+    /* Asymmetric layout */
+    .portfolio-item:nth-child(1) { grid-column: 1/8;  grid-row: 1; aspect-ratio: 16/10; }
+    .portfolio-item:nth-child(2) { grid-column: 8/13; grid-row: 1; aspect-ratio: 3/4;   }
+    .portfolio-item:nth-child(3) { grid-column: 1/5;  grid-row: 2; aspect-ratio: 4/5;   }
+    .portfolio-item:nth-child(4) { grid-column: 5/9;  grid-row: 2; aspect-ratio: 4/5;   }
+    .portfolio-item:nth-child(5) { grid-column: 9/13; grid-row: 2; aspect-ratio: 4/5;   }
+    .portfolio-item:nth-child(6) { grid-column: 1/6;  grid-row: 3; aspect-ratio: 16/9;  }
+    .portfolio-item:nth-child(7) { grid-column: 6/13; grid-row: 3; aspect-ratio: 16/9;  }
+
+    .portfolio-item img { transition: transform .75s var(--ease); }
+    .portfolio-item:hover img { transform: scale(1.05); }
+
+    .portfolio-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,10,10,0);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 28px;
+      transition: background .45s;
+    }
+    .portfolio-item:hover .portfolio-overlay { background: rgba(10,10,10,.68); }
+
+    .portfolio-overlay-content {
+      transform: translateY(14px); opacity: 0;
+      transition: transform .45s var(--ease), opacity .45s;
+    }
+    .portfolio-item:hover .portfolio-overlay-content { transform: translateY(0); opacity: 1; }
+
+    .portfolio-category {
+      font-size: .58rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 5px;
+    }
+    .portfolio-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; }
+    .portfolio-count { font-size: .62rem; color: var(--text-muted); margin-top: 5px; }
+
+    /* ===========================
+       ABOUT
+    =========================== */
+    #about {
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 112px; align-items: center;
+    }
+    .about-image-wrapper { position: relative; }
+    .about-image-frame { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--bg-2); }
+    .about-image-frame::before {
+      content: ''; position: absolute;
+      top: -18px; right: -18px;
+      width: 100%; height: 100%;
+      border: 1px solid var(--border); z-index: -1;
+    }
+    .about-accent-text {
+      position: absolute; bottom: -22px; left: 22px;
+      font-family: var(--font-display); font-size: .72rem;
+      font-style: italic; color: var(--text-muted); letter-spacing: .06em;
+    }
+    .about-body {
+      margin-top: 44px; font-size: 1rem;
+      color: rgba(242,240,235,.7); line-height: 1.85;
+    }
+    .about-body p + p { margin-top: 20px; }
+
+    .about-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      margin-top: 60px; border-top: 1px solid var(--border); padding-top: 44px;
+    }
+    .stat { padding-right: 24px; }
+    .stat + .stat { padding-left: 24px; border-left: 1px solid var(--border); }
+    .stat-number {
+      font-family: var(--font-display); font-size: 2.6rem;
+      font-weight: 900; line-height: 1;
+    }
+    .stat-label {
+      font-size: .62rem; font-weight: 500; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--text-muted); margin-top: 7px;
+    }
+    .about-cta {
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-top: 52px; font-size: .68rem; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent); border-bottom: 1px solid var(--accent);
+      padding-bottom: 4px; transition: gap var(--transition);
+    }
+    .about-cta:hover { gap: 22px; }
+
+    /* ===========================
+       SERVICES
+    =========================== */
+    #services { border-top: 1px solid var(--border); background: var(--bg-2); }
+    .services-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: end; margin-bottom: 80px;
+    }
+    .services-intro {
+      font-size: 1rem; color: var(--text-muted);
+      line-height: 1.85; max-width: 440px;
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .service-card {
+      background: var(--bg-2); padding: 52px 44px;
+      position: relative; overflow: hidden;
+      transition: background var(--transition);
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 0; height: 2px; background: var(--accent);
+      transition: width .55s var(--ease);
+    }
+    .service-card:hover::before { width: 100%; }
+    .service-card:hover { background: #141414; }
+
+    .service-number {
+      font-family: var(--font-display); font-size: .78rem;
+      font-weight: 600; color: var(--accent);
+      letter-spacing: .12em; margin-bottom: 36px;
+    }
+    .service-name {
+      font-family: var(--font-display); font-size: 1.7rem;
+      font-weight: 600; line-height: 1.15; margin-bottom: 14px;
+    }
+    .service-price {
+      font-size: .62rem; font-weight: 600; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 26px;
+    }
+    .service-description {
+      font-size: .88rem; color: var(--text-muted);
+      line-height: 1.75; margin-bottom: 36px;
+    }
+    .service-features { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .service-features li {
+      font-size: .8rem; color: rgba(242,240,235,.6);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .service-features li::before {
+      content: ''; width: 18px; height: 1px;
+      background: var(--accent); flex-shrink: 0;
+    }
+
+    /* ===========================
+       TESTIMONIALS
+    =========================== */
+    #testimonials { border-top: 1px solid var(--border); }
+    .testimonials-header { margin-bottom: 80px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .testimonial-card {
+      border: 1px solid var(--border); padding: 44px;
+      transition: border-color var(--transition);
+    }
+    .testimonial-card:hover { border-color: rgba(232,56,61,.3); }
+    .testimonial-quote {
+      font-family: var(--font-display); font-size: 4.5rem;
+      font-weight: 900; color: var(--accent);
+      line-height: .75; margin-bottom: 24px; opacity: .4;
+    }
+    .testimonial-text {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 1.05rem; line-height: 1.75;
+      color: rgba(242,240,235,.82); margin-bottom: 36px;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      overflow: hidden; background: var(--bg-2); flex-shrink: 0;
+    }
+    .testimonial-name { font-size: .8rem; font-weight: 600; letter-spacing: .04em; }
+    .testimonial-role { font-size: .68rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ===========================
+       CONTACT
+    =========================== */
+    #contact {
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 112px; align-items: start;
+    }
+    .contact-left { position: sticky; top: 120px; }
+    .contact-body {
+      margin-top: 36px; font-size: 1rem;
+      color: var(--text-muted); line-height: 1.85; max-width: 400px;
+    }
+    .contact-details {
+      margin-top: 60px; display: flex; flex-direction: column; gap: 26px;
+    }
+    .contact-detail-item { display: flex; flex-direction: column; gap: 5px; }
+    .contact-detail-label {
+      font-size: .58rem; font-weight: 600;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
+    }
+    .contact-detail-value { font-size: .95rem; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 0; }
+    .form-group { position: relative; border-bottom: 1px solid var(--border); }
+    .form-group:first-child { border-top: 1px solid var(--border); }
+    .form-group label {
+      position: absolute; top: 22px; left: 0;
+      font-size: .58rem; font-weight: 600;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--text-muted); transition: color var(--transition);
+      pointer-events: none;
+    }
+    .form-group:focus-within label { color: var(--accent); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; background: none; border: none; outline: none;
+      color: var(--text); font-family: var(--font-body);
+      font-size: .95rem; padding: 48px 0 22px 0; cursor: none;
+    }
+    .form-group select { appearance: none; }
+    .form-group select option { background: var(--bg); color: var(--text); }
+    .form-group textarea { resize: none; min-height: 130px; }
+
+    .form-submit {
+      margin-top: 44px; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .form-note { font-size: .68rem; color: var(--text-muted); }
+    .submit-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--text); color: var(--bg);
+      border: none; font-family: var(--font-body);
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      padding: 18px 38px; cursor: none;
+      transition: background var(--transition), color var(--transition);
+    }
+    .submit-btn:hover { background: var(--accent); color: var(--text); }
+    .submit-btn svg { transition: transform var(--transition); }
+    .submit-btn:hover svg { transform: translateX(4px); }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      border-top: 1px solid var(--border); padding: 48px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 36px; list-style: none; }
+    .footer-links a {
+      font-size: .62rem; font-weight: 500; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: .62rem; color: var(--text-muted); }
+
+    /* ===========================
+       SCROLL ANIMATIONS
+    =========================== */
+    .fade-up {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .stagger > * {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .stagger.visible > *:nth-child(1) { opacity:1;transform:none;transition-delay:0s; }
+    .stagger.visible > *:nth-child(2) { opacity:1;transform:none;transition-delay:.1s; }
+    .stagger.visible > *:nth-child(3) { opacity:1;transform:none;transition-delay:.2s; }
+    .stagger.visible > *:nth-child(4) { opacity:1;transform:none;transition-delay:.3s; }
+    .stagger.visible > *:nth-child(5) { opacity:1;transform:none;transition-delay:.4s; }
+    .stagger.visible > *:nth-child(6) { opacity:1;transform:none;transition-delay:.5s; }
+    .stagger.visible > *:nth-child(7) { opacity:1;transform:none;transition-delay:.6s; }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1100px) {
+      section { padding: 96px 40px; }
+      nav { padding: 24px 40px; }
+      nav::after { left: 40px; right: 40px; }
+      footer { padding: 40px; }
+
+      .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .portfolio-item:nth-child(n) { grid-column: auto; grid-row: auto; aspect-ratio: 4/3; }
+      .portfolio-item:nth-child(1) { grid-column: 1/3; aspect-ratio: 16/9; }
+
+      #about { grid-template-columns: 1fr; gap: 72px; }
+      .about-image-frame { max-width: 480px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .services-header { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      #contact { grid-template-columns: 1fr; gap: 72px; }
+      .contact-left { position: static; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 80px 24px; }
+      nav { padding: 20px 24px; }
+      nav::after { left: 24px; right: 24px; }
+      footer { padding: 40px 24px; flex-direction: column; gap: 28px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+
+      .nav-links    { display: none; }
+      .nav-hamburger{ display: flex; }
+
+      .hero-content { grid-template-columns: 1fr; padding: 0 24px 52px; gap: 28px; }
+      .hero-meta { align-items: flex-start; }
+      .hero-tagline { text-align: left; }
+      .hero-scroll  { display: none; }
+
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-item:nth-child(n) { grid-column: auto; aspect-ratio: 4/3; }
+
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      .about-stats { grid-template-columns: 1fr 1fr; gap: 0; }
+      .about-stats .stat:last-child {
+        grid-column: 1/3; border-left: none;
+        border-top: 1px solid var(--border);
+        padding-top: 24px; margin-top: 24px; padding-left: 0;
+      }
+
+      .form-submit { flex-direction: column; gap: 20px; align-items: flex-start; }
+
+      body  { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== CURSOR ===== -->
+  <div class="cursor"     id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <a href="#home" class="nav-logo">JANE DOE<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#testimonials">Clients</a></li>
+      <li><a href="#contact" class="nav-cta">Inquire</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===== MOBILE NAV ===== -->
+  <div class="nav-mobile" id="mobileNav" aria-hidden="true">
+    <a href="#portfolio"    class="mobile-link">Work</a>
+    <a href="#about"        class="mobile-link">About</a>
+    <a href="#services"     class="mobile-link">Services</a>
+    <a href="#testimonials" class="mobile-link">Clients</a>
+    <a href="#contact"      class="mobile-link">Inquire</a>
+  </div>
+
+  <!-- ====================================================
+       HERO
+  ===================================================== -->
+  <section id="home">
+    <div class="hero-image">
+      <img
+        src="https://picsum.photos/seed/herophoto42/1800/1000"
+        alt="Hero — dramatic landscape photograph"
+        width="1800" height="1000"
+        loading="eager"
+      >
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-headline">
+        Light<br>&amp;&nbsp;<em>Shadow</em>
+      </h1>
+      <div class="hero-meta">
+        <p class="hero-tagline">Photography by Jane Doe<br>New York &mdash; Available Worldwide</p>
+        <a href="#portfolio" class="hero-cta">
+          View the Work
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- ====================================================
+       PORTFOLIO
+  ===================================================== -->
+  <section id="portfolio">
+    <div class="portfolio-header fade-up">
+      <div>
+        <p class="section-label">Selected Work</p>
+        <h2 class="section-title">The&nbsp;<em>Portfolio</em></h2>
+      </div>
+      <div class="portfolio-header-right">
+        Curated across 5 disciplines<br>
+        20&ndash;30 hand-selected images
+      </div>
+    </div>
+
+    <div class="portfolio-grid stagger">
+
+      <div class="portfolio-item">
+        <img src="https://picsum.photos/seed/p1a/900/600" alt="Editorial portraiture series" width="900" height="600" loading="lazy">
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <p class="portfolio-category">Editorial</p>
+            <p class="portfolio-title">Portraiture</p>
+            <p class="portfolio-count">8 Images</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://picsum.photos/seed/p2b/700/900" alt="Wedding ceremony photography" width="700" height="900" loading="lazy">
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <p class="portfolio-category">Ceremony</p>
+            <p class="portfolio-title">Weddings</p>
+            <p class="portfolio-count">12 Images</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://picsum.photos/seed/p3c/600/750" alt="Landscape nature photography" width="600" height="750" loading="lazy">
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <p class="portfolio-category">Nature</p>
+            <p class="portfolio-title">Landscapes</p>
+            <p class="portfolio-count">6 Images</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://picsum.photos/seed/p4d/600/750" alt="Commercial brand photography" width="600" height="750" loading="lazy">
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <p class="portfolio-category">Brand</p>
+            <p class="portfolio-title">Commercial</p>
+            <p class="portfolio-count">5 Images</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://picsum.photos/seed/p5e/600/750" alt="Fine art abstract photography" width="600" height="750" loading="lazy">
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <p class="portfolio-category">Fine Art</p>
+            <p class="portfolio-title">Abstracts</p>
+            <p class="portfolio-count">4 Images</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://picsum.photos/seed/p6f/900/600" alt="Fashion editorial photography" width="900" height="600" loading="lazy">
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <p class="portfolio-category">Fashion</p>
+            <p class="portfolio-title">Editorial</p>
+            <p class="portfolio-count">7 Images</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://picsum.photos/seed/p7g/1000/600" alt="Documentary storytelling photography" width="1000" height="600" loading="lazy">
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-content">
+            <p class="portfolio-category">Story</p>
+            <p class="portfolio-title">Documentary</p>
+            <p class="portfolio-count">9 Images</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================
+       ABOUT
+  ===================================================== -->
+  <section id="about">
+    <div class="about-image-wrapper fade-up">
+      <div class="about-image-frame">
+        <img
+          src="https://picsum.photos/seed/aboutjane/600/800"
+          alt="Portrait of Jane Doe, photographer"
+          width="600" height="800" loading="lazy"
+        >
+      </div>
+      <span class="about-accent-text">New York &mdash; Available Worldwide</span>
+    </div>
+
+    <div class="about-content">
+      <p class="section-label fade-up">The Photographer</p>
+      <h2 class="section-title fade-up">I find the<br><em>truth in light.</em></h2>
+      <div class="about-body fade-up">
+        <p>
+          Placeholder bio — replace with your own. Introduce yourself here: your style, background, what drives your work. Keep it authentic, direct, and confident. Don't explain photography — embody it.
+        </p>
+        <p>
+          Second paragraph. Talk about your philosophy — how you approach a shoot, what you believe makes an image last. Clients want to know who they're hiring, not just what you shoot.
+        </p>
+        <p>
+          Specialties: [Your niches]. Based in [City]. Available for travel worldwide.
+        </p>
+      </div>
+
+      <div class="about-stats stagger">
+        <div class="stat">
+          <p class="stat-number">8+</p>
+          <p class="stat-label">Years Shooting</p>
+        </div>
+        <div class="stat">
+          <p class="stat-number">340</p>
+          <p class="stat-label">Projects Done</p>
+        </div>
+        <div class="stat">
+          <p class="stat-number">12</p>
+          <p class="stat-label">Countries Shot</p>
+        </div>
+      </div>
+
+      <a href="#contact" class="about-cta fade-up">
+        Let's work together
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+          <path d="M0 5H15M15 5L10 1M15 5L10 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       SERVICES
+  ===================================================== -->
+  <section id="services">
+    <div class="services-header">
+      <div class="fade-up">
+        <p class="section-label">What I Offer</p>
+        <h2 class="section-title">Services &amp;<br><em>Pricing</em></h2>
+      </div>
+      <p class="services-intro fade-up">
+        Every engagement is tailored. These tiers are starting points — not ceilings. Reach out and let's build something specific to your vision.
+      </p>
+    </div>
+
+    <div class="services-grid stagger">
+      <div class="service-card">
+        <p class="service-number">01</p>
+        <h3 class="service-name">Essential Session</h3>
+        <p class="service-price">Starting from $000</p>
+        <p class="service-description">
+          Perfect for individuals, headshots, or focused personal projects. Efficient and delivered with full attention to detail.
+        </p>
+        <ul class="service-features">
+          <li>2&ndash;hour shoot session</li>
+          <li>1 curated location</li>
+          <li>25 edited digital files</li>
+          <li>Private online gallery</li>
+          <li>Personal use license</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <p class="service-number">02</p>
+        <h3 class="service-name">Signature Package</h3>
+        <p class="service-price">Starting from $000</p>
+        <p class="service-description">
+          The full experience. Half-day coverage, multiple locations, and a comprehensive gallery for those who want it done right.
+        </p>
+        <ul class="service-features">
+          <li>4&ndash;hour shoot session</li>
+          <li>Multiple locations</li>
+          <li>75 edited digital files</li>
+          <li>Private online gallery</li>
+          <li>Commercial use license</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <p class="service-number">03</p>
+        <h3 class="service-name">Full-Day Coverage</h3>
+        <p class="service-price">Starting from $000</p>
+        <p class="service-description">
+          Weddings, brand campaigns, editorial shoots. The whole day, from first light to final frame — nothing missed.
+        </p>
+        <ul class="service-features">
+          <li>8&ndash;10 hour coverage</li>
+          <li>Second shooter available</li>
+          <li>200+ edited digital files</li>
+          <li>Priority turnaround</li>
+          <li>Full commercial license</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       TESTIMONIALS
+  ===================================================== -->
+  <section id="testimonials">
+    <div class="testimonials-header fade-up">
+      <p class="section-label">What Clients Say</p>
+      <h2 class="section-title">The&nbsp;<em>Proof</em></h2>
+    </div>
+
+    <div class="testimonials-grid stagger">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">&ldquo;</p>
+        <p class="testimonial-text">
+          Placeholder — replace with a real client quote. Keep it specific. Vague praise is forgettable. The more concrete the better.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <img src="https://picsum.photos/seed/tm1/80/80" alt="Client avatar" width="80" height="80" loading="lazy">
+          </div>
+          <div>
+            <p class="testimonial-name">Client Name</p>
+            <p class="testimonial-role">Role, Company</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-quote">&ldquo;</p>
+        <p class="testimonial-text">
+          Second placeholder. Aim for variety — one from a wedding client, one from a commercial client, one from an editorial subject.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <img src="https://picsum.photos/seed/tm2/80/80" alt="Client avatar" width="80" height="80" loading="lazy">
+          </div>
+          <div>
+            <p class="testimonial-name">Client Name</p>
+            <p class="testimonial-role">Role, Company</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-quote">&ldquo;</p>
+        <p class="testimonial-text">
+          Third placeholder. A short, punchy quote often lands harder than a long one. Edit ruthlessly — every word earns its place.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <img src="https://picsum.photos/seed/tm3/80/80" alt="Client avatar" width="80" height="80" loading="lazy">
+          </div>
+          <div>
+            <p class="testimonial-name">Client Name</p>
+            <p class="testimonial-role">Role, Company</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       CONTACT
+  ===================================================== -->
+  <section id="contact">
+    <div class="contact-left">
+      <p class="section-label fade-up">Get In Touch</p>
+      <h2 class="section-title fade-up">Let's Make<br><em>Something.</em></h2>
+      <p class="contact-body fade-up">
+        Whether you have a full brief or just a feeling — reach out. I reply within 24 hours and love a good conversation about a creative idea.
+      </p>
+      <div class="contact-details stagger">
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Email</span>
+          <span class="contact-detail-value">hello@yourdomain.com</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Location</span>
+          <span class="contact-detail-value">New York, NY &mdash; Available Worldwide</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Response Time</span>
+          <span class="contact-detail-value">Within 24 hours</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Follow</span>
+          <span class="contact-detail-value">@yourhandle</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Netlify form — attribute activates form handling on Netlify hosting -->
+    <form class="contact-form" name="contact" netlify>
+      <input type="hidden" name="form-name" value="contact">
+
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text"  id="name"    name="name"    autocomplete="name"  required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email"   name="email"   autocomplete="email" required>
+      </div>
+      <div class="form-group">
+        <label for="type">Project Type</label>
+        <select id="type" name="type">
+          <option value=""></option>
+          <option>Wedding</option>
+          <option>Portrait Session</option>
+          <option>Commercial / Brand</option>
+          <option>Editorial</option>
+          <option>Fine Art</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date">Preferred Date</label>
+        <input type="text" id="date" name="date" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+
+      <div class="form-submit">
+        <span class="form-note">* Required fields</span>
+        <button type="submit" class="submit-btn">
+          Send Inquiry
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ====================================================
+       FOOTER
+  ===================================================== -->
+  <footer>
+    <div class="footer-logo">JANE DOE<span>.</span></div>
+    <ul class="footer-links">
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Jane Doe. All rights reserved.</p>
+  </footer>
+
+  <!-- ====================================================
+       JAVASCRIPT
+  ===================================================== -->
+  <script>
+    /* ---- CUSTOM CURSOR ---- */
+    const cursor    = document.getElementById('cursor');
+    const cursorRing= document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    (function animateRing() {
+      rx += (mx - rx) * 0.11;
+      ry += (my - ry) * 0.11;
+      cursorRing.style.left = rx + 'px';
+      cursorRing.style.top  = ry + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+
+    document.querySelectorAll('a, button, .portfolio-item, .service-card, input, textarea, select')
+      .forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+      });
+
+    /* ---- MOBILE NAV ---- */
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    let open = false;
+
+    function toggleNav(state) {
+      open = state;
+      mobileNav.classList.toggle('open', open);
+      mobileNav.setAttribute('aria-hidden', String(!open));
+      const [s0, s1, s2] = hamburger.querySelectorAll('span');
+      if (open) {
+        s0.style.transform = 'rotate(45deg) translate(4px, 4px)';
+        s1.style.opacity   = '0';
+        s2.style.transform = 'rotate(-45deg) translate(4px, -4px)';
+      } else {
+        [s0, s1, s2].forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+      }
+    }
+
+    hamburger.addEventListener('click', () => toggleNav(!open));
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => toggleNav(false)));
+
+    /* ---- SCROLL ANIMATIONS ---- */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+
+    document.querySelectorAll('.fade-up, .stagger').forEach(el => io.observe(el));
+
+    /* ---- NAV SCROLL BLUR ---- */
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      const past = window.scrollY > 80;
+      nav.style.background      = past ? 'rgba(10,10,10,0.9)'  : '';
+      nav.style.backdropFilter  = past ? 'blur(14px)'           : '';
+      nav.style.webkitBackdropFilter = past ? 'blur(14px)'      : '';
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
