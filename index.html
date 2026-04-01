@@ -1,476 +1,929 @@
+You are helping me plan and build a portfolio website for a photographer.
+
+Goal:
+Create a clean, elegant, minimalist photography portfolio website that feels premium, loads fast, and showcases a curated body of work.
+
+Constraints:
+- The site must be free to build and free to host.
+- It should work well as a static site.
+- Avoid expensive tools, paid plugins, or complex backend dependencies.
+- The design should prioritize images, whitespace, and simplicity.
+- The portfolio should feel professional, modern, and easy to navigate.
+
+Audience:
+- Potential clients looking for a photographer.
+- People viewing the photographer’s best work.
+- The photographer wants to look polished, credible, and memorable.
+
+Primary pages:
+- Home
+- Portfolio / Galleries
+- About
+- Services or Pricing
+- Contact
+- Optional: Testimonials, FAQ, Blog, or Booking
+
+Design direction:
+- Minimalist, gallery-first layout.
+- Large imagery, clean typography, subtle transitions.
+- Mobile-first responsive design.
+- Easy navigation with clear calls to action.
+- No clutter, no heavy animations, no distracting elements.
+
+Content strategy:
+- Curate 20–30 of the strongest images total.
+- Group work into a few meaningful categories.
+- Keep text short and confident.
+- Include a short bio, specialties, location, services, and contact info.
+- Make the homepage instantly communicate style and niche.
+
+Technical direction:
+- Prefer a static site architecture.
+- Optimize images for web performance.
+- Use lazy loading where appropriate.
+- Ensure SEO basics: page titles, meta descriptions, alt text, and structured headings.
+- Include accessibility best practices.
+
+Deliverables I want from you:
+1. A recommended site structure / sitemap.
+2. A content outline for each page.
+3. A visual style guide with fonts, colors, spacing, and mood.
+4. Suggested free hosting options and the best choice for this project.
+5. A recommended tech stack for a static portfolio.
+6. A step-by-step build plan.
+7. A list of pitfalls to avoid for a photography portfolio.
+8. If helpful, ask me any clarifying questions before finalizing.
+
+Important:
+Before giving code, first give me a detailed plan and recommended structure.
+
+
+After that walk me through how i could host this on github for free.
+
+Mar 30
+Architected comprehensive portfolio strategy and GitHub hosting walkthrough
+Photography Portfolio — Complete Build Plan
+
+Here's everything you need before writing a single line of code.
+1. Sitemap & Site Structure
+
+/                    → Home
+/portfolio           → Portfolio (gallery overview)
+  /portfolio/weddings
+  /portfolio/portraits
+  /portfolio/landscapes
+/about               → About
+/services            → Services & Pricing
+/contact             → Contact
+/testimonials        → (Optional)
+
+Keep it flat. Deep nesting kills portfolio sites.
+2. Content Outline Per Page
+
+Home
+
+    Full-bleed hero image (your single best shot) + one-line tagline
+    3–4 image teasers linking to gallery categories
+    1–2 sentence mission statement
+    CTA: "View My Work" → Portfolio
+
+Portfolio
+
+    Category cards (3–5 max) with a cover image each
+    On click → masonry or grid gallery for that category
+    6–10 images per category, curated ruthlessly
+
+About
+
+    Professional headshot
+    2–3 short paragraphs: who you are, your style, your story
+    Location + availability
+    CTA: "Work With Me" → Contact
+
+Services / Pricing
+
+    3–4 service tiers in a clean card layout
+    What's included per tier
+    Starting-from pricing (or "inquire" if you prefer)
+    FAQ accordion (3–6 common questions)
+    CTA: "Get in Touch"
+
+Contact
+
+    Simple form: Name, Email, Event type, Date, Message
+    Location/timezone info
+    Response time expectation ("I reply within 24 hours")
+    Optional: Social links
+
+3. Visual Style Guide
+
+Typography
+Role	Font	Source
+Headings	Cormorant Garamond (serif, elegant)	Google Fonts
+Body	Inter or DM Sans (clean, readable)	Google Fonts
+Accent/Label	Jost (spaced uppercase)	Google Fonts
+
+Use 2 fonts max. Never 3.
+
+Color Palette
+Name	Hex	Use
+Off-white	#F9F7F4
+	Page background
+Near-black	#1A1A1A
+	Body text
+Warm gray	#8A8A8A
+	Captions, labels
+Accent	#C9A96E
+	CTAs, links, hover states
+Pure white	#FFFFFF
+	Cards, nav background
+
+Spacing System — use multiples of 8px: 8 / 16 / 24 / 32 / 48 / 64 / 96px
+
+Mood
+
+    Lots of whitespace — images breathe
+    No gradients, no drop shadows
+    Thin borders (1px solid #eee) over box shadows
+    Subtle fade-in transitions (opacity 0.4s ease) only
+
+4. Free Hosting Options
+Option	Pros	Cons
+GitHub Pages ✅	Free, reliable, custom domain, SSL	No server-side code
+Netlify	Free tier, form handling built-in	Bandwidth limits
+Vercel	Fast CDN, easy deploys	Geared toward frameworks
+Cloudflare Pages	Fastest CDN globally, generous free tier	Slightly more setup
+
+Best choice: GitHub Pages + Netlify Forms combo. Host on GitHub Pages for simplicity and version control. Use Netlify's free form endpoint to handle the contact form without any backend.
+5. Recommended Tech Stack
+
+Keep it dead simple:
+
+HTML5                → Structure
+CSS3 (custom)        → All styling — no Bootstrap, no Tailwind
+Vanilla JavaScript   → Lightbox, lazy loading, mobile nav
+No build tools       → Just files in a folder
+
+Optional light additions:
+
+    GLightbox — free, zero-dependency image lightbox
+    Masonry.js — natural grid layouts for galleries (4KB)
+
+Do NOT use:
+
+    WordPress (overkill, slow)
+    React/Next.js (unnecessary complexity for static content)
+    jQuery (dead weight in 2026)
+
+6. Step-by-Step Build Plan
+
+Phase 1 — Foundation (Day 1)
+
+    Create folder structure: /css, /js, /images, /pages
+    Build index.html with semantic HTML (<header>, <main>, <footer>, <nav>)
+    Write style.css with CSS variables for your color/font system
+    Build the nav — hamburger menu for mobile
+
+Phase 2 — Core Pages (Days 2–3) 5. Build Home: hero image, category teasers, CTA 6. Build Portfolio: category index page + 3 gallery pages 7. Add lazy loading: loading="lazy" on all <img> tags 8. Add GLightbox to gallery pages
+
+Phase 3 — Supporting Pages (Day 4) 9. Build About page 10. Build Services/Pricing page 11. Build Contact page with Netlify Forms (<form netlify>)
+
+Phase 4 — Polish & Performance (Day 5) 12. Compress all images: use Squoosh → WebP format, aim under 200KB each 13. Add <meta> descriptions and <title> tags to every page 14. Add alt text to every image 15. Test on mobile (Chrome DevTools) 16. Run PageSpeed Insights — target 90+ score
+
+Phase 5 — Launch (Day 6) 17. Push to GitHub 18. Enable GitHub Pages 19. (Optional) Connect custom domain
+7. Pitfalls to Avoid
+
+Performance killers
+
+    Uploading raw camera files (5–20MB each) directly — always compress first
+    Not using WebP format — it's 30–50% smaller than JPG with same quality
+    Too many fonts loaded from Google Fonts
+
+Design mistakes
+
+    Putting the bio on the homepage — keep home about the work
+    Using a dark background unless your work specifically calls for it
+    Overloading galleries — 8 perfect images beat 40 mediocre ones
+    Tiny CTA buttons — they need to be obvious on mobile
+
+SEO/Accessibility gaps
+
+    Missing alt text on images (also hurts SEO)
+    No lang="en" on the <html> tag
+    Low color contrast on text
+    Images with no width/height attributes (causes layout shift)
+
+Business mistakes
+
+    No clear way to contact you above the fold
+    Hiding your location — clients want local photographers
+    No pricing signal at all — "inquire for rates" with zero context loses clients
+
+8. Clarifying Questions
+
+Before you start, I'd love to know:
+
+    Photography niche — weddings, portraits, nature, commercial, street? This shapes everything from category names to color palette to tone of copy.
+    Do you have images ready, or do we need to plan around placeholder images for now?
+    Custom domain? (e.g. janedoephoto.com) — or are you fine with username.github.io for now?
+    Contact form — do you want a simple email link, or a full form with fields?
+
+Hosting on GitHub Pages — Step by Step
+
+Here's the complete walkthrough:
+
+Step 1 — Create a GitHub account Go to github.com and sign up if you don't have one. Free accounts get unlimited public repos with Pages hosting.
+
+Step 2 — Create a new repository
+
+    Click New repository
+    Name it exactly: username.github.io (replace username with your GitHub username)
+    Set it to Public
+    Check "Add a README" — click Create repository
+
+This special name tells GitHub to treat it as your Pages site automatically.
+
+Step 3 — Upload your files Two ways to do this:
+
+Option A — Browser upload (easiest to start):
+
+    Go to your repo → click Add file → Upload files
+    Drag your index.html, /css, /js, /images folders in
+    Commit directly to main
+
+Option B — Git (recommended, lets you update easily):
+bash
+
+git clone https://github.com/username/username.github.io
+# Copy your files into that folder
+git add .
+git commit -m "Initial portfolio launch"
+git push origin main
+
+Step 4 — Enable GitHub Pages
+
+    Go to your repo → Settings → Pages
+    Under "Source," select Deploy from a branch
+    Branch: main / Folder: / (root)
+    Click Save
+
+GitHub will give you a green banner with your live URL: https://username.github.io
+
+It takes 1–2 minutes to go live the first time. Every future push auto-deploys in under 60 seconds.
+
+Step 5 — Connect a custom domain (optional but recommended)
+
+    Buy a domain at Namecheap (~$10/year for .com)
+    In your repo's Settings → Pages → Custom domain, enter www.yourdomain.com
+    At your registrar's DNS settings, add:
+        4 A records pointing to GitHub's IPs: 185.199.108.153, .109.153, .110.153, .111.153
+        1 CNAME record: www → username.github.io
+    Check "Enforce HTTPS" — GitHub provides a free SSL certificate automatically
+
+Step 6 — Handle the contact form GitHub Pages is static — no PHP, no server. The cleanest free workaround:
+
+    Sign up at Netlify (free)
+    Add netlify attribute to your form: <form name="contact" netlify>
+    Submissions go to your Netlify dashboard and can be emailed to you
+    You keep your GitHub Pages host — just point your form action to Netlify's endpoint
+
+Ready to build? Share your niche and I'll generate the full HTML/CSS starter files tailored to your specific style — complete with the color palette, fonts, and layout structure above.
+
+Just put placeholders for now I'll add more detail later after I see the first draft. Make sure it's professional as posible. Also maybe a little edgy.
+Mar 30
+Architected dark, editorial photography portfolio with asymmetric layouts
+
+Here's your first draft. What's in it:
+
+Design choices made for "professional + edgy":
+
+    Dark theme (#0A0A0A) — photography looks better on dark, and it reads as confident rather than decorative
+    Bodoni Moda for headlines — high-contrast, fashion-editorial, a little severe in the best way
+    Syne for body — geometric, slightly unconventional, not overused
+    Red accent (#E8383D) — not apologetic gold or safe blue; it punctuates without screaming
+    Film grain texture baked in via SVG — adds tactility
+    Custom red cursor dot with a lagging ring — immediately signals this isn't a template
+    Asymmetric 12-column portfolio grid — breaks the expected even-grid monotony
+
+What's fully built:
+
+    Sticky nav with scroll-blur + mobile hamburger overlay
+    Full-viewport hero with gradient overlay and scroll indicator
+    7-image asymmetric portfolio grid with hover reveal
+    About section with offset-border image frame + stats
+    3-tier services/pricing in a ruled grid
+    Testimonials with quote styling
+    Contact section with sticky left column + Netlify-ready form
+    Footer
+
+To customize it, just swap:
+
+    JANE DOE → your name everywhere
+    Placeholder bio text in the About section
+    $000 pricing with real numbers
+    picsum.photos image URLs with your actual photos
+    hello@yourdomain.com and @yourhandle with real contact info
+
+What would you like to adjust first — the color palette, layout, typography, or content?
+Index
+Code · HTML 
+
+lets keep working on it:
+Mar 30
+Inventoried completed features and identified enhancement opportunities
+
+Nice brief — a lot of what it describes is already in the current build. Let me check what's done vs. what's still open, then we can prioritize.
+
+What's already live:
+
+    Graph paper canvas with pan + zoom
+    Photo nodes clustered by project with ellipse rings
+    Bezier connection lines (within + cross-project)
+    Click-to-expand detail panel with tags, description, related photos
+    Project filter pills
+    Hover lift, selected glow, Locate button
+    Mobile responsive
+
+What's still on the table from your brief:
+
+What would you like to tackle next?
+
+Pick whichever combination feels right and I'll get to work on it.
+
+Q: What should we work on next? (Select all that apply)
+A: Improve cluster/connection visuals — more organic, animated, Add About + Contact sections (outside the canvas), Tag filtering — click a tag to filter matching photos, I see some issues
+
+Q: Anything about the current canvas that feels wrong? (Select all that apply)
+A: Detail panel needs more info, Connection lines too subtle or too visible
+Mar 30
+Catalogued feature requests and identified clarification needs
+
+Before I dive in, two quick things I need to know:
+
+Q: Connection lines — which way is the problem?
+A: Too subtle — I can barely see them
+
+Q: What issues are you seeing? (describe below if none of these fit)
+A: Nodes overlap or feel cramped
+Mar 30
+Repositioning nodes to eliminate overlapping clusters
+Claude's response was interrupted
+
+actually you can keep them close together like it, just remove the light circle behind the projects, i think just having the pictures together shows that its a project.
+Mar 30
+Reconsidered design approach, pivoting toward visual simplicity
+
+Good. I have everything I need. Rebuilding now with all four improvements at once — removing the rings, stronger connections, tag filtering, and About + Contact overlays.
+Ran a command, created a file, read a file
+
+Here's what changed in this version:
+
+Cluster rings removed — the photos group visually on their own now, with just a subtle floating project label above each cluster so you still get orientation without the visual weight.
+
+Connection lines — much stronger — same-project lines are now at 38% opacity (was 22%), cross-project lines at 28%. When you select a photo, its connections animate with a flowing dashed stroke in the project's color, so the relationships feel alive rather than decorative.
+
+Tag filtering — click any tag chip in the detail panel and the canvas filters to only photos with that tag. A dismissible badge appears in the nav bar showing the active tag. Click the same tag again (or the ✕) to clear it. Tag filters stack with project filters.
+
+Detail panel — more info — each photo now has a 4-cell metadata grid showing Location, Year, Camera, and Format (all placeholder values you can replace). The tags section also has a hint that they're clickable.
+
+About + Contact — two full-screen overlays accessible from the nav. About has your portrait, bio, stats, and availability status. Contact has sticky details on the left and a Netlify-ready form on the right. Both close with the button or Escape key.
+Index
+Code · HTML 
+
+i don't think we need the animated lines, also i don't want the details under the photos when they arent clicked. Another thing is that I notice we can see behind the screen when we move it. It should look like an infinite scroll. I also would like to maybe make the pictures moveable but the connections will act like gravity. Do you know what the obsidian graph view looks like i want it to replicate that. Do you understand what I mean. Also add any features you think will enhance it. Also change the name to Derek Kwok. Keep working untill you have a good working website that you believe i would be able to put to production now.
+12:52 PM
+Synthesized comprehensive feature requirements and production-ready implementation strategy
+
+This is the production build. Here's everything that changed and what's now in it:
+
+Core Obsidian-graph behavior:
+
+    Live physics simulation — nodes repel each other, connections act as springs. Drop a node and the connected ones pull toward it. The graph breathes subtly even when idle.
+    Draggable nodes — grab any photo and drag it. Connected photos follow due to spring tension. Release and physics takes over again.
+    Node size scales with connections — photos with more links are slightly larger, exactly like Obsidian. Fine Art and Portraiture nodes are biggest.
+    Truly infinite canvas — the grid background is now on the fixed viewport layer with its position and scale updated every frame. You'll never see an edge.
+
+Visual changes:
+
+    No text on nodes — just the photo. Clean, graph-style.
+    Tooltip on hover — title + project dot appears near your cursor, disappears on move away.
+    Connection lines stronger — idle lines at 42% opacity, lit connections (on hover or select) jump to 72% in the project's color. No animation, just weight.
+
+New features added:
+
+    FIT button — zooms to frame all visible nodes perfectly (also bound to F)
+    Status bar (bottom left) — shows "20 photos across 5 projects" or "8 photos tagged 'editorial'" when filtering
+    Keyboard shortcuts: +/- zoom, R reset, F fit, Esc close everything, arrow keys pan
+    Richer detail panel — metadata grid (Location, Year, Camera, Format)
+    About + Contact overlays — full screen, slide-in, Netlify form ready
+    Name updated to Derek Kwok throughout
+
+To go live: swap picsum.photos URLs with your actual image paths, fill in the About bio and contact details, deploy to Netlify (the form works automatically on Netlify hosting), done.
+Index
+Code · HTML 
+
+I like the directions that we are headed. Some things to point out, the physics as they are currently is very jumpy. I think this might be due to the photos being too close to each other? Maybe create a slider for the physics, like pull, push, etc as sliders with text so i can also just input. Have it be acceiable with a button on the side that would open the editor. I want to do it this way so that I can eaisly test the physics that would work well. instead of having you guess a lot. Another thing, I want the pictures that are related to naturally group (projects most tightly grouped) would this slider accomplish that or shoudl we start thinking of somthing else. Also i want your opinion. Should i try to get this version at a good point first then add more features or add features now and get it all working at the same time.
+5:17 PM
+Architected physics panel with tunable sliders and prioritized foundation stability
+
+Great questions. My opinion first, then I'll build.
+
+Build strategy: get this version solid first. The physics is the literal foundation — if nodes jump around and cluster wrong, every feature you add on top will feel broken. Nail the feel, then add features. You'll also understand the system better by the time you're adding complexity.
+
+On clustering: The sliders will help tune it, but for tight project grouping you need an additional force — a "cluster gravity" that pulls each node toward its project's center point. Links alone aren't enough because cross-project links fight the grouping. I'm adding both: cluster gravity as a slider, plus collision detection so nodes never overlap (that's the main cause of jumpiness).
+
+Building now — physics panel, better defaults, cluster force, collision, all of it.
+Ran a command, created a file, read a file
+
+Here's what's new and what changed:
+
+Physics fixes (the core jumpiness problem):
+
+    Each project now has a dedicated cluster centre on the canvas — nodes start near their project's home and the cluster gravity pulls them back. Same-project nodes naturally huddle together without relying only on links.
+    Collision detection now properly prevents overlap by calculating each node's actual radius. That was the main cause of the jittery bouncing — nodes were fighting each other from inside.
+    Velocity decay raised to 0.82 (was 0.72) — much more damping, much less bounce.
+    Nodes start spread around their cluster, not piled in the same spot, so the initial burst of energy is gone.
+
+Physics panel (the ⊕ button on the right edge, vertically centred):
+
+    Opens as a slide-in panel with 8 labelled sliders, each with a number input you can type into directly
+    Plain English descriptions under each slider explaining what it actually does
+    5 presets: Balanced, Tight clusters, Loose/airy, Orbital, Frozen — good starting points for testing
+    Reheat button kicks the simulation back to life if it's settled
+    Changes apply live while you drag sliders
+
+Recommended starting point for you to try: Open the physics panel and click Tight clusters — it should give you the Obsidian-style tight grouping you're after. Then drag the Cluster gravity slider up or down until the spacing feels right.
+Index
+Code · HTML 
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Derek Kwok — Photography</title>
-  <meta name="description" content="Derek Kwok is a photographer specialising in portraiture, landscapes, commercial work, and fine art. An interactive visual portfolio.">
-  <meta property="og:title"       content="Derek Kwok — Photography">
-  <meta property="og:description" content="An interactive graph-view portfolio of photographs.">
-  <meta property="og:type"        content="website">
-
+  <meta name="description" content="Derek Kwok — photographer. An interactive visual portfolio.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-
   <style>
-    /* ─────────────────────────────────
-       RESET & BASE
-    ───────────────────────────────── */
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     :root {
-      --bg:    #F8F7F5;
-      --text:  #1A1A1A;
-      --muted: #999;
-      --nav:   56px;
+      --bg:   #F8F7F5;
+      --text: #1A1A1A;
+      --dim:  #999;
+      --nav:  56px;
     }
     html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; }
-
-    /* ─────────────────────────────────
-       INFINITE CANVAS WRAPPER
-       Grid lives here so it's infinite
-    ───────────────────────────────── */
+ 
+    /* ─── CANVAS ─── */
     #wrap {
       position:fixed; top:var(--nav); left:0; right:0; bottom:0;
       cursor:grab; overflow:hidden;
-      /* Grid — background-position and size updated by JS for infinite effect */
-      background-color: var(--bg);
+      background-color:var(--bg);
       background-image:
-        linear-gradient(rgba(0,0,0,0.055) 1px, transparent 1px),
-        linear-gradient(90deg,rgba(0,0,0,0.055) 1px, transparent 1px),
-        linear-gradient(rgba(0,0,0,0.022) 1px, transparent 1px),
-        linear-gradient(90deg,rgba(0,0,0,0.022) 1px, transparent 1px);
-      background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+        linear-gradient(rgba(0,0,0,.05) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,0,0,.05) 1px,transparent 1px),
+        linear-gradient(rgba(0,0,0,.02) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,0,0,.02) 1px,transparent 1px);
+      background-size:80px 80px,80px 80px,16px 16px,16px 16px;
     }
     #wrap.grabbing { cursor:grabbing; }
-
-    /* Physics space — no background, just a coordinate system */
-    #canvas {
-      position:absolute; top:0; left:0;
-      width:10000px; height:10000px;
-      transform-origin:0 0; will-change:transform;
-    }
-
-    /* SVG for connections — lives inside canvas, same coordinate space */
-    #svg {
-      position:absolute; top:0; left:0;
-      width:10000px; height:10000px;
-      pointer-events:none; overflow:visible;
-    }
-
-    /* ─────────────────────────────────
-       PHOTO NODES  (image-only, no text)
-    ───────────────────────────────── */
+    #canvas { position:absolute; top:0; left:0; width:10000px; height:10000px; transform-origin:0 0; will-change:transform; }
+    #svg    { position:absolute; top:0; left:0; width:10000px; height:10000px; pointer-events:none; overflow:visible; }
+ 
+    /* ─── NODES ─── */
     .node {
-      position:absolute; top:0; left:0;
-      background:#fff;
-      border:1px solid rgba(0,0,0,0.1);
-      border-radius:3px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.07), 0 6px 20px rgba(0,0,0,0.05);
-      overflow:hidden; cursor:pointer;
-      will-change:transform;
-      transition: box-shadow .22s ease, border-color .22s ease;
+      position:absolute; overflow:hidden; cursor:pointer;
+      background:#fff; border:1px solid rgba(0,0,0,.09); border-radius:3px;
+      box-shadow:0 2px 7px rgba(0,0,0,.07),0 6px 22px rgba(0,0,0,.05);
+      will-change:transform; user-select:none;
+      transition:box-shadow .22s,border-color .22s;
     }
     .node:hover {
-      box-shadow: 0 8px 28px rgba(0,0,0,0.13), 0 18px 52px rgba(0,0,0,0.08);
-      z-index:10 !important;
+      box-shadow:0 8px 28px rgba(0,0,0,.13),0 18px 52px rgba(0,0,0,.08);
+      z-index:10!important;
     }
     .node.selected {
-      border-color: var(--c, #555);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.12), 0 18px 52px rgba(0,0,0,0.08),
-                  0 0 0 3px var(--g, rgba(80,80,80,.14));
-      z-index:22 !important;
+      border-color:var(--c,#555);
+      box-shadow:0 8px 28px rgba(0,0,0,.12),0 18px 52px rgba(0,0,0,.08),0 0 0 3px var(--g,rgba(80,80,80,.14));
+      z-index:22!important;
     }
-    .node.dimmed { opacity:0.1 !important; pointer-events:none !important; }
-    .node.dragging { cursor:grabbing; z-index:30 !important; transition:none; }
-
-    .node-img {
-      width:100%; height:100%;
-      object-fit:cover; display:block;
-      transition:transform .4s ease; pointer-events:none; user-select:none;
-    }
-    .node:hover .node-img { transform:scale(1.06); }
-
-    /* ─────────────────────────────────
-       NAV
-    ───────────────────────────────── */
+    .node.dimmed { opacity:.1!important; pointer-events:none!important; }
+    .node.dragging { cursor:grabbing; z-index:30!important; transition:none; }
+    .node-img { width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; user-select:none; transition:transform .4s ease; }
+    .node:hover .node-img { transform:scale(1.07); }
+ 
+    /* ─── NAV ─── */
     #nav {
       position:fixed; top:0; left:0; right:0; z-index:400;
-      height:var(--nav); padding:0 22px;
-      display:flex; align-items:center; gap:0;
-      background:rgba(248,247,245,.94);
-      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+      height:var(--nav); padding:0 20px;
+      display:flex; align-items:center;
+      background:rgba(248,247,245,.94); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
       border-bottom:1px solid rgba(0,0,0,.08);
     }
-    #logo {
-      font-family:'Cormorant Garamond',serif;
-      font-size:16px; font-weight:500; letter-spacing:.08em;
-      cursor:pointer; flex-shrink:0; margin-right:20px; white-space:nowrap;
-    }
+    #logo { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:500; letter-spacing:.08em; cursor:pointer; flex-shrink:0; margin-right:18px; white-space:nowrap; }
     #logo em { font-style:italic; font-weight:300; }
-
-    .sep { width:1px; height:16px; background:rgba(0,0,0,.11); margin:0 18px; flex-shrink:0; }
-
+    .sep { width:1px; height:16px; background:rgba(0,0,0,.11); margin:0 16px; flex-shrink:0; }
     #filters { display:flex; align-items:center; gap:4px; flex:1; min-width:0; overflow:hidden; }
-
     .pill {
       flex-shrink:0; display:inline-flex; align-items:center; gap:5px;
       height:25px; padding:0 11px; border-radius:100px;
       font-size:10px; font-weight:500; letter-spacing:.04em;
-      border:1px solid rgba(0,0,0,.11); background:#fff; color:var(--muted);
-      cursor:pointer; transition:all .18s; white-space:nowrap;
-      font-family:'DM Sans',sans-serif;
+      border:1px solid rgba(0,0,0,.11); background:#fff; color:var(--dim);
+      cursor:pointer; transition:all .18s; white-space:nowrap; font-family:'DM Sans',sans-serif;
     }
     .pill:hover { border-color:rgba(0,0,0,.24); color:var(--text); }
     .pill.on { background:var(--text); border-color:var(--text); color:#fff; }
     .pill.proj.on { background:var(--pc); border-color:var(--pc); }
     .pill .dot { width:5px; height:5px; border-radius:50%; background:var(--pc); flex-shrink:0; }
     .pill.proj.on .dot { background:rgba(255,255,255,.7); }
-
-    /* Active tag badge */
-    #tag-active {
-      display:none; align-items:center; gap:5px;
-      height:25px; padding:0 8px 0 11px; border-radius:100px;
-      font-size:10px; font-weight:500;
-      background:var(--text); color:#fff; border:1px solid var(--text); flex-shrink:0;
-    }
+    #tag-active { display:none; align-items:center; gap:5px; height:25px; padding:0 8px 0 11px; border-radius:100px; font-size:10px; font-weight:500; background:var(--text); color:#fff; border:1px solid var(--text); flex-shrink:0; }
     #tag-active.show { display:flex; }
-    #tag-x {
-      width:14px; height:14px; border-radius:50%;
-      background:rgba(255,255,255,.2); display:flex;
-      align-items:center; justify-content:center;
-      font-size:9px; cursor:pointer; transition:background .15s;
-    }
+    #tag-x { width:14px; height:14px; border-radius:50%; background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center; font-size:9px; cursor:pointer; transition:background .15s; }
     #tag-x:hover { background:rgba(255,255,255,.38); }
-
-    #nav-right {
-      margin-left:auto; display:flex; align-items:center; gap:4px; padding-left:14px; flex-shrink:0;
+    #nav-right { margin-left:auto; display:flex; align-items:center; gap:4px; padding-left:12px; flex-shrink:0; }
+    .pg-btn { height:25px; padding:0 13px; border-radius:100px; font-size:10px; font-weight:500; border:1px solid rgba(0,0,0,.11); background:#fff; color:var(--dim); cursor:pointer; transition:all .18s; font-family:'DM Sans',sans-serif; }
+    .pg-btn:hover { background:var(--text); color:#fff; border-color:var(--text); }
+    .icon-btn { width:25px; height:25px; border-radius:4px; border:1px solid rgba(0,0,0,.11); background:#fff; color:var(--text); font-size:13px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .18s; flex-shrink:0; }
+    .icon-btn:hover { background:var(--text); color:#fff; border-color:var(--text); }
+ 
+    /* ─── PHYSICS PANEL BUTTON (side) ─── */
+    #phys-toggle {
+      position:fixed; right:0; top:50%; z-index:450;
+      transform:translateY(-50%);
+      width:28px; height:72px;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(0,0,0,.1); border-right:none;
+      border-radius:6px 0 0 6px;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:all .2s;
+      box-shadow:-2px 0 12px rgba(0,0,0,.06);
     }
-    .pg-btn {
-      height:25px; padding:0 13px; border-radius:100px;
-      font-size:10px; font-weight:500; letter-spacing:.04em;
-      border:1px solid rgba(0,0,0,.11); background:#fff; color:var(--muted);
+    #phys-toggle:hover { background:var(--text); color:#fff; }
+    #phys-toggle svg { display:block; }
+    #phys-toggle.panel-open { right:360px; }
+ 
+    /* ─── PHYSICS PANEL ─── */
+    #phys-panel {
+      position:fixed; top:var(--nav); right:0; bottom:0; width:360px; z-index:440;
+      background:rgba(255,255,255,.98);
+      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border-left:1px solid rgba(0,0,0,.08);
+      transform:translateX(100%);
+      transition:transform .38s cubic-bezier(.22,1,.36,1);
+      overflow-y:auto; overflow-x:hidden;
+    }
+    #phys-panel.open { transform:translateX(0); box-shadow:-10px 0 44px rgba(0,0,0,.07); }
+    #phys-panel::-webkit-scrollbar { width:3px; }
+    #phys-panel::-webkit-scrollbar-thumb { background:rgba(0,0,0,.08); border-radius:2px; }
+ 
+    #phys-inner { padding:22px 22px 40px; }
+    .pp-head { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; margin-bottom:4px; }
+    .pp-sub  { font-size:10px; color:var(--dim); line-height:1.6; margin-bottom:22px; }
+ 
+    .pp-section { margin-bottom:24px; }
+    .pp-section-title {
+      font-size:8.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+      color:var(--dim); margin-bottom:14px;
+      padding-bottom:8px; border-bottom:1px solid rgba(0,0,0,.07);
+    }
+ 
+    .pp-row { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+    .pp-label-row { display:flex; align-items:baseline; justify-content:space-between; }
+    .pp-label { font-size:11.5px; font-weight:500; color:var(--text); }
+    .pp-desc  { font-size:10px; color:var(--dim); margin-top:2px; line-height:1.5; }
+ 
+    .pp-controls { display:flex; align-items:center; gap:8px; }
+    .pp-slider {
+      flex:1; -webkit-appearance:none; appearance:none;
+      height:3px; border-radius:2px; outline:none; cursor:pointer;
+      background:linear-gradient(to right, var(--text) var(--pct,50%), rgba(0,0,0,.12) var(--pct,50%));
+    }
+    .pp-slider::-webkit-slider-thumb {
+      -webkit-appearance:none; width:14px; height:14px; border-radius:50%;
+      background:#fff; border:2px solid var(--text);
+      cursor:pointer; transition:transform .15s;
+    }
+    .pp-slider::-webkit-slider-thumb:hover { transform:scale(1.25); }
+    .pp-slider::-moz-range-thumb {
+      width:14px; height:14px; border-radius:50%;
+      background:#fff; border:2px solid var(--text); cursor:pointer;
+    }
+    .pp-num {
+      width:54px; height:27px; border:1px solid rgba(0,0,0,.12); border-radius:3px;
+      text-align:center; font-size:11px; font-family:'DM Sans',sans-serif;
+      background:#fff; color:var(--text); outline:none;
+      transition:border-color .18s;
+    }
+    .pp-num:focus { border-color:var(--text); }
+ 
+    .pp-btn {
+      width:100%; height:32px; border-radius:3px; border:1px solid rgba(0,0,0,.12);
+      font-family:'DM Sans',sans-serif; font-size:10.5px; font-weight:500;
+      cursor:pointer; transition:all .18s; margin-bottom:7px;
+    }
+    .pp-btn-primary { background:var(--text); color:#fff; border-color:var(--text); }
+    .pp-btn-primary:hover { background:#333; }
+    .pp-btn-ghost { background:#fff; color:var(--text); }
+    .pp-btn-ghost:hover { background:rgba(0,0,0,.04); }
+ 
+    /* preset chips */
+    .pp-presets { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:18px; }
+    .pp-preset {
+      padding:4px 10px; border-radius:100px; font-size:10px; font-weight:500;
+      border:1px solid rgba(0,0,0,.11); background:#fff; color:var(--dim);
       cursor:pointer; transition:all .18s; font-family:'DM Sans',sans-serif;
     }
-    .pg-btn:hover { background:var(--text); color:#fff; border-color:var(--text); }
-    .icon-btn {
-      width:25px; height:25px; border-radius:4px;
-      border:1px solid rgba(0,0,0,.11); background:#fff; color:var(--text);
-      font-size:13px; display:flex; align-items:center; justify-content:center;
-      cursor:pointer; transition:all .18s; flex-shrink:0;
-    }
-    .icon-btn:hover { background:var(--text); color:#fff; border-color:var(--text); }
-
-    /* ─────────────────────────────────
-       TOOLTIP
-    ───────────────────────────────── */
-    #tooltip {
+    .pp-preset:hover { border-color:rgba(0,0,0,.28); color:var(--text); }
+    .pp-preset.active { background:var(--text); color:#fff; border-color:var(--text); }
+ 
+    /* ─── TOOLTIP ─── */
+    #tt {
       position:fixed; z-index:500; pointer-events:none;
       background:rgba(255,255,255,.97); border:1px solid rgba(0,0,0,.09);
       box-shadow:0 2px 10px rgba(0,0,0,.09);
       padding:6px 11px; border-radius:3px;
-      opacity:0; transition:opacity .15s; white-space:nowrap;
+      opacity:0; transition:opacity .14s; white-space:nowrap;
     }
-    #tooltip.show { opacity:1; }
-    #tt-title {
-      font-family:'Cormorant Garamond',serif;
-      font-size:13px; font-weight:500; color:var(--text);
-    }
-    #tt-proj {
-      display:flex; align-items:center; gap:5px;
-      font-size:9.5px; font-weight:500; letter-spacing:.07em;
-      text-transform:uppercase; color:var(--muted); margin-top:3px;
-    }
-    #tt-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
-
-    /* ─────────────────────────────────
-       DETAIL PANEL
-    ───────────────────────────────── */
+    #tt.show { opacity:1; }
+    #tt-title { font-family:'Cormorant Garamond',serif; font-size:13px; font-weight:500; }
+    #tt-proj  { display:flex; align-items:center; gap:5px; font-size:9.5px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--dim); margin-top:3px; }
+    #tt-dot   { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+ 
+    /* ─── DETAIL PANEL ─── */
     #panel {
-      position:fixed; top:var(--nav); right:0; bottom:0; width:400px;
-      background:rgba(255,255,255,.97);
-      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-      border-left:1px solid rgba(0,0,0,.08); z-index:300;
+      position:fixed; top:var(--nav); right:0; bottom:0; width:390px; z-index:300;
+      background:rgba(255,255,255,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border-left:1px solid rgba(0,0,0,.08);
       display:flex; flex-direction:column;
-      transform:translateX(100%);
-      transition:transform .42s cubic-bezier(.22,1,.36,1);
+      transform:translateX(100%); transition:transform .42s cubic-bezier(.22,1,.36,1);
       overflow:hidden;
     }
     #panel.open { transform:translateX(0); box-shadow:-10px 0 44px rgba(0,0,0,.07); }
-
-    #p-img-wrap {
-      position:relative; flex-shrink:0;
-      width:100%; aspect-ratio:4/3; overflow:hidden; background:#ECEAE6;
-    }
+    #p-img-wrap { position:relative; flex-shrink:0; width:100%; aspect-ratio:4/3; overflow:hidden; background:#ECEAE6; }
     #p-img { width:100%; height:100%; object-fit:cover; display:block; }
-
-    #p-close, #p-locate {
-      position:absolute; top:11px;
-      border:1px solid rgba(0,0,0,.1); cursor:pointer; color:var(--text);
-      background:rgba(255,255,255,.92); backdrop-filter:blur(8px);
-      font-family:'DM Sans',sans-serif; transition:all .18s;
-    }
-    #p-close {
-      left:11px; width:29px; height:29px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center; font-size:12px;
-    }
-    #p-close:hover  { background:var(--text); color:#fff; }
-    #p-locate {
-      right:11px; height:27px; padding:0 11px; border-radius:100px;
-      display:flex; align-items:center; gap:5px;
-      font-size:9.5px; font-weight:500; letter-spacing:.07em; text-transform:uppercase;
-    }
+    #p-close,#p-locate { position:absolute; top:11px; border:1px solid rgba(0,0,0,.1); cursor:pointer; color:var(--text); background:rgba(255,255,255,.92); backdrop-filter:blur(8px); font-family:'DM Sans',sans-serif; transition:all .18s; }
+    #p-close { left:11px; width:29px; height:29px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; }
+    #p-close:hover { background:var(--text); color:#fff; }
+    #p-locate { right:11px; height:27px; padding:0 11px; border-radius:100px; display:flex; align-items:center; gap:5px; font-size:9.5px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; }
     #p-locate:hover { background:var(--text); color:#fff; }
-
     #p-body { padding:20px 22px 40px; overflow-y:auto; flex:1; }
     #p-body::-webkit-scrollbar { width:3px; }
     #p-body::-webkit-scrollbar-thumb { background:rgba(0,0,0,.08); border-radius:2px; }
-
-    #p-badge {
-      display:inline-flex; align-items:center; gap:6px;
-      padding:3px 10px; border-radius:100px;
-      font-size:9px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
-      border:1px solid; margin-bottom:12px;
-    }
+    #p-badge { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:100px; font-size:9px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; border:1px solid; margin-bottom:12px; }
     #p-badge .bd { width:5px; height:5px; border-radius:50%; background:currentColor; }
-    #p-title {
-      font-family:'Cormorant Garamond',serif;
-      font-size:27px; font-weight:400; line-height:1.15; margin-bottom:11px;
-    }
-    #p-desc { font-size:12.5px; line-height:1.82; color:#666; margin-bottom:20px; }
-
-    /* Meta grid */
-    #p-meta {
-      display:grid; grid-template-columns:1fr 1fr;
-      border:1px solid rgba(0,0,0,.07); border-radius:3px;
-      overflow:hidden; margin-bottom:22px;
-    }
-    .mi {
-      padding:9px 12px;
-      border-right:1px solid rgba(0,0,0,.07);
-      border-bottom:1px solid rgba(0,0,0,.07);
-    }
-    .mi:nth-child(2n)  { border-right:none; }
+    #p-title { font-family:'Cormorant Garamond',serif; font-size:27px; font-weight:400; line-height:1.15; margin-bottom:11px; }
+    #p-desc  { font-size:12.5px; line-height:1.82; color:#666; margin-bottom:20px; }
+    #p-meta { display:grid; grid-template-columns:1fr 1fr; border:1px solid rgba(0,0,0,.07); border-radius:3px; overflow:hidden; margin-bottom:22px; }
+    .mi { padding:9px 12px; border-right:1px solid rgba(0,0,0,.07); border-bottom:1px solid rgba(0,0,0,.07); }
+    .mi:nth-child(2n)        { border-right:none; }
     .mi:nth-last-child(-n+2) { border-bottom:none; }
-    .mk { font-size:8.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
+    .mk { font-size:8.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:3px; }
     .mv { font-size:12px; }
-
-    /* Tags */
     .ps { margin-bottom:20px; }
-    .pl { font-size:9px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:9px; }
+    .pl { font-size:9px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:9px; }
     #p-tags { display:flex; flex-wrap:wrap; gap:5px; }
-    .tc {
-      padding:4px 10px; border-radius:100px; font-size:10px;
-      border:1px solid rgba(0,0,0,.1); color:#555; background:#fff;
-      cursor:pointer; transition:all .18s; font-family:'DM Sans',sans-serif;
-    }
-    .tc:hover, .tc.on { background:var(--text); color:#fff; border-color:var(--text); }
-
-    /* Related */
+    .tc { padding:4px 10px; border-radius:100px; font-size:10px; border:1px solid rgba(0,0,0,.1); color:#555; background:#fff; cursor:pointer; transition:all .18s; font-family:'DM Sans',sans-serif; }
+    .tc:hover,.tc.on { background:var(--text); color:#fff; border-color:var(--text); }
     #p-related { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
-    .rt {
-      aspect-ratio:4/3; overflow:hidden; border-radius:2px;
-      border:1px solid rgba(0,0,0,.08); cursor:pointer; position:relative;
-    }
-    .rt img { width:100%; height:100%; object-fit:cover; transition:transform .3s, opacity .3s; }
+    .rt { aspect-ratio:4/3; overflow:hidden; border-radius:2px; border:1px solid rgba(0,0,0,.08); cursor:pointer; position:relative; }
+    .rt img { width:100%; height:100%; object-fit:cover; transition:transform .3s,opacity .3s; }
     .rt:hover img { transform:scale(1.1); opacity:.75; }
-    .rt-lbl {
-      position:absolute; bottom:0; left:0; right:0; padding:5px 6px 4px;
-      background:linear-gradient(to top,rgba(0,0,0,.6),transparent);
-      font-family:'Cormorant Garamond',serif; font-size:10px; color:#fff;
-      opacity:0; transition:opacity .2s;
-    }
+    .rt-lbl { position:absolute; bottom:0; left:0; right:0; padding:5px 6px 4px; background:linear-gradient(to top,rgba(0,0,0,.6),transparent); font-family:'Cormorant Garamond',serif; font-size:10px; color:#fff; opacity:0; transition:opacity .2s; }
     .rt:hover .rt-lbl { opacity:1; }
-
-    /* ─────────────────────────────────
-       OVERLAYS  (About / Contact)
-    ───────────────────────────────── */
-    .overlay {
-      position:fixed; inset:var(--nav) 0 0;
-      background:rgba(248,247,245,.97);
-      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-      z-index:350; overflow-y:auto;
-      opacity:0; pointer-events:none; transition:opacity .4s ease;
-    }
+ 
+    /* ─── OVERLAYS ─── */
+    .overlay { position:fixed; inset:var(--nav) 0 0; background:rgba(248,247,245,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); z-index:350; overflow-y:auto; opacity:0; pointer-events:none; transition:opacity .4s ease; }
     .overlay.open { opacity:1; pointer-events:all; }
-    .ov-close {
-      position:fixed; top:calc(var(--nav) + 22px); right:28px;
-      width:34px; height:34px; border-radius:50%;
-      border:1px solid rgba(0,0,0,.12); background:#fff;
-      display:flex; align-items:center; justify-content:center;
-      font-size:13px; cursor:pointer; color:var(--text); z-index:10;
-      transition:all .18s;
-    }
+    .ov-close { position:fixed; top:calc(var(--nav) + 22px); right:28px; width:34px; height:34px; border-radius:50%; border:1px solid rgba(0,0,0,.12); background:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; cursor:pointer; color:var(--text); z-index:10; transition:all .18s; }
     .ov-close:hover { background:var(--text); color:#fff; }
-
-    /* About */
-    #ab-inner {
-      max-width:1100px; margin:0 auto; padding:64px 56px;
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:88px; align-items:start;
-    }
-    .ab-frame {
-      position:relative; aspect-ratio:3/4; overflow:hidden;
-      background:#ECEAE6; border:1px solid rgba(0,0,0,.07);
-    }
-    .ab-frame::before {
-      content:''; position:absolute; inset:-16px -16px auto auto;
-      width:100%; height:100%; border:1px solid rgba(0,0,0,.07); z-index:-1;
-    }
+    #ab-inner { max-width:1100px; margin:0 auto; padding:64px 56px; display:grid; grid-template-columns:1fr 1fr; gap:88px; align-items:start; }
+    .ab-frame { position:relative; aspect-ratio:3/4; overflow:hidden; background:#ECEAE6; border:1px solid rgba(0,0,0,.07); }
+    .ab-frame::before { content:''; position:absolute; inset:-16px -16px auto auto; width:100%; height:100%; border:1px solid rgba(0,0,0,.07); z-index:-1; }
     .ab-frame img { width:100%; height:100%; object-fit:cover; display:block; }
-    .ab-eyebrow { font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
-    .ab-name {
-      font-family:'Cormorant Garamond',serif;
-      font-size:clamp(3rem,5vw,5rem); font-weight:400; line-height:.92;
-      letter-spacing:-.02em; margin-bottom:30px;
-    }
+    .ab-eyebrow { font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin-bottom:16px; }
+    .ab-name { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,5vw,5rem); font-weight:400; line-height:.92; letter-spacing:-.02em; margin-bottom:30px; }
     .ab-name em { font-style:italic; }
     .ab-bio { font-size:13.5px; line-height:1.82; color:#555; margin-bottom:34px; }
     .ab-bio p+p { margin-top:16px; }
-    .ab-stats {
-      display:grid; grid-template-columns:repeat(3,1fr);
-      border-top:1px solid rgba(0,0,0,.08); padding-top:30px; margin-bottom:36px;
-    }
+    .ab-stats { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(0,0,0,.08); padding-top:30px; margin-bottom:36px; }
     .ast { padding-right:18px; }
     .ast+.ast { padding-left:18px; border-left:1px solid rgba(0,0,0,.08); }
     .ast-n { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:400; line-height:1; }
-    .ast-l { font-size:9px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:5px; }
-    .ab-avail { display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--muted); }
+    .ast-l { font-size:9px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-top:5px; }
+    .ab-avail { display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--dim); }
     .av-dot { width:7px; height:7px; border-radius:50%; background:#4E8A6A; flex-shrink:0; animation:pulse 2.4s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
-
-    /* Contact */
-    #ct-inner {
-      max-width:1000px; margin:0 auto; padding:64px 56px;
-      display:grid; grid-template-columns:1fr 1.3fr; gap:88px; align-items:start;
-    }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.35} }
+    #ct-inner { max-width:1000px; margin:0 auto; padding:64px 56px; display:grid; grid-template-columns:1fr 1.3fr; gap:88px; align-items:start; }
     .ct-left { position:sticky; top:64px; }
-    .ct-eyebrow { font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
-    .ct-h {
-      font-family:'Cormorant Garamond',serif;
-      font-size:clamp(2.4rem,4vw,3.8rem); font-weight:400; line-height:.95; margin-bottom:22px;
-    }
+    .ct-eyebrow { font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin-bottom:16px; }
+    .ct-h { font-family:'Cormorant Garamond',serif; font-size:clamp(2.4rem,4vw,3.8rem); font-weight:400; line-height:.95; margin-bottom:22px; }
     .ct-h em { font-style:italic; }
     .ct-body { font-size:13px; line-height:1.8; color:#666; margin-bottom:34px; }
     .ct-deets { display:flex; flex-direction:column; gap:20px; }
-    .cd-k { font-size:8.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
+    .cd-k { font-size:8.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:3px; }
     .cd-v { font-size:13px; }
-    /* Form */
     .cf { display:flex; flex-direction:column; }
     .fg { position:relative; border-bottom:1px solid rgba(0,0,0,.1); }
     .fg:first-child { border-top:1px solid rgba(0,0,0,.1); }
-    .fg label {
-      position:absolute; top:18px; left:0;
-      font-size:8.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
-      color:var(--muted); pointer-events:none; transition:color .2s;
-    }
+    .fg label { position:absolute; top:18px; left:0; font-size:8.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); pointer-events:none; transition:color .2s; }
     .fg:focus-within label { color:var(--text); }
-    .fg input,.fg select,.fg textarea {
-      width:100%; background:none; border:none; outline:none; color:var(--text);
-      font-family:'DM Sans',sans-serif; font-size:13px; padding:40px 0 14px;
-    }
+    .fg input,.fg select,.fg textarea { width:100%; background:none; border:none; outline:none; color:var(--text); font-family:'DM Sans',sans-serif; font-size:13px; padding:40px 0 14px; }
     .fg select { appearance:none; cursor:pointer; }
     .fg select option { background:#fff; }
     .fg textarea { resize:none; min-height:110px; }
     .cf-foot { margin-top:28px; display:flex; align-items:center; justify-content:space-between; }
-    .cf-note { font-size:10px; color:var(--muted); }
-    .cf-sub {
-      display:inline-flex; align-items:center; gap:10px;
-      background:var(--text); color:#fff; border:none;
-      font-family:'DM Sans',sans-serif; font-size:10px; font-weight:600;
-      letter-spacing:.15em; text-transform:uppercase;
-      padding:14px 28px; cursor:pointer; border-radius:2px; transition:background .18s;
-    }
+    .cf-note { font-size:10px; color:var(--dim); }
+    .cf-sub { display:inline-flex; align-items:center; gap:10px; background:var(--text); color:#fff; border:none; font-family:'DM Sans',sans-serif; font-size:10px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; padding:14px 28px; cursor:pointer; border-radius:2px; transition:background .18s; }
     .cf-sub:hover { background:#333; }
     .cf-sub svg { transition:transform .2s; }
     .cf-sub:hover svg { transform:translateX(4px); }
-
-    /* ─────────────────────────────────
-       HUD
-    ───────────────────────────────── */
-    #hint {
-      position:fixed; bottom:22px; left:50%; transform:translateX(-50%);
-      font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
-      background:rgba(255,255,255,.92); backdrop-filter:blur(8px);
-      padding:7px 18px; border-radius:100px; border:1px solid rgba(0,0,0,.08);
-      pointer-events:none; z-index:100; transition:opacity 1.4s ease;
-    }
+ 
+    /* ─── HUD ─── */
+    #hint { position:fixed; bottom:22px; left:50%; transform:translateX(-50%); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); background:rgba(255,255,255,.92); backdrop-filter:blur(8px); padding:7px 18px; border-radius:100px; border:1px solid rgba(0,0,0,.08); pointer-events:none; z-index:100; transition:opacity 1.4s; }
     #hint.gone { opacity:0; }
-    #zoom-pill {
-      position:fixed; bottom:22px; right:22px; font-size:10px; letter-spacing:.06em;
-      color:var(--muted); background:rgba(255,255,255,.92); backdrop-filter:blur(8px);
-      padding:5px 11px; border-radius:4px; border:1px solid rgba(0,0,0,.08);
-      z-index:100; user-select:none;
-    }
-    #status-bar {
-      position:fixed; bottom:22px; left:22px; font-size:10px; letter-spacing:.06em;
-      color:var(--muted); background:rgba(255,255,255,.92); backdrop-filter:blur(8px);
-      padding:5px 11px; border-radius:4px; border:1px solid rgba(0,0,0,.08);
-      z-index:100; user-select:none; transition:opacity .3s;
-    }
-
-    /* ─────────────────────────────────
-       MOBILE
-    ───────────────────────────────── */
-    @media (max-width:800px) {
-      #panel { width:100%; }
-      #filters { display:none; }
-      #ab-inner,#ct-inner { grid-template-columns:1fr; gap:48px; padding:40px 24px; }
-      .ct-left { position:static; }
-    }
+    #zoom-pill { position:fixed; bottom:22px; right:22px; font-size:10px; color:var(--dim); background:rgba(255,255,255,.92); backdrop-filter:blur(8px); padding:5px 11px; border-radius:4px; border:1px solid rgba(0,0,0,.08); z-index:100; user-select:none; }
+    #status-bar { position:fixed; bottom:22px; left:22px; font-size:10px; color:var(--dim); background:rgba(255,255,255,.92); backdrop-filter:blur(8px); padding:5px 11px; border-radius:4px; border:1px solid rgba(0,0,0,.08); z-index:100; user-select:none; }
+ 
+    @media(max-width:800px){ #panel{width:100%;} #filters{display:none;} #ab-inner,#ct-inner{grid-template-columns:1fr;gap:48px;padding:40px 24px;} .ct-left{position:static;} #phys-panel{width:100%;} }
   </style>
 </head>
 <body>
-
-<!-- ══════════ NAV ══════════ -->
+ 
+<!-- ══ NAV ══ -->
 <nav id="nav">
-  <div id="logo" role="button" tabindex="0" aria-label="Reset view">Derek <em>Kwok</em></div>
+  <div id="logo" role="button" tabindex="0">Derek <em>Kwok</em></div>
   <div class="sep"></div>
-  <div id="filters" role="group" aria-label="Project filters">
+  <div id="filters" role="group">
     <button class="pill on" data-f="all">All</button>
   </div>
   <div id="nav-right">
-    <div id="tag-active" role="status">
+    <div id="tag-active">
       <span id="tag-label"></span>
-      <span id="tag-x" aria-label="Clear tag filter">✕</span>
+      <span id="tag-x" aria-label="Clear tag">✕</span>
     </div>
-    <div class="sep" style="margin:0 4px;"></div>
+    <div class="sep" style="margin:0 4px"></div>
     <button class="pg-btn" id="btn-about">About</button>
     <button class="pg-btn" id="btn-contact">Contact</button>
-    <div class="sep" style="margin:0 4px;"></div>
-    <button class="icon-btn" id="btn-zi" title="Zoom in (=)">+</button>
+    <div class="sep" style="margin:0 4px"></div>
+    <button class="icon-btn" id="btn-zi" title="Zoom in (+)">+</button>
     <button class="icon-btn" id="btn-zo" title="Zoom out (-)">−</button>
-    <button class="icon-btn" id="btn-fit" title="Fit all (F)" style="font-size:9px;letter-spacing:-.5px">FIT</button>
-    <button class="icon-btn" id="btn-r" title="Reset (R)" style="font-size:10px">↺</button>
+    <button class="icon-btn" id="btn-fit" title="Fit (F)" style="font-size:9px;letter-spacing:-.5px">FIT</button>
+    <button class="icon-btn" id="btn-r"  title="Reset (R)" style="font-size:10px">↺</button>
   </div>
 </nav>
-
-<!-- ══════════ CANVAS ══════════ -->
+ 
+<!-- ══ CANVAS ══ -->
 <div id="wrap">
   <div id="canvas">
     <svg id="svg" aria-hidden="true"></svg>
   </div>
 </div>
-
-<!-- ══════════ TOOLTIP ══════════ -->
-<div id="tooltip" aria-hidden="true">
-  <div id="tt-title"></div>
-  <div id="tt-proj"><span id="tt-dot"></span><span id="tt-proj-name"></span></div>
+ 
+<!-- ══ PHYSICS PANEL TOGGLE ══ -->
+<button id="phys-toggle" title="Physics editor" aria-label="Open physics editor" aria-expanded="false">
+  <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+    <circle cx="6.5" cy="6.5" r="2.5" stroke="currentColor" stroke-width="1.2"/>
+    <line x1="6.5" y1="0" x2="6.5" y2="2"  stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="6.5" y1="11" x2="6.5" y2="13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="0" y1="6.5" x2="2" y2="6.5"   stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="11" y1="6.5" x2="13" y2="6.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="1.8" y1="1.8" x2="3.2" y2="3.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="9.8" y1="9.8" x2="11.2" y2="11.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="11.2" y1="1.8" x2="9.8" y2="3.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="1.8" y1="11.2" x2="3.2" y2="9.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+</button>
+ 
+<!-- ══ PHYSICS PANEL ══ -->
+<div id="phys-panel" aria-label="Physics editor" aria-hidden="true">
+  <div id="phys-inner">
+    <p class="pp-head">Physics</p>
+    <p class="pp-sub">Tune the forces that shape the graph. Changes apply live. Drag any photo to feel the pull.</p>
+ 
+    <!-- Presets -->
+    <div class="pp-section">
+      <p class="pp-section-title">Presets</p>
+      <div class="pp-presets">
+        <button class="pp-preset active" data-preset="balanced">Balanced</button>
+        <button class="pp-preset" data-preset="tight">Tight clusters</button>
+        <button class="pp-preset" data-preset="loose">Loose / airy</button>
+        <button class="pp-preset" data-preset="orbit">Orbital</button>
+        <button class="pp-preset" data-preset="frozen">Frozen</button>
+      </div>
+    </div>
+ 
+    <!-- Repulsion -->
+    <div class="pp-section">
+      <p class="pp-section-title">Repulsion</p>
+      <div class="pp-row" id="row-repulse">
+        <div class="pp-label-row"><span class="pp-label">Charge strength</span></div>
+        <p class="pp-desc">How hard nodes push each other away. Increase to spread the graph out; decrease to let nodes cluster tighter.</p>
+        <div class="pp-controls">
+          <input type="range" class="pp-slider" id="sl-repulse" min="500" max="8000" step="50">
+          <input type="number" class="pp-num"  id="nu-repulse" min="500" max="8000" step="50">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Links -->
+    <div class="pp-section">
+      <p class="pp-section-title">Links (Spring connections)</p>
+      <div class="pp-row" id="row-ldist">
+        <div class="pp-label-row"><span class="pp-label">Rest distance</span></div>
+        <p class="pp-desc">Target gap between connected photos, in pixels. Higher = more spread; lower = tighter grouping.</p>
+        <div class="pp-controls">
+          <input type="range" class="pp-slider" id="sl-ldist" min="100" max="800" step="10">
+          <input type="number" class="pp-num"  id="nu-ldist" min="100" max="800" step="10">
+        </div>
+      </div>
+      <div class="pp-row" id="row-lstr">
+        <div class="pp-label-row"><span class="pp-label">Spring strength</span></div>
+        <p class="pp-desc">How strongly connected nodes pull toward each other. High values make the graph rigid.</p>
+        <div class="pp-controls">
+          <input type="range" class="pp-slider" id="sl-lstr" min="0.01" max="0.6" step="0.01">
+          <input type="number" class="pp-num"  id="nu-lstr" min="0.01" max="0.6" step="0.01">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Clustering -->
+    <div class="pp-section">
+      <p class="pp-section-title">Project clustering</p>
+      <div class="pp-row" id="row-cstr">
+        <div class="pp-label-row"><span class="pp-label">Cluster gravity</span></div>
+        <p class="pp-desc">Extra pull toward each project's centre. This is what makes same-project photos group tightly together.</p>
+        <div class="pp-controls">
+          <input type="range" class="pp-slider" id="sl-cstr" min="0" max="0.08" step="0.001">
+          <input type="number" class="pp-num"  id="nu-cstr" min="0" max="0.08" step="0.001">
+        </div>
+      </div>
+      <div class="pp-row" id="row-cdist">
+        <div class="pp-label-row"><span class="pp-label">Cluster radius</span></div>
+        <p class="pp-desc">How far from the project centre nodes are pulled toward. Think of it as the target cluster size.</p>
+        <div class="pp-controls">
+          <input type="range" class="pp-slider" id="sl-cdist" min="50" max="600" step="10">
+          <input type="number" class="pp-num"  id="nu-cdist" min="50" max="600" step="10">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Damping -->
+    <div class="pp-section">
+      <p class="pp-section-title">Damping &amp; stability</p>
+      <div class="pp-row" id="row-decay">
+        <div class="pp-label-row"><span class="pp-label">Velocity decay</span></div>
+        <p class="pp-desc">How quickly nodes slow down each step. Lower = more momentum and bounce; higher = snappy and still.</p>
+        <div class="pp-controls">
+          <input type="range" class="pp-slider" id="sl-decay" min="0.3" max="0.98" step="0.01">
+          <input type="number" class="pp-num"  id="nu-decay" min="0.3" max="0.98" step="0.01">
+        </div>
+      </div>
+      <div class="pp-row" id="row-collide">
+        <div class="pp-label-row"><span class="pp-label">Collision padding</span></div>
+        <p class="pp-desc">Extra space around each node before it collides. Prevents overlapping.</p>
+        <div class="pp-controls">
+          <input type="range" class="pp-slider" id="sl-collide" min="0" max="80" step="1">
+          <input type="number" class="pp-num"  id="nu-collide" min="0" max="80" step="1">
+        </div>
+      </div>
+      <div class="pp-row" id="row-center">
+        <div class="pp-label-row"><span class="pp-label">Global gravity</span></div>
+        <p class="pp-desc">Weak pull toward the canvas centre so nodes don't drift too far. Set to 0 to turn off.</p>
+        <div class="pp-controls">
+          <input type="range" class="pp-slider" id="sl-center" min="0" max="0.02" step="0.0005">
+          <input type="number" class="pp-num"  id="nu-center" min="0" max="0.02" step="0.0005">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Actions -->
+    <div class="pp-section">
+      <p class="pp-section-title">Actions</p>
+      <button class="pp-btn pp-btn-primary" id="pp-reheat">Reheat simulation</button>
+      <button class="pp-btn pp-btn-ghost"   id="pp-reset-defaults">Reset to defaults</button>
+    </div>
+  </div>
 </div>
-
-<!-- ══════════ DETAIL PANEL ══════════ -->
+ 
+<!-- ══ TOOLTIP ══ -->
+<div id="tt" aria-hidden="true">
+  <div id="tt-title"></div>
+  <div id="tt-proj"><span id="tt-dot"></span><span id="tt-pname"></span></div>
+</div>
+ 
+<!-- ══ DETAIL PANEL ══ -->
 <aside id="panel" aria-label="Photo detail" aria-hidden="true">
   <div id="p-img-wrap">
     <img id="p-img" src="" alt="" width="800" height="600">
-    <button id="p-close" aria-label="Close panel">✕</button>
-    <button id="p-locate" aria-label="Pan canvas to this photo">
-      <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-        <circle cx="5" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/>
-        <line x1="5" y1="0" x2="5" y2="1.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-        <line x1="5" y1="8.3" x2="5" y2="10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-        <line x1="0" y1="5" x2="1.7" y2="5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-        <line x1="8.3" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-      </svg>
+    <button id="p-close" aria-label="Close">✕</button>
+    <button id="p-locate" aria-label="Locate on canvas">
+      <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><line x1="5" y1="0" x2="5" y2="1.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="5" y1="8.3" x2="5" y2="10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="0" y1="5" x2="1.7" y2="5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="8.3" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
       Locate
     </button>
   </div>
@@ -484,49 +937,39 @@
       <div class="mi"><p class="mk">Camera</p>  <p class="mv" id="m-cam">—</p></div>
       <div class="mi"><p class="mk">Format</p>  <p class="mv" id="m-fmt">—</p></div>
     </div>
-    <div class="ps">
-      <p class="pl">Tags — click to filter</p>
-      <div id="p-tags"></div>
-    </div>
-    <div class="ps" id="rel-sec">
-      <p class="pl">Related</p>
-      <div id="p-related"></div>
-    </div>
+    <div class="ps"><p class="pl">Tags — click to filter</p><div id="p-tags"></div></div>
+    <div class="ps" id="rel-sec"><p class="pl">Related</p><div id="p-related"></div></div>
   </div>
 </aside>
-
-<!-- ══════════ ABOUT OVERLAY ══════════ -->
+ 
+<!-- ══ ABOUT ══ -->
 <div id="about-ov" class="overlay" aria-hidden="true">
-  <button class="ov-close" id="ab-close" aria-label="Close">✕</button>
+  <button class="ov-close" id="ab-close">✕</button>
   <div id="ab-inner">
     <div class="ab-frame">
-      <!-- Replace src with your actual portrait photo -->
-      <img src="https://picsum.photos/seed/dkportrait88/600/800" alt="Derek Kwok" width="600" height="800" loading="lazy">
+      <img src="https://picsum.photos/seed/dkportrait88/600/800" alt="Derek Kwok" loading="lazy">
     </div>
     <div>
       <p class="ab-eyebrow">The Photographer</p>
       <h2 class="ab-name">Derek<br><em>Kwok</em></h2>
       <div class="ab-bio">
         <p>Placeholder — Introduce yourself here. Your style, your background, what drives your work. Keep it direct and confident. Don't explain photography — embody it.</p>
-        <p>Second paragraph. Your philosophy: how you approach a shoot, what you believe makes an image last. Clients want to know who they're hiring, not just what you shoot.</p>
-        <p>Based in [Your City]. Available for travel worldwide. Specialising in [your disciplines].</p>
+        <p>Second paragraph. Your philosophy: how you approach a shoot, what you believe makes an image last.</p>
+        <p>Based in [Your City]. Available for travel worldwide.</p>
       </div>
       <div class="ab-stats">
-        <div class="ast"><p class="ast-n">8+</p> <p class="ast-l">Years</p></div>
+        <div class="ast"><p class="ast-n">8+</p><p class="ast-l">Years</p></div>
         <div class="ast"><p class="ast-n">340</p><p class="ast-l">Projects</p></div>
-        <div class="ast"><p class="ast-n">12</p> <p class="ast-l">Countries</p></div>
+        <div class="ast"><p class="ast-n">12</p><p class="ast-l">Countries</p></div>
       </div>
-      <div class="ab-avail">
-        <span class="av-dot"></span>
-        Currently accepting commissions for 2025–2026
-      </div>
+      <div class="ab-avail"><span class="av-dot"></span>Currently accepting commissions for 2025–2026</div>
     </div>
   </div>
 </div>
-
-<!-- ══════════ CONTACT OVERLAY ══════════ -->
+ 
+<!-- ══ CONTACT ══ -->
 <div id="contact-ov" class="overlay" aria-hidden="true">
-  <button class="ov-close" id="ct-close" aria-label="Close">✕</button>
+  <button class="ov-close" id="ct-close">✕</button>
   <div id="ct-inner">
     <div class="ct-left">
       <p class="ct-eyebrow">Get In Touch</p>
@@ -539,45 +982,32 @@
         <div><p class="cd-k">Follow</p>  <p class="cd-v">@derekkwok</p></div>
       </div>
     </div>
-    <!-- Netlify form handling: deploy to Netlify and this form works automatically -->
     <form class="cf" name="contact" netlify>
       <input type="hidden" name="form-name" value="contact">
-      <div class="fg"><label for="f-n">Full Name</label>      <input type="text"  id="f-n" name="name"    autocomplete="name"  required></div>
-      <div class="fg"><label for="f-e">Email Address</label>  <input type="email" id="f-e" name="email"   autocomplete="email" required></div>
+      <div class="fg"><label for="f-n">Full Name</label>     <input type="text"  id="f-n" name="name"    autocomplete="name"  required></div>
+      <div class="fg"><label for="f-e">Email</label>          <input type="email" id="f-e" name="email"   autocomplete="email" required></div>
       <div class="fg"><label for="f-t">Project Type</label>
-        <select id="f-t" name="type">
-          <option value=""></option>
-          <option>Wedding</option><option>Portrait</option>
-          <option>Commercial / Brand</option><option>Editorial</option>
-          <option>Fine Art</option><option>Other</option>
-        </select>
+        <select id="f-t" name="type"><option value=""></option><option>Wedding</option><option>Portrait</option><option>Commercial</option><option>Editorial</option><option>Fine Art</option><option>Other</option></select>
       </div>
-      <div class="fg"><label for="f-d">Preferred Date</label> <input type="text"     id="f-d" name="date"    autocomplete="off"></div>
-      <div class="fg"><label for="f-m">Your Message</label>   <textarea             id="f-m" name="message" required></textarea></div>
+      <div class="fg"><label for="f-d">Preferred Date</label><input type="text"  id="f-d" name="date"    autocomplete="off"></div>
+      <div class="fg"><label for="f-m">Message</label>        <textarea           id="f-m" name="message" required></textarea></div>
       <div class="cf-foot">
         <span class="cf-note">All enquiries welcome.</span>
-        <button type="submit" class="cf-sub">Send
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-        </button>
+        <button type="submit" class="cf-sub">Send <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></button>
       </div>
     </form>
   </div>
 </div>
-
-<!-- ══════════ HUD ══════════ -->
-<div id="hint" aria-hidden="true">Drag canvas to explore &nbsp;·&nbsp; Click photo to open &nbsp;·&nbsp; Drag photos to rearrange</div>
+ 
+<!-- ══ HUD ══ -->
+<div id="hint" aria-hidden="true">Drag canvas to explore &nbsp;·&nbsp; Click a photo &nbsp;·&nbsp; Drag photos to reposition</div>
 <div id="zoom-pill" aria-live="polite">85%</div>
-<div id="status-bar" aria-live="polite"></div>
-
+<div id="status-bar"></div>
+ 
 <script>
-/* ═══════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════
    DATA
-   To replace placeholder images: change each photo's
-   `seed` to any string, or replace the picsum URL in
-   renderNodes() with your actual image path.
-════════════════════════════════════════════════════════ */
+══════════════════════════════════════════════ */
 const PROJ = {
   portraits:  { name:'Portraiture', color:'#B0705A', rgb:'176,112,90'  },
   weddings:   { name:'Weddings',    color:'#9E8838', rgb:'158,136,56'  },
@@ -585,677 +1015,672 @@ const PROJ = {
   commercial: { name:'Commercial',  color:'#4E72B0', rgb:'78,114,176'  },
   fineart:    { name:'Fine Art',    color:'#8A5EAA', rgb:'138,94,170'  },
 };
-
-/* Initial positions are spread around canvas center (5000,5000).
-   Physics will refine them. Adjust as needed. */
+ 
+// Cluster centres — where each project group wants to live on the canvas
+const CLUSTER_CENTRES = {
+  portraits:  { x:4600, y:4700 },
+  weddings:   { x:5400, y:4700 },
+  landscapes: { x:5000, y:5400 },
+  commercial: { x:5700, y:5200 },
+  fineart:    { x:5300, y:5800 },
+};
+ 
 const PHOTOS = [
-  /* ── PORTRAITURE ── */
-  { id:'p1', proj:'portraits',  x:4580, y:4580, title:'Emma, Golden Hour',   desc:'Placeholder — Describe the shoot, the light, the moment. What made this image worth keeping? Specific details make it memorable.',            meta:{loc:'New York',     yr:'2024', cam:'Canon R5',       fmt:'Digital'},       tags:['portrait','studio','natural light','editorial'], rel:['p2','p3','f1'], seed:'portA1x' },
-  { id:'p2', proj:'portraits',  x:4780, y:4530, title:'Marco, Noon Light',   desc:'Placeholder — A brief story about this image or subject. Keep it personal and direct.',                                                       meta:{loc:'Brooklyn',     yr:'2023', cam:'Leica M11',      fmt:'Digital'},       tags:['portrait','street','monochrome'],               rel:['p1','p4'],      seed:'portB2y' },
-  { id:'p3', proj:'portraits',  x:4640, y:4740, title:'Self, Series I',       desc:'Placeholder — Fine art self-portraiture exploring identity. Part of an ongoing series.',                                                     meta:{loc:'Studio',       yr:'2023', cam:'Hasselblad X2D', fmt:'Medium Format'}, tags:['portrait','fine art','self-portrait'],           rel:['p1','f2'],      seed:'portC3z' },
-  { id:'p4', proj:'portraits',  x:4820, y:4720, title:'Unnamed, Blue',        desc:'Placeholder — Describe the atmosphere and intent. The more specific, the more memorable.',                                                   meta:{loc:'Studio',       yr:'2024', cam:'Canon R5',       fmt:'Digital'},       tags:['portrait','studio','blue','minimal'],            rel:['p2','p3'],      seed:'portD4w' },
-  /* ── WEDDINGS ── */
-  { id:'w1', proj:'weddings',   x:5260, y:4560, title:'The First Look',       desc:'Placeholder — The moment before anything is said. Replace with a real anecdote from the day.',                                               meta:{loc:'Hudson Valley',yr:'2024', cam:'Sony A1',         fmt:'Digital'},       tags:['wedding','ceremony','emotion','documentary'],    rel:['w2','w3'],      seed:'wedA1a'  },
-  { id:'w2', proj:'weddings',   x:5440, y:4510, title:'Reception, Evening',   desc:'Placeholder — When the night takes over and everyone forgets the camera is there.',                                                          meta:{loc:'Manhattan',    yr:'2023', cam:'Canon R5',       fmt:'Digital'},       tags:['wedding','reception','available light'],         rel:['w1','w4'],      seed:'wedB2b'  },
-  { id:'w3', proj:'weddings',   x:5410, y:4720, title:'Garden Ceremony',      desc:'Placeholder — Outdoor ceremony in soft afternoon light. Describe the setting and what made it particular.',                                  meta:{loc:'Hamptons',     yr:'2024', cam:'Sony A1',         fmt:'Digital'},       tags:['wedding','outdoor','ceremony','golden hour'],    rel:['w1','w2'],      seed:'wedC3c'  },
-  { id:'w4', proj:'weddings',   x:5210, y:4720, title:'Table, Before',        desc:'Placeholder — Details matter. The quiet before the guests arrive.',                                                                          meta:{loc:'Brooklyn',     yr:'2023', cam:'Canon R5',       fmt:'Digital'},       tags:['wedding','detail','still life'],                 rel:['w2','c1'],      seed:'wedD4d'  },
-  /* ── LANDSCAPES ── */
-  { id:'l1', proj:'landscapes', x:4880, y:5340, title:'Desert, Dawn',         desc:'Placeholder — Five hours before anyone else arrived. The silence before the light changed everything.',                                      meta:{loc:'Utah',         yr:'2022', cam:'Phase One',      fmt:'Medium Format'}, tags:['landscape','desert','dawn','long exposure'],     rel:['l2','l3'],      seed:'lanA1e'  },
-  { id:'l2', proj:'landscapes', x:5080, y:5290, title:'Fog, Coast',           desc:"Placeholder — Pacific coast in mid-October. The fog never fully lifted, which turned out to be the whole point.",                          meta:{loc:'Oregon Coast', yr:'2023', cam:'Phase One',      fmt:'Medium Format'}, tags:['landscape','coastal','fog','moody'],             rel:['l1','f1'],      seed:'lanB2f'  },
-  { id:'l3', proj:'landscapes', x:4940, y:5500, title:'Mountain, Last Light', desc:"Placeholder — The last thirty seconds of light before full dark.",                                                                           meta:{loc:'Colorado',     yr:'2022', cam:'Canon R5',       fmt:'Digital'},       tags:['landscape','mountain','dusk','golden hour'],     rel:['l1','l4'],      seed:'lanC3g'  },
-  { id:'l4', proj:'landscapes', x:5110, y:5460, title:'River, Autumn',        desc:'Placeholder — The river always changes; autumn makes it dramatic.',                                                                          meta:{loc:'Vermont',      yr:'2023', cam:'Phase One',      fmt:'Medium Format'}, tags:['landscape','river','autumn','color'],            rel:['l3','l2'],      seed:'lanD4h'  },
-  /* ── COMMERCIAL ── */
-  { id:'c1', proj:'commercial', x:5600, y:5080, title:'Brand, Minimal',       desc:'Placeholder — Product photography for a skincare brand. The object is the story; the background disappears.',                              meta:{loc:'Studio NY',    yr:'2024', cam:'Hasselblad X2D', fmt:'Medium Format'}, tags:['commercial','product','minimal','studio'],       rel:['c2','c3'],      seed:'comA1i'  },
-  { id:'c2', proj:'commercial', x:5780, y:5030, title:'Campaign, Spring',     desc:'Placeholder — Lifestyle campaign for an outdoor clothing brand. Real locations, natural light, no stylists.',                              meta:{loc:'Catskills',    yr:'2024', cam:'Sony A1',         fmt:'Digital'},       tags:['commercial','lifestyle','campaign','outdoor'],   rel:['c1','c4'],      seed:'comB2j'  },
-  { id:'c3', proj:'commercial', x:5660, y:5240, title:'Interior, Restaurant', desc:'Placeholder — Architectural and food photography. The space tells the story before the food arrives.',                                     meta:{loc:'Manhattan',    yr:'2023', cam:'Canon R5',       fmt:'Digital'},       tags:['commercial','interior','food','architecture'],   rel:['c1','c2'],      seed:'comC3k'  },
-  { id:'c4', proj:'commercial', x:5840, y:5200, title:'Portrait, Corporate',  desc:"Placeholder — Executive portraits that feel human, not corporate. The brief is always the same; the outcome never is.",                   meta:{loc:'Midtown NY',   yr:'2024', cam:'Canon R5',       fmt:'Digital'},       tags:['commercial','portrait','corporate'],             rel:['c2','p1'],      seed:'comD4l'  },
-  /* ── FINE ART ── */
-  { id:'f1', proj:'fineart',    x:5280, y:5520, title:'Threshold I',          desc:'Placeholder — An ongoing series about in-between spaces and liminal moments. Where you are just before something changes.',                meta:{loc:'New York',     yr:'2023', cam:'Leica M11',      fmt:'Digital'},       tags:['fine art','series','abstract','conceptual'],     rel:['f2','f3','p1'], seed:'artA1m'  },
-  { id:'f2', proj:'fineart',    x:5460, y:5470, title:'Threshold II',         desc:'Placeholder — Second part of the Threshold series. Different light, same unresolved question.',                                            meta:{loc:'New York',     yr:'2023', cam:'Leica M11',      fmt:'Digital'},       tags:['fine art','series','light','conceptual'],        rel:['f1','f4','l2'], seed:'artB2n'  },
-  { id:'f3', proj:'fineart',    x:5350, y:5680, title:'Untitled, 2023',       desc:"Placeholder — No title because the image should do all the talking. If you need to explain it, it isn't finished.",                      meta:{loc:'Studio',       yr:'2023', cam:'Hasselblad X2D', fmt:'Medium Format'}, tags:['fine art','abstract','monochrome'],              rel:['f1','f4'],      seed:'artC3o'  },
-  { id:'f4', proj:'fineart',    x:5530, y:5640, title:'Still, No. 7',         desc:'Placeholder — Part of a stillness study. Slowness as a subject, patience as a method.',                                                    meta:{loc:'Studio',       yr:'2024', cam:'Hasselblad X2D', fmt:'Medium Format'}, tags:['fine art','still life','minimal','color theory'],rel:['f2','f3'],      seed:'artD4p'  },
+  { id:'p1', proj:'portraits',  title:'Emma, Golden Hour',    desc:'Placeholder — Describe the shoot, the light, the moment. Specific details make it memorable.',                                       meta:{loc:'New York',     yr:'2024',cam:'Canon R5',      fmt:'Digital'},       tags:['portrait','studio','natural light','editorial'], rel:['p2','p3','f1'], seed:'portA1x' },
+  { id:'p2', proj:'portraits',  title:'Marco, Noon Light',    desc:'Placeholder — A brief story about this image or subject. Keep it personal and direct.',                                             meta:{loc:'Brooklyn',     yr:'2023',cam:'Leica M11',     fmt:'Digital'},       tags:['portrait','street','monochrome'],               rel:['p1','p4'],      seed:'portB2y' },
+  { id:'p3', proj:'portraits',  title:'Self, Series I',        desc:'Placeholder — Fine art self-portraiture exploring identity. Part of an ongoing series.',                                           meta:{loc:'Studio',       yr:'2023',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['portrait','fine art','self-portrait'],           rel:['p1','f2'],      seed:'portC3z' },
+  { id:'p4', proj:'portraits',  title:'Unnamed, Blue',         desc:'Placeholder — Describe the atmosphere and intent. The more specific, the more memorable.',                                         meta:{loc:'Studio',       yr:'2024',cam:'Canon R5',      fmt:'Digital'},       tags:['portrait','studio','blue','minimal'],            rel:['p2','p3'],      seed:'portD4w' },
+  { id:'w1', proj:'weddings',   title:'The First Look',        desc:'Placeholder — The moment before anything is said. Replace with a real anecdote from the day.',                                     meta:{loc:'Hudson Valley',yr:'2024',cam:'Sony A1',       fmt:'Digital'},       tags:['wedding','ceremony','emotion','documentary'],    rel:['w2','w3'],      seed:'wedA1a'  },
+  { id:'w2', proj:'weddings',   title:'Reception, Evening',    desc:'Placeholder — When the night takes over and everyone forgets the camera is there.',                                                 meta:{loc:'Manhattan',    yr:'2023',cam:'Canon R5',      fmt:'Digital'},       tags:['wedding','reception','available light'],         rel:['w1','w4'],      seed:'wedB2b'  },
+  { id:'w3', proj:'weddings',   title:'Garden Ceremony',       desc:'Placeholder — Outdoor ceremony in soft afternoon light. Describe the setting.',                                                     meta:{loc:'Hamptons',     yr:'2024',cam:'Sony A1',       fmt:'Digital'},       tags:['wedding','outdoor','ceremony','golden hour'],    rel:['w1','w2'],      seed:'wedC3c'  },
+  { id:'w4', proj:'weddings',   title:'Table, Before',         desc:'Placeholder — Details matter. The quiet before the guests arrive.',                                                                 meta:{loc:'Brooklyn',     yr:'2023',cam:'Canon R5',      fmt:'Digital'},       tags:['wedding','detail','still life'],                 rel:['w2','c1'],      seed:'wedD4d'  },
+  { id:'l1', proj:'landscapes', title:'Desert, Dawn',          desc:'Placeholder — Five hours before anyone else arrived. The silence before the light changed everything.',                             meta:{loc:'Utah',         yr:'2022',cam:'Phase One',     fmt:'Medium Format'}, tags:['landscape','desert','dawn','long exposure'],     rel:['l2','l3'],      seed:'lanA1e'  },
+  { id:'l2', proj:'landscapes', title:'Fog, Coast',            desc:"Placeholder — Pacific coast in mid-October. The fog never fully lifted, which turned out to be the whole point.",                 meta:{loc:'Oregon Coast', yr:'2023',cam:'Phase One',     fmt:'Medium Format'}, tags:['landscape','coastal','fog','moody'],             rel:['l1','f1'],      seed:'lanB2f'  },
+  { id:'l3', proj:'landscapes', title:'Mountain, Last Light',  desc:"Placeholder — The last thirty seconds of light before full dark.",                                                                  meta:{loc:'Colorado',     yr:'2022',cam:'Canon R5',      fmt:'Digital'},       tags:['landscape','mountain','dusk','golden hour'],     rel:['l1','l4'],      seed:'lanC3g'  },
+  { id:'l4', proj:'landscapes', title:'River, Autumn',         desc:'Placeholder — The river always changes; autumn makes it dramatic.',                                                                 meta:{loc:'Vermont',      yr:'2023',cam:'Phase One',     fmt:'Medium Format'}, tags:['landscape','river','autumn','color'],            rel:['l3','l2'],      seed:'lanD4h'  },
+  { id:'c1', proj:'commercial', title:'Brand, Minimal',        desc:'Placeholder — Product photography for a skincare brand. The object is the story.',                                                 meta:{loc:'Studio NY',    yr:'2024',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['commercial','product','minimal','studio'],       rel:['c2','c3'],      seed:'comA1i'  },
+  { id:'c2', proj:'commercial', title:'Campaign, Spring',      desc:'Placeholder — Lifestyle campaign for an outdoor clothing brand. Real locations, natural light.',                                    meta:{loc:'Catskills',    yr:'2024',cam:'Sony A1',       fmt:'Digital'},       tags:['commercial','lifestyle','campaign','outdoor'],   rel:['c1','c4'],      seed:'comB2j'  },
+  { id:'c3', proj:'commercial', title:'Interior, Restaurant',  desc:'Placeholder — Architectural and food photography. The space tells the story before the food arrives.',                             meta:{loc:'Manhattan',    yr:'2023',cam:'Canon R5',      fmt:'Digital'},       tags:['commercial','interior','food','architecture'],   rel:['c1','c2'],      seed:'comC3k'  },
+  { id:'c4', proj:'commercial', title:'Portrait, Corporate',   desc:"Placeholder — Executive portraits that feel human, not corporate.",                                                                 meta:{loc:'Midtown NY',   yr:'2024',cam:'Canon R5',      fmt:'Digital'},       tags:['commercial','portrait','corporate'],             rel:['c2','p1'],      seed:'comD4l'  },
+  { id:'f1', proj:'fineart',    title:'Threshold I',           desc:'Placeholder — An ongoing series about in-between spaces and liminal moments.',                                                      meta:{loc:'New York',     yr:'2023',cam:'Leica M11',     fmt:'Digital'},       tags:['fine art','series','abstract','conceptual'],     rel:['f2','f3','p1'], seed:'artA1m'  },
+  { id:'f2', proj:'fineart',    title:'Threshold II',          desc:'Placeholder — Second part of the Threshold series. Different light, same unresolved question.',                                    meta:{loc:'New York',     yr:'2023',cam:'Leica M11',     fmt:'Digital'},       tags:['fine art','series','light','conceptual'],        rel:['f1','f4','l2'], seed:'artB2n'  },
+  { id:'f3', proj:'fineart',    title:'Untitled, 2023',        desc:"Placeholder — No title because the image should do all the talking.",                                                               meta:{loc:'Studio',       yr:'2023',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['fine art','abstract','monochrome'],              rel:['f1','f4'],      seed:'artC3o'  },
+  { id:'f4', proj:'fineart',    title:'Still, No. 7',          desc:'Placeholder — Part of a stillness study. Slowness as a subject, patience as a method.',                                            meta:{loc:'Studio',       yr:'2024',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['fine art','still life','minimal','color theory'],rel:['f2','f3'],      seed:'artD4p'  },
 ];
-
+ 
 const LINKS = [
   ['p1','p2'],['p1','p3'],['p2','p4'],['p3','p4'],
   ['w1','w2'],['w1','w3'],['w2','w4'],['w3','w4'],
   ['l1','l2'],['l1','l3'],['l2','l4'],['l3','l4'],
   ['c1','c2'],['c1','c3'],['c2','c4'],['c3','c4'],
   ['f1','f2'],['f1','f3'],['f2','f4'],['f3','f4'],
-  /* cross-project connections */
   ['p1','f1'],['p3','f2'],['l2','f1'],['w4','c1'],['c4','p1'],
 ];
-
-/* ═══════════════════════════════════════════════════════
-   STATE
-════════════════════════════════════════════════════════ */
-let tx = 0, ty = 0, sc = 0.85;
-let panning = false, panStart = {};
-let selectedId = null, hoverNodeId = null;
-let filterProj = 'all', filterTag = null;
-let dragNode = null, dragStart = {};
-let isDragging = false;
-
-// Physics nodes (add vx/vy)
-const nodes = {};
-PHOTOS.forEach(p => nodes[p.id] = { ...p, vx:0, vy:0, fixed:false });
-
-// Lookup by id
-const byId = {};
-PHOTOS.forEach(p => byId[p.id] = p);
-
-// Connection count per node (for sizing)
-const connCount = {};
-PHOTOS.forEach(p => connCount[p.id] = 0);
-LINKS.forEach(([a,b]) => { connCount[a]++; connCount[b]++; });
-
-// Node size: base 150px, +10px per connection, max 205px
-function nodeW(id) { return Math.min(148 + connCount[id] * 11, 208); }
-function nodeH(id) { return Math.round(nodeW(id) * 0.75); }
-
-/* ═══════════════════════════════════════════════════════
-   PHYSICS  (simplified force-directed simulation)
-════════════════════════════════════════════════════════ */
-const SIM = {
-  alpha:        1,
-  alphaDecay:   0.018,
-  velDecay:     0.72,
-  repulse:      -2400,
-  linkDist:     290,
-  linkStr:      0.14,
-  centerStr:    0.006,
-
-  tick() {
-    if (this.alpha < 0.001 && !Object.values(nodes).some(n=>!n.fixed&&(n.vx||n.vy))) {
-      // Barely alive: add a whisper of noise to keep it breathing
-      Object.values(nodes).forEach(n => {
-        if (!n.fixed) { n.vx += (Math.random()-.5)*0.08; n.vy += (Math.random()-.5)*0.08; }
-      });
-    }
-    this.alpha = Math.max(0.001, this.alpha * (1 - this.alphaDecay));
-
-    const ns = Object.values(nodes);
-
-    // Repulsion (charge) — all pairs
-    for (let i = 0; i < ns.length; i++) {
-      for (let j = i+1; j < ns.length; j++) {
-        const a = ns[i], b = ns[j];
-        const dx = b.x - a.x || 0.01, dy = b.y - a.y || 0.01;
-        const d2 = Math.max(dx*dx + dy*dy, 1);
-        const d  = Math.sqrt(d2);
-        const f  = (this.repulse / d2) * this.alpha;
-        const fx = f*dx/d, fy = f*dy/d;
-        if (!a.fixed) { a.vx -= fx; a.vy -= fy; }
-        if (!b.fixed) { b.vx += fx; b.vy += fy; }
-      }
-    }
-
-    // Link springs — attract connected nodes
-    LINKS.forEach(([id1, id2]) => {
-      const a = nodes[id1], b = nodes[id2];
-      if (!a || !b) return;
-      const dx = b.x - a.x, dy = b.y - a.y;
-      const d  = Math.sqrt(dx*dx + dy*dy) || 1;
-      const diff = (d - this.linkDist) / d * this.linkStr * this.alpha;
-      if (!a.fixed) { a.vx += dx*diff; a.vy += dy*diff; }
-      if (!b.fixed) { b.vx -= dx*diff; b.vy -= dy*diff; }
-    });
-
-    // Center gravity — weak pull to keep nodes from drifting
-    ns.forEach(n => {
-      if (!n.fixed) {
-        n.vx += (5000 - n.x) * this.centerStr * this.alpha;
-        n.vy += (5000 - n.y) * this.centerStr * this.alpha;
-      }
-    });
-
-    // Integrate
-    ns.forEach(n => {
-      if (!n.fixed) {
-        n.vx *= this.velDecay;
-        n.vy *= this.velDecay;
-        n.x  += n.vx;
-        n.y  += n.vy;
-      }
-    });
-  },
-
-  heat(a=0.4) { this.alpha = Math.max(this.alpha, a); }
+ 
+/* ══════════════════════════════════════════════
+   PHYSICS CONFIG
+   These are the defaults, mirrored into the panel
+══════════════════════════════════════════════ */
+const DEFAULTS = {
+  repulse:  3200,   // charge repulsion strength
+  ldist:    320,    // link rest distance (px)
+  lstr:     0.08,   // link spring strength
+  cstr:     0.022,  // cluster gravity strength
+  cdist:    220,    // cluster radius target
+  decay:    0.82,   // velocity decay (damping)
+  collide:  18,     // collision padding (px beyond node half-size)
+  center:   0.002,  // global centre gravity
 };
-
-/* ═══════════════════════════════════════════════════════
+ 
+const CFG = { ...DEFAULTS };
+ 
+// Presets
+const PRESETS = {
+  balanced: { repulse:3200, ldist:320, lstr:0.08,  cstr:0.022, cdist:220, decay:0.82, collide:18, center:0.002 },
+  tight:    { repulse:1800, ldist:220, lstr:0.14,  cstr:0.042, cdist:140, decay:0.86, collide:10, center:0.003 },
+  loose:    { repulse:5000, ldist:480, lstr:0.04,  cstr:0.008, cdist:360, decay:0.78, collide:28, center:0.001 },
+  orbit:    { repulse:4500, ldist:400, lstr:0.06,  cstr:0.035, cdist:280, decay:0.76, collide:20, center:0.004 },
+  frozen:   { repulse:2800, ldist:300, lstr:0.12,  cstr:0.03,  cdist:200, decay:0.97, collide:15, center:0.001 },
+};
+ 
+/* ══════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════ */
+let tx=0, ty=0, sc=0.85;
+let panning=false, panStart={};
+let selectedId=null, hoverNodeId=null;
+let filterProj='all', filterTag=null;
+let isDragging=false;
+let simAlpha=1;
+ 
+const byId={};
+PHOTOS.forEach(p => byId[p.id]=p);
+ 
+// Connection count per node (for sizing)
+const connCount={};
+PHOTOS.forEach(p => connCount[p.id]=0);
+LINKS.forEach(([a,b]) => { connCount[a]++; connCount[b]++; });
+ 
+// Node physics state — start near their cluster centre with a small random offset
+const NS={};
+PHOTOS.forEach(p => {
+  const cc = CLUSTER_CENTRES[p.proj];
+  NS[p.id] = {
+    x: cc.x + (Math.random()-.5)*180,
+    y: cc.y + (Math.random()-.5)*180,
+    vx:0, vy:0, fixed:false
+  };
+});
+ 
+function nodeW(id) { return Math.min(145 + connCount[id]*11, 200); }
+function nodeH(id) { return Math.round(nodeW(id)*0.75); }
+function nodeR(id) { return Math.sqrt(nodeW(id)**2 + nodeH(id)**2)/2; }
+ 
+/* ══════════════════════════════════════════════
+   PHYSICS SIMULATION
+══════════════════════════════════════════════ */
+function simTick() {
+  const alpha = simAlpha;
+  if (simAlpha > 0.001) simAlpha *= (1 - 0.016);
+ 
+  const ns = Object.values(NS);
+ 
+  // 1. Repulsion (Barnes-Hut approximation skipped for simplicity — O(n²) fine for 20 nodes)
+  for (let i=0; i<ns.length; i++) {
+    const a = ns[i];
+    if (a.fixed) continue;
+    for (let j=i+1; j<ns.length; j++) {
+      const b = ns[j];
+      let dx = b.x - a.x || 0.001, dy = b.y - a.y || 0.001;
+      const d2 = Math.max(dx*dx + dy*dy, 1);
+      const d  = Math.sqrt(d2);
+      const f  = (-CFG.repulse / d2) * alpha;
+      const fx = f*dx/d, fy = f*dy/d;
+      a.vx += fx; a.vy += fy;
+      if (!b.fixed) { b.vx -= fx; b.vy -= fy; }
+    }
+  }
+ 
+  // 2. Link springs
+  LINKS.forEach(([id1,id2]) => {
+    const a=NS[id1], b=NS[id2];
+    if (!a||!b) return;
+    const dx=b.x-a.x, dy=b.y-a.y;
+    const d = Math.sqrt(dx*dx+dy*dy)||1;
+    const diff = (d-CFG.ldist)/d * CFG.lstr * alpha;
+    if (!a.fixed) { a.vx+=dx*diff; a.vy+=dy*diff; }
+    if (!b.fixed) { b.vx-=dx*diff; b.vy-=dy*diff; }
+  });
+ 
+  // 3. Cluster gravity — pulls each node toward its project's target centre
+  PHOTOS.forEach(p => {
+    const n  = NS[p.id];
+    const cc = CLUSTER_CENTRES[p.proj];
+    if (!n||n.fixed) return;
+    const dx = cc.x - n.x, dy = cc.y - n.y;
+    const d  = Math.sqrt(dx*dx+dy*dy)||1;
+    // Pull stronger when far from cluster radius, softer when near
+    const excess = Math.max(d - CFG.cdist, 0);
+    const f = excess * CFG.cstr * alpha;
+    n.vx += (dx/d)*f;
+    n.vy += (dy/d)*f;
+  });
+ 
+  // 4. Global centre gravity
+  ns.forEach(n => {
+    if (!n.fixed) {
+      n.vx += (5000-n.x)*CFG.center*alpha;
+      n.vy += (5000-n.y)*CFG.center*alpha;
+    }
+  });
+ 
+  // 5. Collision detection
+  for (let i=0;i<ns.length;i++) {
+    const a=ns[i];
+    for (let j=i+1;j<ns.length;j++) {
+      const b=ns[j];
+      const pid_a = PHOTOS[i]?.id, pid_b = PHOTOS[j]?.id;
+      if (!pid_a||!pid_b) continue;
+      const rA = nodeR(pid_a)+CFG.collide, rB = nodeR(pid_b)+CFG.collide;
+      const minD = (rA+rB)/2;
+      let dx=b.x-a.x||0.001, dy=b.y-a.y||0.001;
+      const d=Math.sqrt(dx*dx+dy*dy)||1;
+      if (d<minD) {
+        const push=(minD-d)/d * 0.55;
+        if (!a.fixed) { a.vx-=dx*push; a.vy-=dy*push; }
+        if (!b.fixed) { b.vx+=dx*push; b.vy+=dy*push; }
+      }
+    }
+  }
+ 
+  // 6. Integrate
+  ns.forEach(n => {
+    if (!n.fixed) {
+      n.vx *= CFG.decay; n.vy *= CFG.decay;
+      n.x  += n.vx;     n.y  += n.vy;
+    }
+  });
+}
+ 
+function reheat(a=0.5) { simAlpha = Math.max(simAlpha, a); }
+ 
+/* ══════════════════════════════════════════════
+   RENDER LOOP
+══════════════════════════════════════════════ */
+const nodeEls={}, svgPaths={};
+ 
+function loop() {
+  simTick();
+  PHOTOS.forEach(p => {
+    const n=NS[p.id], el=nodeEls[p.id];
+    if (!el) return;
+    const w=nodeW(p.id), h=nodeH(p.id);
+    el.style.left = (n.x-w/2)+'px';
+    el.style.top  = (n.y-h/2)+'px';
+  });
+  updateSVG();
+  requestAnimationFrame(loop);
+}
+ 
+/* ══════════════════════════════════════════════
+   SVG CONNECTIONS
+══════════════════════════════════════════════ */
+function initSVG() {
+  const svg=document.getElementById('svg');
+  LINKS.forEach(([id1,id2]) => {
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('fill','none');
+    svg.appendChild(path);
+    svgPaths[id1+'|'+id2]=path;
+  });
+}
+ 
+function updateSVG() {
+  const activeId = selectedId||hoverNodeId;
+  LINKS.forEach(([id1,id2]) => {
+    const a=NS[id1], b=NS[id2], path=svgPaths[id1+'|'+id2];
+    if (!a||!b||!path) return;
+    const aVis=nodeVisible(byId[id1]), bVis=nodeVisible(byId[id2]);
+    if (!aVis||!bVis) { path.setAttribute('stroke','none'); return; }
+ 
+    const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+    const dx=b.x-a.x, dy=b.y-a.y;
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
+    const bnd=Math.min(len*0.12,36);
+    const cpx=mx-(dy/len)*bnd, cpy=my+(dx/len)*bnd;
+    path.setAttribute('d',`M${a.x} ${a.y} Q${cpx} ${cpy} ${b.x} ${b.y}`);
+ 
+    const same=byId[id1].proj===byId[id2].proj;
+    const lit=activeId&&(id1===activeId||id2===activeId);
+    if (lit) {
+      path.setAttribute('stroke', PROJ[byId[id1].proj]?.color||'#444');
+      path.setAttribute('stroke-width','2.2');
+      path.setAttribute('stroke-opacity','0.75');
+      path.removeAttribute('stroke-dasharray');
+    } else if (same) {
+      path.setAttribute('stroke','#888');
+      path.setAttribute('stroke-width','1.2');
+      path.setAttribute('stroke-opacity','0.4');
+      path.removeAttribute('stroke-dasharray');
+    } else {
+      path.setAttribute('stroke','#AAAAAA');
+      path.setAttribute('stroke-width','0.9');
+      path.setAttribute('stroke-opacity','0.28');
+      path.setAttribute('stroke-dasharray','3 7');
+    }
+  });
+}
+ 
+/* ══════════════════════════════════════════════
+   NODES
+══════════════════════════════════════════════ */
+function renderNodes() {
+  const canvas=document.getElementById('canvas');
+  PHOTOS.forEach((photo,i) => {
+    const p=PROJ[photo.proj], w=nodeW(photo.id), h=nodeH(photo.id);
+    const el=document.createElement('div');
+    el.className='node'; el.id='n-'+photo.id; el.dataset.id=photo.id;
+    el.style.width=w+'px'; el.style.height=h+'px';
+    el.style.zIndex=2+i;
+    el.style.setProperty('--c',p.color);
+    el.style.setProperty('--g',`rgba(${p.rgb},.15)`);
+    el.setAttribute('role','button'); el.setAttribute('tabindex','0');
+    el.setAttribute('aria-label',`${photo.title} — ${p.name}`);
+    /* Replace picsum with your actual image src */
+    el.innerHTML=`<img class="node-img" src="https://picsum.photos/seed/${photo.seed}/${w*2}/${h*2}" alt="${photo.title}" width="${w}" height="${h}" loading="${i<8?'eager':'lazy'}" draggable="false">`;
+    el.addEventListener('mouseenter', ()=>onEnter(photo));
+    el.addEventListener('mouseleave', ()=>onLeave());
+    el.addEventListener('mousedown',  e =>onDown(e,photo,el));
+    el.addEventListener('keydown',    e =>{ if(e.key==='Enter'||e.key===' ') openDetail(photo); });
+    canvas.appendChild(el);
+    nodeEls[photo.id]=el;
+  });
+}
+ 
+/* ══════════════════════════════════════════════
+   FILTER
+══════════════════════════════════════════════ */
+function buildPills() {
+  const bar=document.getElementById('filters');
+  Object.entries(PROJ).forEach(([key,p]) => {
+    const btn=document.createElement('button');
+    btn.className='pill proj'; btn.dataset.f=key;
+    btn.style.setProperty('--pc',p.color);
+    btn.innerHTML=`<span class="dot"></span>${p.name}`;
+    btn.addEventListener('click',()=>setProj(key,btn));
+    bar.appendChild(btn);
+  });
+  bar.querySelector('[data-f="all"]').addEventListener('click',function(){setProj('all',this);});
+}
+function setProj(key,btn) {
+  filterProj=key; filterTag=null; hideBadge();
+  document.querySelectorAll('.pill').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  applyVis(); updateStatus(); reheat(0.18);
+}
+function setTag(tag) {
+  if (filterTag===tag){clearTag();return;}
+  filterTag=tag; filterProj='all';
+  document.querySelectorAll('.pill').forEach(b=>b.classList.remove('on'));
+  document.querySelector('[data-f="all"]').classList.add('on');
+  document.getElementById('tag-label').textContent='# '+tag;
+  document.getElementById('tag-active').classList.add('show');
+  applyVis(); updateStatus();
+  document.querySelectorAll('.tc').forEach(c=>c.classList.toggle('on',c.dataset.tag===tag));
+}
+function clearTag() {
+  filterTag=null; hideBadge(); applyVis(); updateStatus();
+  document.querySelectorAll('.tc').forEach(c=>c.classList.remove('on'));
+}
+function hideBadge(){ document.getElementById('tag-active').classList.remove('show'); }
+function nodeVisible(p) {
+  return (filterProj==='all'||p.proj===filterProj) && (!filterTag||p.tags.includes(filterTag));
+}
+function applyVis() {
+  PHOTOS.forEach(p => {
+    const el=nodeEls[p.id];
+    if (nodeVisible(p)){ el.classList.remove('dimmed'); el.style.pointerEvents=''; }
+    else               { el.classList.add('dimmed');    el.style.pointerEvents='none'; }
+  });
+}
+ 
+/* ══════════════════════════════════════════════
+   TOOLTIP
+══════════════════════════════════════════════ */
+function onEnter(photo) {
+  if (isDragging) return;
+  hoverNodeId=photo.id;
+  const p=PROJ[photo.proj];
+  document.getElementById('tt-title').textContent=photo.title;
+  document.getElementById('tt-pname').textContent=p.name;
+  document.getElementById('tt-dot').style.background=p.color;
+  document.getElementById('tt').classList.add('show');
+}
+function onLeave() {
+  hoverNodeId=null;
+  document.getElementById('tt').classList.remove('show');
+}
+document.addEventListener('mousemove',e => {
+  const tt=document.getElementById('tt');
+  if (!tt.classList.contains('show')) return;
+  tt.style.left=(e.clientX+16)+'px'; tt.style.top=(e.clientY+14)+'px';
+});
+ 
+/* ══════════════════════════════════════════════
+   NODE DRAG & CLICK
+══════════════════════════════════════════════ */
+function onDown(e,photo,el) {
+  e.stopPropagation();
+  isDragging=false;
+  const n=NS[photo.id];
+  const start={mx:e.clientX,my:e.clientY,nx:n.x,ny:n.y};
+  n.fixed=true;
+  const onMove=ev => {
+    const ddx=ev.clientX-start.mx, ddy=ev.clientY-start.my;
+    if (!isDragging&&Math.sqrt(ddx*ddx+ddy*ddy)>5) {
+      isDragging=true; el.classList.add('dragging'); onLeave();
+    }
+    if (!isDragging) return;
+    n.x=start.nx+ddx/sc; n.y=start.ny+ddy/sc;
+    n.vx=0; n.vy=0; reheat(0.25);
+  };
+  const onUp=()=>{
+    window.removeEventListener('mousemove',onMove);
+    window.removeEventListener('mouseup',onUp);
+    el.classList.remove('dragging');
+    if (!isDragging) openDetail(photo);
+    setTimeout(()=>{ n.fixed=false; isDragging=false; reheat(0.28); },80);
+  };
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('mouseup',onUp);
+}
+ 
+/* ══════════════════════════════════════════════
+   DETAIL PANEL
+══════════════════════════════════════════════ */
+function openDetail(photo) {
+  const p=PROJ[photo.proj];
+  selectedId=photo.id;
+  document.querySelectorAll('.node').forEach(el=>el.classList.remove('selected'));
+  nodeEls[photo.id]?.classList.add('selected');
+ 
+  document.getElementById('p-img').src=`https://picsum.photos/seed/${photo.seed}/800/600`;
+  document.getElementById('p-img').alt=photo.title;
+ 
+  const badge=document.getElementById('p-badge');
+  badge.style.color=p.color; badge.style.borderColor=p.color+'44'; badge.style.background=`rgba(${p.rgb},.07)`;
+  document.getElementById('p-badge-txt').textContent=p.name;
+  document.getElementById('p-title').textContent=photo.title;
+  document.getElementById('p-desc').textContent=photo.desc;
+  document.getElementById('m-loc').textContent=photo.meta?.loc||'—';
+  document.getElementById('m-yr').textContent=photo.meta?.yr||'—';
+  document.getElementById('m-cam').textContent=photo.meta?.cam||'—';
+  document.getElementById('m-fmt').textContent=photo.meta?.fmt||'—';
+ 
+  document.getElementById('p-tags').innerHTML=photo.tags.map(t=>`<button class="tc${filterTag===t?' on':''}" data-tag="${t}"># ${t}</button>`).join('');
+  document.querySelectorAll('.tc').forEach(c=>c.addEventListener('click',()=>setTag(c.dataset.tag)));
+ 
+  const rels=photo.rel.map(id=>byId[id]).filter(Boolean);
+  const relSec=document.getElementById('rel-sec'), relEl=document.getElementById('p-related');
+  if (rels.length) {
+    relSec.style.display='';
+    relEl.innerHTML=rels.map(r=>`<div class="rt" data-id="${r.id}" role="button" tabindex="0" title="${r.title}"><img src="https://picsum.photos/seed/${r.seed}/240/180" alt="${r.title}" loading="lazy" width="240" height="180"><div class="rt-lbl">${r.title}</div></div>`).join('');
+    relEl.querySelectorAll('.rt').forEach(t=>{
+      const go=()=>{const rp=byId[t.dataset.id]; panTo(rp,520,()=>openDetail(rp));};
+      t.addEventListener('click',go);
+      t.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+    });
+  } else relSec.style.display='none';
+ 
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('panel').setAttribute('aria-hidden','false');
+  document.getElementById('p-locate').onclick=()=>panTo(photo,500);
+}
+function closeDetail() {
+  selectedId=null;
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('panel').setAttribute('aria-hidden','true');
+  document.querySelectorAll('.node').forEach(el=>el.classList.remove('selected'));
+}
+ 
+/* ══════════════════════════════════════════════
+   PAN / ZOOM / TRANSFORM
+══════════════════════════════════════════════ */
+function applyT() {
+  document.getElementById('canvas').style.transform=`translate(${tx}px,${ty}px) scale(${sc})`;
+  const wrap=document.getElementById('wrap');
+  const g80=80*sc, g16=16*sc;
+  const ox80=((tx%g80)+g80)%g80, oy80=((ty%g80)+g80)%g80;
+  const ox16=((tx%g16)+g16)%g16, oy16=((ty%g16)+g16)%g16;
+  wrap.style.backgroundSize=`${g80}px ${g80}px,${g80}px ${g80}px,${g16}px ${g16}px,${g16}px ${g16}px`;
+  wrap.style.backgroundPosition=`${ox80}px ${oy80}px,${ox80}px ${oy80}px,${ox16}px ${oy16}px,${ox16}px ${oy16}px`;
+  document.getElementById('zoom-pill').textContent=Math.round(sc*100)+'%';
+}
+function panTo(photo,dur,cb) {
+  const n=NS[photo.id];
+  const pw=document.getElementById('panel').classList.contains('open')?390:0;
+  const vw=window.innerWidth-pw, vh=window.innerHeight-56;
+  animPan(vw/2-n.x*sc, vh/2-n.y*sc, dur, cb);
+}
+function animPan(toX,toY,dur,cb) {
+  const fX=tx,fY=ty,t0=performance.now();
+  const tick=now=>{
+    const t=Math.min((now-t0)/dur,1),e=t<.5?2*t*t:-1+(4-2*t)*t;
+    tx=fX+(toX-fX)*e; ty=fY+(toY-fY)*e; applyT();
+    if(t<1)requestAnimationFrame(tick);else cb?.();
+  };
+  requestAnimationFrame(tick);
+}
+function zoomAt(factor,cx,cy) {
+  const ns=Math.min(Math.max(sc*factor,.18),4);
+  tx=cx-(cx-tx)*(ns/sc); ty=cy-(cy-ty)*(ns/sc); sc=ns; applyT();
+}
+ 
+/* ══════════════════════════════════════════════
+   CANVAS INTERACTION
+══════════════════════════════════════════════ */
+function initInteraction() {
+  const wrap=document.getElementById('wrap');
+  wrap.addEventListener('mousedown',e=>{
+    if(e.target.closest('.node'))return;
+    panning=true; panStart={x:e.clientX,y:e.clientY,ox:tx,oy:ty};
+    wrap.classList.add('grabbing');
+    document.getElementById('hint').classList.add('gone');
+  });
+  window.addEventListener('mousemove',e=>{
+    if(!panning)return;
+    tx=panStart.ox+(e.clientX-panStart.x); ty=panStart.oy+(e.clientY-panStart.y); applyT();
+  });
+  window.addEventListener('mouseup',()=>{ panning=false; document.getElementById('wrap').classList.remove('grabbing'); });
+  wrap.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const r=wrap.getBoundingClientRect();
+    zoomAt(e.deltaY<0?1.09:1/1.09, e.clientX-r.left, e.clientY-r.top);
+  },{passive:false});
+  let lt=null;
+  wrap.addEventListener('touchstart',e=>{if(e.touches.length===1)lt={x:e.touches[0].clientX,y:e.touches[0].clientY};},{passive:true});
+  wrap.addEventListener('touchmove',e=>{if(e.touches.length===1&&lt){tx+=e.touches[0].clientX-lt.x;ty+=e.touches[0].clientY-lt.y;lt={x:e.touches[0].clientX,y:e.touches[0].clientY};applyT();}},{passive:true});
+  wrap.addEventListener('touchend',()=>lt=null);
+  wrap.addEventListener('click',e=>{if(!e.target.closest('.node')&&!isDragging)closeDetail();});
+}
+ 
+/* ══════════════════════════════════════════════
+   CONTROLS & KEYBOARD
+══════════════════════════════════════════════ */
+function initControls() {
+  document.getElementById('btn-zi').addEventListener('click',()=>zoomAt(1.22,window.innerWidth/2,(window.innerHeight-56)/2));
+  document.getElementById('btn-zo').addEventListener('click',()=>zoomAt(1/1.22,window.innerWidth/2,(window.innerHeight-56)/2));
+  document.getElementById('btn-r').addEventListener('click',resetView);
+  document.getElementById('btn-fit').addEventListener('click',fitAll);
+  document.getElementById('p-close').addEventListener('click',closeDetail);
+  document.getElementById('logo').addEventListener('click',resetView);
+  document.getElementById('logo').addEventListener('keydown',e=>{if(e.key==='Enter')resetView();});
+  document.getElementById('tag-x').addEventListener('click',clearTag);
+  document.addEventListener('keydown',e=>{
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT')return;
+    if(e.key==='Escape'){closeDetail();closeOv('about-ov');closeOv('contact-ov');}
+    if(e.key==='='||e.key==='+')zoomAt(1.18,window.innerWidth/2,(window.innerHeight-56)/2);
+    if(e.key==='-')zoomAt(1/1.18,window.innerWidth/2,(window.innerHeight-56)/2);
+    if(e.key==='f'||e.key==='F')fitAll();
+    if(e.key==='r'||e.key==='R')resetView();
+    const spd=60/sc;
+    if(e.key==='ArrowLeft'){tx+=spd;applyT();}
+    if(e.key==='ArrowRight'){tx-=spd;applyT();}
+    if(e.key==='ArrowUp'){ty+=spd;applyT();}
+    if(e.key==='ArrowDown'){ty-=spd;applyT();}
+  });
+}
+function resetView() {
+  const cx=5050, cy=5200;
+  const toX=window.innerWidth/2-cx*0.85, toY=(window.innerHeight-56)/2-cy*0.85;
+  const fSc=sc,fX=tx,fY=ty,dur=680,t0=performance.now();
+  const tick=now=>{const t=Math.min((now-t0)/dur,1),e=t<.5?2*t*t:-1+(4-2*t)*t;sc=fSc+(0.85-fSc)*e;tx=fX+(toX-fX)*e;ty=fY+(toY-fY)*e;applyT();if(t<1)requestAnimationFrame(tick);};
+  requestAnimationFrame(tick);
+}
+function fitAll() {
+  const vis=PHOTOS.filter(p=>nodeVisible(p));
+  if(!vis.length)return;
+  const xs=vis.map(p=>NS[p.id].x), ys=vis.map(p=>NS[p.id].y);
+  const minX=Math.min(...xs)-160,maxX=Math.max(...xs)+160,minY=Math.min(...ys)-130,maxY=Math.max(...ys)+130;
+  const pw=document.getElementById('panel').classList.contains('open')?390:0;
+  const vw=window.innerWidth-pw,vh=window.innerHeight-56;
+  const nSc=Math.min(.92,Math.min(vw/(maxX-minX),vh/(maxY-minY)));
+  const cx=(minX+maxX)/2,cy=(minY+maxY)/2;
+  const toX=vw/2+pw/2-cx*nSc,toY=vh/2-cy*nSc;
+  const fSc=sc,fX=tx,fY=ty,dur=680,t0=performance.now();
+  const tick=now=>{const t=Math.min((now-t0)/dur,1),e=t<.5?2*t*t:-1+(4-2*t)*t;sc=fSc+(nSc-fSc)*e;tx=fX+(toX-fX)*e;ty=fY+(toY-fY)*e;applyT();if(t<1)requestAnimationFrame(tick);};
+  requestAnimationFrame(tick);
+}
+ 
+/* ══════════════════════════════════════════════
+   OVERLAYS
+══════════════════════════════════════════════ */
+function initOverlays() {
+  document.getElementById('btn-about').addEventListener('click',()=>openOv('about-ov'));
+  document.getElementById('btn-contact').addEventListener('click',()=>openOv('contact-ov'));
+  document.getElementById('ab-close').addEventListener('click',()=>closeOv('about-ov'));
+  document.getElementById('ct-close').addEventListener('click',()=>closeOv('contact-ov'));
+}
+function openOv(id){document.getElementById(id).classList.add('open');document.getElementById(id).setAttribute('aria-hidden','false');}
+function closeOv(id){document.getElementById(id).classList.remove('open');document.getElementById(id).setAttribute('aria-hidden','true');}
+ 
+/* ══════════════════════════════════════════════
+   STATUS BAR
+══════════════════════════════════════════════ */
+function updateStatus() {
+  const vis=PHOTOS.filter(p=>nodeVisible(p)).length;
+  const sb=document.getElementById('status-bar');
+  if (filterTag) sb.textContent=`${vis} photo${vis!==1?'s':''} tagged "${filterTag}"`;
+  else if (filterProj!=='all') sb.textContent=`${vis} photo${vis!==1?'s':''} — ${PROJ[filterProj].name}`;
+  else sb.textContent=`${PHOTOS.length} photos · ${Object.keys(PROJ).length} projects`;
+}
+ 
+/* ══════════════════════════════════════════════
+   PHYSICS PANEL
+══════════════════════════════════════════════ */
+function initPhysicsPanel() {
+  const toggle=document.getElementById('phys-toggle');
+  const panel=document.getElementById('phys-panel');
+  let open=false;
+ 
+  toggle.addEventListener('click',()=>{
+    open=!open;
+    panel.classList.toggle('open',open);
+    panel.setAttribute('aria-hidden',String(!open));
+    toggle.classList.toggle('panel-open',open);
+    toggle.setAttribute('aria-expanded',String(open));
+  });
+ 
+  // Slider ↔ Number input sync
+  const pairs = [
+    ['sl-repulse','nu-repulse','repulse'],
+    ['sl-ldist',  'nu-ldist',  'ldist'],
+    ['sl-lstr',   'nu-lstr',   'lstr'],
+    ['sl-cstr',   'nu-cstr',   'cstr'],
+    ['sl-cdist',  'nu-cdist',  'cdist'],
+    ['sl-decay',  'nu-decay',  'decay'],
+    ['sl-collide','nu-collide','collide'],
+    ['sl-center', 'nu-center', 'center'],
+  ];
+ 
+  function syncSliderFill(sl) {
+    const min=parseFloat(sl.min), max=parseFloat(sl.max), val=parseFloat(sl.value);
+    const pct=((val-min)/(max-min)*100).toFixed(1)+'%';
+    sl.style.setProperty('--pct',pct);
+  }
+ 
+  pairs.forEach(([slId,nuId,key]) => {
+    const sl=document.getElementById(slId), nu=document.getElementById(nuId);
+    // Set initial values
+    const decimals=sl.step.includes('.')?sl.step.split('.')[1].length:0;
+    sl.value=CFG[key]; nu.value=CFG[key].toFixed(decimals); syncSliderFill(sl);
+ 
+    sl.addEventListener('input',()=>{
+      const v=parseFloat(sl.value);
+      CFG[key]=v; nu.value=v.toFixed(decimals);
+      syncSliderFill(sl); reheat(0.3);
+    });
+    nu.addEventListener('change',()=>{
+      let v=Math.min(Math.max(parseFloat(nu.value)||0, parseFloat(sl.min)), parseFloat(sl.max));
+      CFG[key]=v; sl.value=v; nu.value=v.toFixed(decimals);
+      syncSliderFill(sl); reheat(0.3);
+    });
+  });
+ 
+  // Presets
+  document.querySelectorAll('.pp-preset').forEach(btn => {
+    btn.addEventListener('click',()=>{
+      const preset=PRESETS[btn.dataset.preset];
+      if (!preset) return;
+      Object.assign(CFG,preset);
+      document.querySelectorAll('.pp-preset').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      // Sync all sliders
+      pairs.forEach(([slId,nuId,key])=>{
+        const sl=document.getElementById(slId), nu=document.getElementById(nuId);
+        const dec=sl.step.includes('.')?sl.step.split('.')[1].length:0;
+        sl.value=CFG[key]; nu.value=CFG[key].toFixed(dec); syncSliderFill(sl);
+      });
+      reheat(0.55);
+    });
+  });
+ 
+  document.getElementById('pp-reheat').addEventListener('click',()=>reheat(0.8));
+  document.getElementById('pp-reset-defaults').addEventListener('click',()=>{
+    Object.assign(CFG,DEFAULTS);
+    pairs.forEach(([slId,nuId,key])=>{
+      const sl=document.getElementById(slId), nu=document.getElementById(nuId);
+      const dec=sl.step.includes('.')?sl.step.split('.')[1].length:0;
+      sl.value=CFG[key]; nu.value=CFG[key].toFixed(dec); syncSliderFill(sl);
+    });
+    document.querySelectorAll('.pp-preset').forEach(b=>b.classList.remove('active'));
+    document.querySelector('[data-preset="balanced"]').classList.add('active');
+    reheat(0.55);
+  });
+}
+ 
+/* ══════════════════════════════════════════════
    BOOT
-════════════════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
+══════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
   buildPills();
   initSVG();
   renderNodes();
   initInteraction();
   initControls();
   initOverlays();
-
-  // Centre view on node cluster centre
-  const cx = 5050, cy = 5130;
-  tx = window.innerWidth  / 2 - cx * sc;
-  ty = (window.innerHeight - 56) / 2 - cy * sc;
-  applyT();
+  initPhysicsPanel();
   updateStatus();
+ 
+  const cx=5050, cy=5200;
+  tx=window.innerWidth/2-cx*sc;
+  ty=(window.innerHeight-56)/2-cy*sc;
+  applyT();
   loop();
-
-  setTimeout(() => document.getElementById('hint').classList.add('gone'), 5000);
+  setTimeout(()=>document.getElementById('hint').classList.add('gone'),5000);
 });
-
-/* ═══════════════════════════════════════════════════════
-   ANIMATION LOOP
-════════════════════════════════════════════════════════ */
-function loop() {
-  SIM.tick();
-  updateNodeEls();
-  updateSVGPaths();
-  requestAnimationFrame(loop);
-}
-
-/* ═══════════════════════════════════════════════════════
-   NODE ELEMENTS
-════════════════════════════════════════════════════════ */
-const nodeEls = {};
-
-function renderNodes() {
-  const canvas = document.getElementById('canvas');
-  PHOTOS.forEach((photo, i) => {
-    const p   = PROJ[photo.proj];
-    const w   = nodeW(photo.id), h = nodeH(photo.id);
-    const el  = document.createElement('div');
-    el.className = 'node';
-    el.id = 'n-' + photo.id;
-    el.dataset.id = photo.id;
-    el.style.width  = w + 'px';
-    el.style.height = h + 'px';
-    el.style.zIndex = 2 + i;
-    el.style.setProperty('--c', p.color);
-    el.style.setProperty('--g', `rgba(${p.rgb},.15)`);
-    el.setAttribute('role','button');
-    el.setAttribute('tabindex','0');
-    el.setAttribute('aria-label', `${photo.title} — ${p.name}`);
-
-    /* Replace picsum URL with your actual image paths:
-       e.g. src="/photos/${photo.id}.jpg" */
-    el.innerHTML = `<img class="node-img"
-      src="https://picsum.photos/seed/${photo.seed}/${w*2}/${h*2}"
-      alt="${photo.title}" width="${w}" height="${h}"
-      loading="${i < 8 ? 'eager' : 'lazy'}" draggable="false">`;
-
-    el.addEventListener('mouseenter', () => onNodeEnter(photo, el));
-    el.addEventListener('mouseleave', () => onNodeLeave());
-    el.addEventListener('mousedown',  e  => onNodeDown(e, photo, el));
-    el.addEventListener('keydown',    e  => { if (e.key==='Enter'||e.key===' ') openDetail(photo); });
-
-    canvas.appendChild(el);
-    nodeEls[photo.id] = el;
-    positionNodeEl(photo.id);
-  });
-}
-
-function positionNodeEl(id) {
-  const n = nodes[id], el = nodeEls[id];
-  const w = nodeW(id), h = nodeH(id);
-  el.style.left = (n.x - w/2) + 'px';
-  el.style.top  = (n.y - h/2) + 'px';
-}
-
-function updateNodeEls() {
-  PHOTOS.forEach(p => positionNodeEl(p.id));
-}
-
-/* ═══════════════════════════════════════════════════════
-   SVG CONNECTIONS
-════════════════════════════════════════════════════════ */
-const svgPaths = {};
-
-function initSVG() {
-  const svg = document.getElementById('svg');
-  LINKS.forEach(([id1, id2]) => {
-    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    path.setAttribute('fill','none');
-    svg.appendChild(path);
-    svgPaths[id1+'|'+id2] = path;
-  });
-}
-
-function updateSVGPaths() {
-  const activeId = selectedId || hoverNodeId;
-
-  LINKS.forEach(([id1, id2]) => {
-    const a = nodes[id1], b = nodes[id2];
-    const path = svgPaths[id1+'|'+id2];
-    if (!a || !b || !path) return;
-
-    const aVis = nodeVisible(byId[id1]);
-    const bVis = nodeVisible(byId[id2]);
-    if (!aVis || !bVis) { path.setAttribute('stroke','none'); return; }
-
-    // Gentle bezier
-    const mx  = (a.x + b.x)/2, my = (a.y + b.y)/2;
-    const dx  = b.x - a.x,     dy = b.y - a.y;
-    const len = Math.sqrt(dx*dx + dy*dy) || 1;
-    const bnd = Math.min(len * 0.13, 38);
-    const cpx = mx - (dy/len)*bnd, cpy = my + (dx/len)*bnd;
-    path.setAttribute('d', `M${a.x} ${a.y} Q${cpx} ${cpy} ${b.x} ${b.y}`);
-
-    const sameProj = a.proj === b.proj;
-    const lit = activeId && (id1===activeId || id2===activeId);
-
-    if (lit) {
-      const color = PROJ[a.proj]?.color || '#444';
-      path.setAttribute('stroke',        color);
-      path.setAttribute('stroke-width',  '2');
-      path.setAttribute('stroke-opacity','0.72');
-      path.removeAttribute('stroke-dasharray');
-    } else if (sameProj) {
-      path.setAttribute('stroke',        '#888');
-      path.setAttribute('stroke-width',  '1.2');
-      path.setAttribute('stroke-opacity','0.42');
-      path.removeAttribute('stroke-dasharray');
-    } else {
-      path.setAttribute('stroke',        '#AAAAAA');
-      path.setAttribute('stroke-width',  '1');
-      path.setAttribute('stroke-opacity','0.28');
-      path.setAttribute('stroke-dasharray','3 7');
-    }
-  });
-}
-
-/* ═══════════════════════════════════════════════════════
-   FILTER PILLS
-════════════════════════════════════════════════════════ */
-function buildPills() {
-  const bar = document.getElementById('filters');
-  Object.entries(PROJ).forEach(([key, p]) => {
-    const btn = document.createElement('button');
-    btn.className = 'pill proj';
-    btn.dataset.f = key;
-    btn.style.setProperty('--pc', p.color);
-    btn.innerHTML = `<span class="dot"></span>${p.name}`;
-    btn.addEventListener('click', () => setProj(key, btn));
-    bar.appendChild(btn);
-  });
-  bar.querySelector('[data-f="all"]').addEventListener('click', function() { setProj('all', this); });
-}
-
-function setProj(key, btn) {
-  filterProj = key; filterTag = null; hideBadge();
-  document.querySelectorAll('.pill').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  applyVis(); updateStatus();
-}
-
-function setTag(tag) {
-  if (filterTag === tag) { clearTag(); return; }
-  filterTag = tag; filterProj = 'all';
-  document.querySelectorAll('.pill').forEach(b => b.classList.remove('on'));
-  document.querySelector('[data-f="all"]').classList.add('on');
-  document.getElementById('tag-label').textContent = '# ' + tag;
-  document.getElementById('tag-active').classList.add('show');
-  applyVis(); updateStatus();
-  document.querySelectorAll('.tc').forEach(c => c.classList.toggle('on', c.dataset.tag===tag));
-}
-
-function clearTag() {
-  filterTag = null; hideBadge(); applyVis(); updateStatus();
-  document.querySelectorAll('.tc').forEach(c => c.classList.remove('on'));
-}
-
-function hideBadge() { document.getElementById('tag-active').classList.remove('show'); }
-
-function nodeVisible(photo) {
-  const mp = filterProj === 'all' || photo.proj === filterProj;
-  const mt = !filterTag  || photo.tags.includes(filterTag);
-  return mp && mt;
-}
-
-function applyVis() {
-  PHOTOS.forEach(p => {
-    const el = nodeEls[p.id];
-    if (nodeVisible(p)) { el.classList.remove('dimmed'); el.style.pointerEvents=''; }
-    else                { el.classList.add('dimmed');    el.style.pointerEvents='none'; }
-  });
-  SIM.heat(0.18);
-}
-
-/* ═══════════════════════════════════════════════════════
-   TOOLTIP
-════════════════════════════════════════════════════════ */
-function onNodeEnter(photo, el) {
-  if (isDragging) return;
-  hoverNodeId = photo.id;
-  const p = PROJ[photo.proj];
-  document.getElementById('tt-title').textContent    = photo.title;
-  document.getElementById('tt-proj-name').textContent= p.name;
-  document.getElementById('tt-dot').style.background = p.color;
-  document.getElementById('tooltip').classList.add('show');
-}
-
-function onNodeLeave() {
-  hoverNodeId = null;
-  document.getElementById('tooltip').classList.remove('show');
-}
-
-document.addEventListener('mousemove', e => {
-  const tt = document.getElementById('tooltip');
-  if (!tt.classList.contains('show')) return;
-  tt.style.left = (e.clientX + 14) + 'px';
-  tt.style.top  = (e.clientY + 14) + 'px';
-});
-
-/* ═══════════════════════════════════════════════════════
-   NODE DRAG & CLICK
-════════════════════════════════════════════════════════ */
-function onNodeDown(e, photo, el) {
-  e.stopPropagation();
-  isDragging = false;
-  const n = nodes[photo.id];
-  dragNode  = n;
-  dragStart = { mx: e.clientX, my: e.clientY, nx: n.x, ny: n.y };
-  n.fixed   = true;
-
-  const onMove = ev => {
-    const ddx = ev.clientX - dragStart.mx;
-    const ddy = ev.clientY - dragStart.my;
-    if (!isDragging && Math.sqrt(ddx*ddx+ddy*ddy) > 4) {
-      isDragging = true;
-      el.classList.add('dragging');
-      onNodeLeave(); // hide tooltip while dragging
-    }
-    if (!isDragging) return;
-    // Convert screen delta to canvas coords
-    n.x = dragStart.nx + ddx / sc;
-    n.y = dragStart.ny + ddy / sc;
-    n.vx = 0; n.vy = 0;
-    SIM.heat(0.22);
-  };
-
-  const onUp = () => {
-    window.removeEventListener('mousemove', onMove);
-    window.removeEventListener('mouseup', onUp);
-    el.classList.remove('dragging');
-    if (!isDragging) {
-      // It was a click, not a drag
-      openDetail(photo);
-    }
-    // Release the node to physics after a short delay
-    setTimeout(() => {
-      if (dragNode === n) { n.fixed = false; dragNode = null; SIM.heat(0.3); }
-    }, 80);
-    isDragging = false;
-  };
-
-  window.addEventListener('mousemove', onMove);
-  window.addEventListener('mouseup', onUp);
-}
-
-/* ═══════════════════════════════════════════════════════
-   DETAIL PANEL
-════════════════════════════════════════════════════════ */
-function openDetail(photo) {
-  const p = PROJ[photo.proj];
-  selectedId = photo.id;
-
-  document.querySelectorAll('.node').forEach(el => el.classList.remove('selected'));
-  nodeEls[photo.id]?.classList.add('selected');
-
-  document.getElementById('p-img').src = `https://picsum.photos/seed/${photo.seed}/800/600`;
-  document.getElementById('p-img').alt = photo.title;
-
-  const badge = document.getElementById('p-badge');
-  badge.style.color       = p.color;
-  badge.style.borderColor = p.color + '44';
-  badge.style.background  = `rgba(${p.rgb},.07)`;
-  document.getElementById('p-badge-txt').textContent = p.name;
-  document.getElementById('p-title').textContent     = photo.title;
-  document.getElementById('p-desc').textContent      = photo.desc;
-
-  document.getElementById('m-loc').textContent = photo.meta?.loc || '—';
-  document.getElementById('m-yr').textContent  = photo.meta?.yr  || '—';
-  document.getElementById('m-cam').textContent = photo.meta?.cam || '—';
-  document.getElementById('m-fmt').textContent = photo.meta?.fmt || '—';
-
-  document.getElementById('p-tags').innerHTML =
-    photo.tags.map(t =>
-      `<button class="tc${filterTag===t?' on':''}" data-tag="${t}"># ${t}</button>`
-    ).join('');
-  document.querySelectorAll('.tc').forEach(c =>
-    c.addEventListener('click', () => setTag(c.dataset.tag))
-  );
-
-  const rels = photo.rel.map(id => byId[id]).filter(Boolean);
-  const relSec = document.getElementById('rel-sec');
-  const relEl  = document.getElementById('p-related');
-  if (rels.length) {
-    relSec.style.display = '';
-    relEl.innerHTML = rels.map(r => `
-      <div class="rt" data-id="${r.id}" role="button" tabindex="0" title="${r.title}">
-        <img src="https://picsum.photos/seed/${r.seed}/240/180" alt="${r.title}" loading="lazy" width="240" height="180">
-        <div class="rt-lbl">${r.title}</div>
-      </div>`).join('');
-    relEl.querySelectorAll('.rt').forEach(t => {
-      const go = () => { const rp = byId[t.dataset.id]; panTo(rp, 520, () => openDetail(rp)); };
-      t.addEventListener('click', go);
-      t.addEventListener('keydown', e => { if(e.key==='Enter') go(); });
-    });
-  } else { relSec.style.display='none'; }
-
-  const panel = document.getElementById('panel');
-  panel.classList.add('open');
-  panel.setAttribute('aria-hidden','false');
-  document.getElementById('p-locate').onclick = () => panTo(photo, 500);
-}
-
-function closeDetail() {
-  selectedId = null;
-  document.getElementById('panel').classList.remove('open');
-  document.getElementById('panel').setAttribute('aria-hidden','true');
-  document.querySelectorAll('.node').forEach(el => el.classList.remove('selected'));
-}
-
-/* ═══════════════════════════════════════════════════════
-   PAN / ZOOM TRANSFORM
-════════════════════════════════════════════════════════ */
-function applyT() {
-  document.getElementById('canvas').style.transform =
-    `translate(${tx}px,${ty}px) scale(${sc})`;
-
-  // Infinite grid: update background offset + size on wrapper
-  const wrap = document.getElementById('wrap');
-  const g80  = 80 * sc, g16 = 16 * sc;
-  const ox80 = ((tx % g80)  + g80)  % g80;
-  const oy80 = ((ty % g80)  + g80)  % g80;
-  const ox16 = ((tx % g16)  + g16)  % g16;
-  const oy16 = ((ty % g16)  + g16)  % g16;
-  wrap.style.backgroundSize     = `${g80}px ${g80}px,${g80}px ${g80}px,${g16}px ${g16}px,${g16}px ${g16}px`;
-  wrap.style.backgroundPosition = `${ox80}px ${oy80}px,${ox80}px ${oy80}px,${ox16}px ${oy16}px,${ox16}px ${oy16}px`;
-
-  document.getElementById('zoom-pill').textContent = Math.round(sc*100) + '%';
-}
-
-function panTo(photo, dur, cb) {
-  const n   = nodes[photo.id];
-  const vw  = window.innerWidth, vh = window.innerHeight - 56;
-  const pw  = document.getElementById('panel').classList.contains('open') ? 400 : 0;
-  animPan((vw-pw)/2 - n.x*sc, vh/2 - n.y*sc, dur, cb);
-}
-
-function animPan(toX, toY, dur, cb) {
-  const fX = tx, fY = ty, t0 = performance.now();
-  const tick = now => {
-    const t = Math.min((now-t0)/dur, 1);
-    const e = t<.5 ? 2*t*t : -1+(4-2*t)*t;
-    tx = fX+(toX-fX)*e; ty = fY+(toY-fY)*e; applyT();
-    if (t<1) requestAnimationFrame(tick); else cb?.();
-  };
-  requestAnimationFrame(tick);
-}
-
-function zoomAround(factor, cx, cy) {
-  const ns = Math.min(Math.max(sc*factor, 0.18), 4);
-  tx = cx - (cx-tx)*(ns/sc); ty = cy - (cy-ty)*(ns/sc); sc = ns; applyT();
-}
-
-/* ═══════════════════════════════════════════════════════
-   CANVAS INTERACTION  (pan, zoom, background click)
-════════════════════════════════════════════════════════ */
-function initInteraction() {
-  const wrap = document.getElementById('wrap');
-
-  wrap.addEventListener('mousedown', e => {
-    if (e.target.closest('.node')) return;
-    panning  = true;
-    panStart = { x:e.clientX, y:e.clientY, ox:tx, oy:ty };
-    wrap.classList.add('grabbing');
-    document.getElementById('hint').classList.add('gone');
-  });
-  window.addEventListener('mousemove', e => {
-    if (!panning) return;
-    tx = panStart.ox + (e.clientX-panStart.x);
-    ty = panStart.oy + (e.clientY-panStart.y);
-    applyT();
-  });
-  window.addEventListener('mouseup', () => {
-    panning = false;
-    document.getElementById('wrap').classList.remove('grabbing');
-  });
-
-  wrap.addEventListener('wheel', e => {
-    e.preventDefault();
-    const dir = e.deltaY < 0 ? 1 : -1;
-    const r   = wrap.getBoundingClientRect();
-    zoomAround(1 + dir*0.09, e.clientX-r.left, e.clientY-r.top);
-  }, { passive:false });
-
-  // Touch pan
-  let lt = null;
-  wrap.addEventListener('touchstart', e => {
-    if (e.touches.length===1) lt = {x:e.touches[0].clientX, y:e.touches[0].clientY};
-  }, {passive:true});
-  wrap.addEventListener('touchmove', e => {
-    if (e.touches.length===1 && lt) {
-      tx += e.touches[0].clientX-lt.x; ty += e.touches[0].clientY-lt.y;
-      lt = {x:e.touches[0].clientX, y:e.touches[0].clientY}; applyT();
-    }
-  }, {passive:true});
-  wrap.addEventListener('touchend', () => lt=null);
-
-  // Click background → close
-  wrap.addEventListener('click', e => {
-    if (!e.target.closest('.node') && !isDragging) closeDetail();
-  });
-}
-
-/* ═══════════════════════════════════════════════════════
-   CONTROLS & KEYBOARD
-════════════════════════════════════════════════════════ */
-function initControls() {
-  document.getElementById('btn-zi').addEventListener('click', () => {
-    const cx=window.innerWidth/2, cy=(window.innerHeight-56)/2;
-    zoomAround(1.22, cx, cy);
-  });
-  document.getElementById('btn-zo').addEventListener('click', () => {
-    const cx=window.innerWidth/2, cy=(window.innerHeight-56)/2;
-    zoomAround(1/1.22, cx, cy);
-  });
-  document.getElementById('btn-r').addEventListener('click', resetView);
-  document.getElementById('btn-fit').addEventListener('click', fitAll);
-  document.getElementById('p-close').addEventListener('click', closeDetail);
-  document.getElementById('logo').addEventListener('click', resetView);
-  document.getElementById('logo').addEventListener('keydown', e => { if(e.key==='Enter') resetView(); });
-  document.getElementById('tag-x').addEventListener('click', clearTag);
-
-  // Keyboard shortcuts
-  document.addEventListener('keydown', e => {
-    if (e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT') return;
-    if (e.key==='Escape') {
-      closeDetail();
-      closeOverlay('about-ov');
-      closeOverlay('contact-ov');
-    }
-    if (e.key==='='||e.key==='+') { const cx=window.innerWidth/2, cy=(window.innerHeight-56)/2; zoomAround(1.18,cx,cy); }
-    if (e.key==='-') { const cx=window.innerWidth/2, cy=(window.innerHeight-56)/2; zoomAround(1/1.18,cx,cy); }
-    if (e.key==='f'||e.key==='F') fitAll();
-    if (e.key==='r'||e.key==='R') resetView();
-    const spd = 60/sc;
-    if (e.key==='ArrowLeft')  { tx+=spd; applyT(); }
-    if (e.key==='ArrowRight') { tx-=spd; applyT(); }
-    if (e.key==='ArrowUp')    { ty+=spd; applyT(); }
-    if (e.key==='ArrowDown')  { ty-=spd; applyT(); }
-  });
-}
-
-function resetView() {
-  const toX = window.innerWidth/2 - 5050*0.85;
-  const toY = (window.innerHeight-56)/2 - 5130*0.85;
-  const fSc=sc, fX=tx, fY=ty, dur=680, t0=performance.now();
-  const tick = now => {
-    const t=Math.min((now-t0)/dur,1), e=t<.5?2*t*t:-1+(4-2*t)*t;
-    sc=fSc+(0.85-fSc)*e; tx=fX+(toX-fX)*e; ty=fY+(toY-fY)*e; applyT();
-    if(t<1) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-}
-
-function fitAll() {
-  // Find bounding box of all visible nodes
-  const vis = PHOTOS.filter(p => nodeVisible(p));
-  if (!vis.length) return;
-  const xs = vis.map(p => nodes[p.id].x);
-  const ys = vis.map(p => nodes[p.id].y);
-  const minX=Math.min(...xs)-140, maxX=Math.max(...xs)+140;
-  const minY=Math.min(...ys)-120, maxY=Math.max(...ys)+120;
-  const pw = document.getElementById('panel').classList.contains('open') ? 400 : 0;
-  const vw=window.innerWidth-pw, vh=window.innerHeight-56;
-  const newSc = Math.min(0.95, Math.min(vw/(maxX-minX), vh/(maxY-minY)));
-  const cx=(minX+maxX)/2, cy=(minY+maxY)/2;
-  const toX=vw/2+pw/2-cx*newSc, toY=vh/2-cy*newSc;
-  const fSc=sc, fX=tx, fY=ty, dur=700, t0=performance.now();
-  const tick = now => {
-    const t=Math.min((now-t0)/dur,1), e=t<.5?2*t*t:-1+(4-2*t)*t;
-    sc=fSc+(newSc-fSc)*e; tx=fX+(toX-fX)*e; ty=fY+(toY-fY)*e; applyT();
-    if(t<1) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-}
-
-/* ═══════════════════════════════════════════════════════
-   OVERLAYS (About / Contact)
-════════════════════════════════════════════════════════ */
-function initOverlays() {
-  document.getElementById('btn-about').addEventListener('click',   () => openOverlay('about-ov'));
-  document.getElementById('btn-contact').addEventListener('click', () => openOverlay('contact-ov'));
-  document.getElementById('ab-close').addEventListener('click',    () => closeOverlay('about-ov'));
-  document.getElementById('ct-close').addEventListener('click',    () => closeOverlay('contact-ov'));
-}
-function openOverlay(id) {
-  document.getElementById(id).classList.add('open');
-  document.getElementById(id).setAttribute('aria-hidden','false');
-}
-function closeOverlay(id) {
-  document.getElementById(id).classList.remove('open');
-  document.getElementById(id).setAttribute('aria-hidden','true');
-}
-
-/* ═══════════════════════════════════════════════════════
-   STATUS BAR
-════════════════════════════════════════════════════════ */
-function updateStatus() {
-  const vis   = PHOTOS.filter(p => nodeVisible(p)).length;
-  const total = PHOTOS.length;
-  const sb = document.getElementById('status-bar');
-  if (filterTag) {
-    sb.textContent = `${vis} photo${vis!==1?'s':''} tagged "${filterTag}"`;
-  } else if (filterProj !== 'all') {
-    sb.textContent = `${vis} photo${vis!==1?'s':''} — ${PROJ[filterProj].name}`;
-  } else {
-    sb.textContent = `${total} photos across ${Object.keys(PROJ).length} projects`;
-  }
-}
 </script>
 </body>
 </html>
+ 
+
