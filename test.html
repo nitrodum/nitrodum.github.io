@@ -6,25 +6,85 @@
   <title>Derek Kwok</title>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      width: 100%; height: 100%;
-      background: #0e0e0e;
-      overflow: hidden;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
+    html, body { width: 100%; height: 100%; background: #0e0e0e; overflow: hidden; font-family: 'Helvetica Neue', Arial, sans-serif; }
     canvas { display: block; }
+
+    /* ── settings panel ── */
+    #gear {
+      position: fixed; bottom: 20px; right: 20px; z-index: 10;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.55); font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .18s, color .18s;
+    }
+    #gear:hover { background: rgba(255,255,255,.16); color: #fff; }
+
+    #panel {
+      position: fixed; bottom: 62px; right: 20px; z-index: 10;
+      width: 220px; background: rgba(18,18,18,.96);
+      border: 1px solid rgba(255,255,255,.1); border-radius: 8px;
+      padding: 16px; display: none; flex-direction: column; gap: 14px;
+      backdrop-filter: blur(12px);
+    }
+    #panel.open { display: flex; }
+
+    .row { display: flex; flex-direction: column; gap: 5px; }
+    .lbl {
+      display: flex; justify-content: space-between;
+      font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+    }
+    .lbl span { color: rgba(255,255,255,.7); font-variant-numeric: tabular-nums; }
+    input[type=range] {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 2px; border-radius: 1px; outline: none; cursor: pointer;
+      background: linear-gradient(to right, rgba(255,255,255,.7) var(--p,50%), rgba(255,255,255,.15) var(--p,50%));
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%;
+      background: #fff; cursor: pointer;
+    }
   </style>
 </head>
 <body>
 <canvas id="c"></canvas>
+
+<button id="gear" title="Settings">⚙</button>
+<div id="panel">
+  <div class="row">
+    <div class="lbl">Name size <span id="v-scale"></span></div>
+    <input type="range" id="s-scale" min="0.10" max="0.50" step="0.01">
+  </div>
+  <div class="row">
+    <div class="lbl">Force <span id="v-force"></span></div>
+    <input type="range" id="s-force" min="1" max="20" step="0.5">
+  </div>
+  <div class="row">
+    <div class="lbl">Radius <span id="v-radius"></span></div>
+    <input type="range" id="s-radius" min="40" max="260" step="5">
+  </div>
+  <div class="row">
+    <div class="lbl">Spring <span id="v-spring"></span></div>
+    <input type="range" id="s-spring" min="0.01" max="0.15" step="0.005">
+  </div>
+  <div class="row">
+    <div class="lbl">Damping <span id="v-damping"></span></div>
+    <input type="range" id="s-damping" min="0.50" max="0.97" step="0.01">
+  </div>
+</div>
+
 <script>
-/* ── constants ── */
-const NAME    = 'DEREK KWOK';
-const CELL    = 26;           // word grid cell size (px) — wider to prevent word collisions
-const FORCE   = 10;           // cursor repulsion strength
-const RADIUS  = 120;          // cursor influence radius (px)
-const SPRING  = 0.06;         // return spring strength
-const DAMPING = 0.78;         // velocity damping
+/* ── live config ── */
+const cfg = {
+  nameScale: 0.30,   // fraction of window width used for sampling font size
+  force:     10,
+  radius:    120,
+  spring:    0.06,
+  damping:   0.78,
+};
+
+const CELL = 26;
 
 const WORDS = [
   'light','shadow','frame','grain','moment','eye','lens','depth',
@@ -33,32 +93,29 @@ const WORDS = [
   'form','texture','layer','edge','silence','space','line','shape',
 ];
 
-/* ── canvas setup ── */
+/* ── canvas ── */
 const canvas = document.getElementById('c');
 const ctx    = canvas.getContext('2d');
-
 let W, H, cells = [], mouse = { x: -9999, y: -9999 };
 
-/* ── sample the name into a brightness map ── */
+/* ── build word grid from name brightness map ── */
 function buildGrid() {
-  // scale name font to ~55% of window width so it fills the screen on any display
-  const FONT_SIZE = Math.max(80, Math.round(W * 0.55));
-
-  const off  = document.createElement('canvas');
+  const fontSize = Math.max(60, Math.round(W * cfg.nameScale));
   const cols = Math.ceil(W / CELL);
   const rows = Math.ceil(H / CELL);
 
+  const off = document.createElement('canvas');
   off.width  = cols * CELL;
   off.height = rows * CELL;
-  const oc   = off.getContext('2d');
+  const oc = off.getContext('2d');
 
   oc.fillStyle = '#000';
   oc.fillRect(0, 0, off.width, off.height);
   oc.fillStyle    = '#fff';
-  oc.font         = `900 ${FONT_SIZE}px Impact, Arial Black, sans-serif`;
+  oc.font         = `900 ${fontSize}px Impact, Arial Black, sans-serif`;
   oc.textAlign    = 'center';
   oc.textBaseline = 'middle';
-  oc.fillText(NAME, off.width / 2, off.height / 2);
+  oc.fillText('DEREK KWOK', off.width / 2, off.height / 2);
 
   const px = oc.getImageData(0, 0, off.width, off.height).data;
 
@@ -70,14 +127,7 @@ function buildGrid() {
       const oy = row * CELL + CELL / 2;
       const i  = (Math.round(oy) * off.width + Math.round(ox)) * 4;
       const brightness = (px[i] + px[i+1] + px[i+2]) / 3 / 255;
-
-      cells.push({
-        ox, oy,           // origin
-        x:  ox, y:  oy,  // current
-        vx: 0,  vy: 0,
-        brightness,
-        word: WORDS[wi++ % WORDS.length],
-      });
+      cells.push({ ox, oy, x: ox, y: oy, vx: 0, vy: 0, brightness, word: WORDS[wi++ % WORDS.length] });
     }
   }
 }
@@ -90,96 +140,92 @@ function resize() {
   canvas.height = Math.round(H * dpr);
   canvas.style.width  = W + 'px';
   canvas.style.height = H + 'px';
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);  // all coords stay in CSS px
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   buildGrid();
 }
 
-/* ── physics tick ── */
+/* ── physics ── */
 function tick() {
   for (const c of cells) {
     const dx = mouse.x - c.x;
     const dy = mouse.y - c.y;
     const d2 = dx * dx + dy * dy;
 
-    if (d2 < RADIUS * RADIUS && d2 > 0) {
+    if (d2 < cfg.radius * cfg.radius && d2 > 0) {
       const d    = Math.sqrt(d2);
-      const t    = 1 - d / RADIUS;          // 0..1, quadratic falloff
-      const push = FORCE * t * t / d;
+      const t    = 1 - d / cfg.radius;
+      const push = cfg.force * t * t / d;
       c.vx -= dx * push;
       c.vy -= dy * push;
     }
 
-    // spring back to origin
-    c.vx += (c.ox - c.x) * SPRING;
-    c.vy += (c.oy - c.y) * SPRING;
-
-    // damping
-    c.vx *= DAMPING;
-    c.vy *= DAMPING;
-
-    c.x += c.vx;
-    c.y += c.vy;
+    c.vx += (c.ox - c.x) * cfg.spring;
+    c.vy += (c.oy - c.y) * cfg.spring;
+    c.vx *= cfg.damping;
+    c.vy *= cfg.damping;
+    c.x  += c.vx;
+    c.y  += c.vy;
   }
 }
 
 /* ── render ── */
 function draw() {
   ctx.clearRect(0, 0, W, H);
+  const dim = [], bright = [];
+  for (const c of cells) (c.brightness > 0.3 ? bright : dim).push(c);
 
-  // two passes: dim background words, then bright name words
-  const dim    = [];
-  const bright = [];
-  for (const c of cells) {
-    (c.brightness > 0.3 ? bright : dim).push(c);
-  }
-
-  ctx.font         = `500 11px 'Helvetica Neue', Arial, sans-serif`;
+  ctx.font = `500 11px 'Helvetica Neue', Arial, sans-serif`;
   ctx.textAlign    = 'center';
   ctx.textBaseline = 'middle';
 
   ctx.globalAlpha = 0.048;
-  ctx.fillStyle   = '#ffffff';
-  for (const c of dim)    ctx.fillText(c.word, c.x, c.y);
+  ctx.fillStyle   = '#fff';
+  for (const c of dim) ctx.fillText(c.word, c.x, c.y);
 
-  ctx.globalAlpha = 1;
   for (const c of bright) {
-    const alpha = 0.55 + c.brightness * 0.45;
-    ctx.globalAlpha = alpha;
-    ctx.fillStyle   = '#ffffff';
+    ctx.globalAlpha = 0.55 + c.brightness * 0.45;
     ctx.fillText(c.word, c.x, c.y);
   }
-
   ctx.globalAlpha = 1;
 }
 
-/* ── loop ── */
-function loop() {
-  tick();
-  draw();
-  requestAnimationFrame(loop);
+function loop() { tick(); draw(); requestAnimationFrame(loop); }
+
+/* ── settings panel ── */
+function bind(sliderId, valId, cfgKey, fmt, rebuild) {
+  const sl  = document.getElementById(sliderId);
+  const val = document.getElementById(valId);
+  sl.value = cfg[cfgKey];
+  const pct = () => ((sl.value - sl.min) / (sl.max - sl.min) * 100).toFixed(1) + '%';
+  const update = () => {
+    cfg[cfgKey] = parseFloat(sl.value);
+    val.textContent = fmt(cfg[cfgKey]);
+    sl.style.setProperty('--p', pct());
+    if (rebuild) buildGrid();
+  };
+  sl.addEventListener('input', update);
+  update();
 }
+
+bind('s-scale',  'v-scale',  'nameScale', v => (v * 100).toFixed(0) + '%', true);
+bind('s-force',  'v-force',  'force',     v => v.toFixed(1),                false);
+bind('s-radius', 'v-radius', 'radius',    v => v.toFixed(0) + 'px',         false);
+bind('s-spring', 'v-spring', 'spring',    v => v.toFixed(3),                false);
+bind('s-damping','v-damping','damping',   v => v.toFixed(2),                false);
+
+document.getElementById('gear').addEventListener('click', () => {
+  document.getElementById('panel').classList.toggle('open');
+});
 
 /* ── events ── */
 window.addEventListener('resize', resize);
-
-canvas.addEventListener('mousemove', e => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-canvas.addEventListener('mouseleave', () => {
-  mouse.x = -9999;
-  mouse.y = -9999;
-});
-
+canvas.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
 canvas.addEventListener('touchmove', e => {
   e.preventDefault();
-  mouse.x = e.touches[0].clientX;
-  mouse.y = e.touches[0].clientY;
+  mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY;
 }, { passive: false });
-canvas.addEventListener('touchend', () => {
-  mouse.x = -9999;
-  mouse.y = -9999;
-});
+canvas.addEventListener('touchend', () => { mouse.x = -9999; mouse.y = -9999; });
 
 /* ── init ── */
 resize();
