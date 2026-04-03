@@ -1,464 +1,3 @@
-You are helping me plan and build a portfolio website for a photographer.
-
-Goal:
-Create a clean, elegant, minimalist photography portfolio website that feels premium, loads fast, and showcases a curated body of work.
-
-Constraints:
-- The site must be free to build and free to host.
-- It should work well as a static site.
-- Avoid expensive tools, paid plugins, or complex backend dependencies.
-- The design should prioritize images, whitespace, and simplicity.
-- The portfolio should feel professional, modern, and easy to navigate.
-
-Audience:
-- Potential clients looking for a photographer.
-- People viewing the photographer’s best work.
-- The photographer wants to look polished, credible, and memorable.
-
-Primary pages:
-- Home
-- Portfolio / Galleries
-- About
-- Services or Pricing
-- Contact
-- Optional: Testimonials, FAQ, Blog, or Booking
-
-Design direction:
-- Minimalist, gallery-first layout.
-- Large imagery, clean typography, subtle transitions.
-- Mobile-first responsive design.
-- Easy navigation with clear calls to action.
-- No clutter, no heavy animations, no distracting elements.
-
-Content strategy:
-- Curate 20–30 of the strongest images total.
-- Group work into a few meaningful categories.
-- Keep text short and confident.
-- Include a short bio, specialties, location, services, and contact info.
-- Make the homepage instantly communicate style and niche.
-
-Technical direction:
-- Prefer a static site architecture.
-- Optimize images for web performance.
-- Use lazy loading where appropriate.
-- Ensure SEO basics: page titles, meta descriptions, alt text, and structured headings.
-- Include accessibility best practices.
-
-Deliverables I want from you:
-1. A recommended site structure / sitemap.
-2. A content outline for each page.
-3. A visual style guide with fonts, colors, spacing, and mood.
-4. Suggested free hosting options and the best choice for this project.
-5. A recommended tech stack for a static portfolio.
-6. A step-by-step build plan.
-7. A list of pitfalls to avoid for a photography portfolio.
-8. If helpful, ask me any clarifying questions before finalizing.
-
-Important:
-Before giving code, first give me a detailed plan and recommended structure.
-
-
-After that walk me through how i could host this on github for free.
-
-Mar 30
-Architected comprehensive portfolio strategy and GitHub hosting walkthrough
-Photography Portfolio — Complete Build Plan
-
-Here's everything you need before writing a single line of code.
-1. Sitemap & Site Structure
-
-/                    → Home
-/portfolio           → Portfolio (gallery overview)
-  /portfolio/weddings
-  /portfolio/portraits
-  /portfolio/landscapes
-/about               → About
-/services            → Services & Pricing
-/contact             → Contact
-/testimonials        → (Optional)
-
-Keep it flat. Deep nesting kills portfolio sites.
-2. Content Outline Per Page
-
-Home
-
-    Full-bleed hero image (your single best shot) + one-line tagline
-    3–4 image teasers linking to gallery categories
-    1–2 sentence mission statement
-    CTA: "View My Work" → Portfolio
-
-Portfolio
-
-    Category cards (3–5 max) with a cover image each
-    On click → masonry or grid gallery for that category
-    6–10 images per category, curated ruthlessly
-
-About
-
-    Professional headshot
-    2–3 short paragraphs: who you are, your style, your story
-    Location + availability
-    CTA: "Work With Me" → Contact
-
-Services / Pricing
-
-    3–4 service tiers in a clean card layout
-    What's included per tier
-    Starting-from pricing (or "inquire" if you prefer)
-    FAQ accordion (3–6 common questions)
-    CTA: "Get in Touch"
-
-Contact
-
-    Simple form: Name, Email, Event type, Date, Message
-    Location/timezone info
-    Response time expectation ("I reply within 24 hours")
-    Optional: Social links
-
-3. Visual Style Guide
-
-Typography
-Role	Font	Source
-Headings	Cormorant Garamond (serif, elegant)	Google Fonts
-Body	Inter or DM Sans (clean, readable)	Google Fonts
-Accent/Label	Jost (spaced uppercase)	Google Fonts
-
-Use 2 fonts max. Never 3.
-
-Color Palette
-Name	Hex	Use
-Off-white	#F9F7F4
-	Page background
-Near-black	#1A1A1A
-	Body text
-Warm gray	#8A8A8A
-	Captions, labels
-Accent	#C9A96E
-	CTAs, links, hover states
-Pure white	#FFFFFF
-	Cards, nav background
-
-Spacing System — use multiples of 8px: 8 / 16 / 24 / 32 / 48 / 64 / 96px
-
-Mood
-
-    Lots of whitespace — images breathe
-    No gradients, no drop shadows
-    Thin borders (1px solid #eee) over box shadows
-    Subtle fade-in transitions (opacity 0.4s ease) only
-
-4. Free Hosting Options
-Option	Pros	Cons
-GitHub Pages ✅	Free, reliable, custom domain, SSL	No server-side code
-Netlify	Free tier, form handling built-in	Bandwidth limits
-Vercel	Fast CDN, easy deploys	Geared toward frameworks
-Cloudflare Pages	Fastest CDN globally, generous free tier	Slightly more setup
-
-Best choice: GitHub Pages + Netlify Forms combo. Host on GitHub Pages for simplicity and version control. Use Netlify's free form endpoint to handle the contact form without any backend.
-5. Recommended Tech Stack
-
-Keep it dead simple:
-
-HTML5                → Structure
-CSS3 (custom)        → All styling — no Bootstrap, no Tailwind
-Vanilla JavaScript   → Lightbox, lazy loading, mobile nav
-No build tools       → Just files in a folder
-
-Optional light additions:
-
-    GLightbox — free, zero-dependency image lightbox
-    Masonry.js — natural grid layouts for galleries (4KB)
-
-Do NOT use:
-
-    WordPress (overkill, slow)
-    React/Next.js (unnecessary complexity for static content)
-    jQuery (dead weight in 2026)
-
-6. Step-by-Step Build Plan
-
-Phase 1 — Foundation (Day 1)
-
-    Create folder structure: /css, /js, /images, /pages
-    Build index.html with semantic HTML (<header>, <main>, <footer>, <nav>)
-    Write style.css with CSS variables for your color/font system
-    Build the nav — hamburger menu for mobile
-
-Phase 2 — Core Pages (Days 2–3) 5. Build Home: hero image, category teasers, CTA 6. Build Portfolio: category index page + 3 gallery pages 7. Add lazy loading: loading="lazy" on all <img> tags 8. Add GLightbox to gallery pages
-
-Phase 3 — Supporting Pages (Day 4) 9. Build About page 10. Build Services/Pricing page 11. Build Contact page with Netlify Forms (<form netlify>)
-
-Phase 4 — Polish & Performance (Day 5) 12. Compress all images: use Squoosh → WebP format, aim under 200KB each 13. Add <meta> descriptions and <title> tags to every page 14. Add alt text to every image 15. Test on mobile (Chrome DevTools) 16. Run PageSpeed Insights — target 90+ score
-
-Phase 5 — Launch (Day 6) 17. Push to GitHub 18. Enable GitHub Pages 19. (Optional) Connect custom domain
-7. Pitfalls to Avoid
-
-Performance killers
-
-    Uploading raw camera files (5–20MB each) directly — always compress first
-    Not using WebP format — it's 30–50% smaller than JPG with same quality
-    Too many fonts loaded from Google Fonts
-
-Design mistakes
-
-    Putting the bio on the homepage — keep home about the work
-    Using a dark background unless your work specifically calls for it
-    Overloading galleries — 8 perfect images beat 40 mediocre ones
-    Tiny CTA buttons — they need to be obvious on mobile
-
-SEO/Accessibility gaps
-
-    Missing alt text on images (also hurts SEO)
-    No lang="en" on the <html> tag
-    Low color contrast on text
-    Images with no width/height attributes (causes layout shift)
-
-Business mistakes
-
-    No clear way to contact you above the fold
-    Hiding your location — clients want local photographers
-    No pricing signal at all — "inquire for rates" with zero context loses clients
-
-8. Clarifying Questions
-
-Before you start, I'd love to know:
-
-    Photography niche — weddings, portraits, nature, commercial, street? This shapes everything from category names to color palette to tone of copy.
-    Do you have images ready, or do we need to plan around placeholder images for now?
-    Custom domain? (e.g. janedoephoto.com) — or are you fine with username.github.io for now?
-    Contact form — do you want a simple email link, or a full form with fields?
-
-Hosting on GitHub Pages — Step by Step
-
-Here's the complete walkthrough:
-
-Step 1 — Create a GitHub account Go to github.com and sign up if you don't have one. Free accounts get unlimited public repos with Pages hosting.
-
-Step 2 — Create a new repository
-
-    Click New repository
-    Name it exactly: username.github.io (replace username with your GitHub username)
-    Set it to Public
-    Check "Add a README" — click Create repository
-
-This special name tells GitHub to treat it as your Pages site automatically.
-
-Step 3 — Upload your files Two ways to do this:
-
-Option A — Browser upload (easiest to start):
-
-    Go to your repo → click Add file → Upload files
-    Drag your index.html, /css, /js, /images folders in
-    Commit directly to main
-
-Option B — Git (recommended, lets you update easily):
-bash
-
-git clone https://github.com/username/username.github.io
-# Copy your files into that folder
-git add .
-git commit -m "Initial portfolio launch"
-git push origin main
-
-Step 4 — Enable GitHub Pages
-
-    Go to your repo → Settings → Pages
-    Under "Source," select Deploy from a branch
-    Branch: main / Folder: / (root)
-    Click Save
-
-GitHub will give you a green banner with your live URL: https://username.github.io
-
-It takes 1–2 minutes to go live the first time. Every future push auto-deploys in under 60 seconds.
-
-Step 5 — Connect a custom domain (optional but recommended)
-
-    Buy a domain at Namecheap (~$10/year for .com)
-    In your repo's Settings → Pages → Custom domain, enter www.yourdomain.com
-    At your registrar's DNS settings, add:
-        4 A records pointing to GitHub's IPs: 185.199.108.153, .109.153, .110.153, .111.153
-        1 CNAME record: www → username.github.io
-    Check "Enforce HTTPS" — GitHub provides a free SSL certificate automatically
-
-Step 6 — Handle the contact form GitHub Pages is static — no PHP, no server. The cleanest free workaround:
-
-    Sign up at Netlify (free)
-    Add netlify attribute to your form: <form name="contact" netlify>
-    Submissions go to your Netlify dashboard and can be emailed to you
-    You keep your GitHub Pages host — just point your form action to Netlify's endpoint
-
-Ready to build? Share your niche and I'll generate the full HTML/CSS starter files tailored to your specific style — complete with the color palette, fonts, and layout structure above.
-
-Just put placeholders for now I'll add more detail later after I see the first draft. Make sure it's professional as posible. Also maybe a little edgy.
-Mar 30
-Architected dark, editorial photography portfolio with asymmetric layouts
-
-Here's your first draft. What's in it:
-
-Design choices made for "professional + edgy":
-
-    Dark theme (#0A0A0A) — photography looks better on dark, and it reads as confident rather than decorative
-    Bodoni Moda for headlines — high-contrast, fashion-editorial, a little severe in the best way
-    Syne for body — geometric, slightly unconventional, not overused
-    Red accent (#E8383D) — not apologetic gold or safe blue; it punctuates without screaming
-    Film grain texture baked in via SVG — adds tactility
-    Custom red cursor dot with a lagging ring — immediately signals this isn't a template
-    Asymmetric 12-column portfolio grid — breaks the expected even-grid monotony
-
-What's fully built:
-
-    Sticky nav with scroll-blur + mobile hamburger overlay
-    Full-viewport hero with gradient overlay and scroll indicator
-    7-image asymmetric portfolio grid with hover reveal
-    About section with offset-border image frame + stats
-    3-tier services/pricing in a ruled grid
-    Testimonials with quote styling
-    Contact section with sticky left column + Netlify-ready form
-    Footer
-
-To customize it, just swap:
-
-    JANE DOE → your name everywhere
-    Placeholder bio text in the About section
-    $000 pricing with real numbers
-    picsum.photos image URLs with your actual photos
-    hello@yourdomain.com and @yourhandle with real contact info
-
-What would you like to adjust first — the color palette, layout, typography, or content?
-Index
-Code · HTML 
-
-lets keep working on it:
-Mar 30
-Inventoried completed features and identified enhancement opportunities
-
-Nice brief — a lot of what it describes is already in the current build. Let me check what's done vs. what's still open, then we can prioritize.
-
-What's already live:
-
-    Graph paper canvas with pan + zoom
-    Photo nodes clustered by project with ellipse rings
-    Bezier connection lines (within + cross-project)
-    Click-to-expand detail panel with tags, description, related photos
-    Project filter pills
-    Hover lift, selected glow, Locate button
-    Mobile responsive
-
-What's still on the table from your brief:
-
-What would you like to tackle next?
-
-Pick whichever combination feels right and I'll get to work on it.
-
-Q: What should we work on next? (Select all that apply)
-A: Improve cluster/connection visuals — more organic, animated, Add About + Contact sections (outside the canvas), Tag filtering — click a tag to filter matching photos, I see some issues
-
-Q: Anything about the current canvas that feels wrong? (Select all that apply)
-A: Detail panel needs more info, Connection lines too subtle or too visible
-Mar 30
-Catalogued feature requests and identified clarification needs
-
-Before I dive in, two quick things I need to know:
-
-Q: Connection lines — which way is the problem?
-A: Too subtle — I can barely see them
-
-Q: What issues are you seeing? (describe below if none of these fit)
-A: Nodes overlap or feel cramped
-Mar 30
-Repositioning nodes to eliminate overlapping clusters
-Claude's response was interrupted
-
-actually you can keep them close together like it, just remove the light circle behind the projects, i think just having the pictures together shows that its a project.
-Mar 30
-Reconsidered design approach, pivoting toward visual simplicity
-
-Good. I have everything I need. Rebuilding now with all four improvements at once — removing the rings, stronger connections, tag filtering, and About + Contact overlays.
-Ran a command, created a file, read a file
-
-Here's what changed in this version:
-
-Cluster rings removed — the photos group visually on their own now, with just a subtle floating project label above each cluster so you still get orientation without the visual weight.
-
-Connection lines — much stronger — same-project lines are now at 38% opacity (was 22%), cross-project lines at 28%. When you select a photo, its connections animate with a flowing dashed stroke in the project's color, so the relationships feel alive rather than decorative.
-
-Tag filtering — click any tag chip in the detail panel and the canvas filters to only photos with that tag. A dismissible badge appears in the nav bar showing the active tag. Click the same tag again (or the ✕) to clear it. Tag filters stack with project filters.
-
-Detail panel — more info — each photo now has a 4-cell metadata grid showing Location, Year, Camera, and Format (all placeholder values you can replace). The tags section also has a hint that they're clickable.
-
-About + Contact — two full-screen overlays accessible from the nav. About has your portrait, bio, stats, and availability status. Contact has sticky details on the left and a Netlify-ready form on the right. Both close with the button or Escape key.
-Index
-Code · HTML 
-
-i don't think we need the animated lines, also i don't want the details under the photos when they arent clicked. Another thing is that I notice we can see behind the screen when we move it. It should look like an infinite scroll. I also would like to maybe make the pictures moveable but the connections will act like gravity. Do you know what the obsidian graph view looks like i want it to replicate that. Do you understand what I mean. Also add any features you think will enhance it. Also change the name to Derek Kwok. Keep working untill you have a good working website that you believe i would be able to put to production now.
-12:52 PM
-Synthesized comprehensive feature requirements and production-ready implementation strategy
-
-This is the production build. Here's everything that changed and what's now in it:
-
-Core Obsidian-graph behavior:
-
-    Live physics simulation — nodes repel each other, connections act as springs. Drop a node and the connected ones pull toward it. The graph breathes subtly even when idle.
-    Draggable nodes — grab any photo and drag it. Connected photos follow due to spring tension. Release and physics takes over again.
-    Node size scales with connections — photos with more links are slightly larger, exactly like Obsidian. Fine Art and Portraiture nodes are biggest.
-    Truly infinite canvas — the grid background is now on the fixed viewport layer with its position and scale updated every frame. You'll never see an edge.
-
-Visual changes:
-
-    No text on nodes — just the photo. Clean, graph-style.
-    Tooltip on hover — title + project dot appears near your cursor, disappears on move away.
-    Connection lines stronger — idle lines at 42% opacity, lit connections (on hover or select) jump to 72% in the project's color. No animation, just weight.
-
-New features added:
-
-    FIT button — zooms to frame all visible nodes perfectly (also bound to F)
-    Status bar (bottom left) — shows "20 photos across 5 projects" or "8 photos tagged 'editorial'" when filtering
-    Keyboard shortcuts: +/- zoom, R reset, F fit, Esc close everything, arrow keys pan
-    Richer detail panel — metadata grid (Location, Year, Camera, Format)
-    About + Contact overlays — full screen, slide-in, Netlify form ready
-    Name updated to Derek Kwok throughout
-
-To go live: swap picsum.photos URLs with your actual image paths, fill in the About bio and contact details, deploy to Netlify (the form works automatically on Netlify hosting), done.
-Index
-Code · HTML 
-
-I like the directions that we are headed. Some things to point out, the physics as they are currently is very jumpy. I think this might be due to the photos being too close to each other? Maybe create a slider for the physics, like pull, push, etc as sliders with text so i can also just input. Have it be acceiable with a button on the side that would open the editor. I want to do it this way so that I can eaisly test the physics that would work well. instead of having you guess a lot. Another thing, I want the pictures that are related to naturally group (projects most tightly grouped) would this slider accomplish that or shoudl we start thinking of somthing else. Also i want your opinion. Should i try to get this version at a good point first then add more features or add features now and get it all working at the same time.
-5:17 PM
-Architected physics panel with tunable sliders and prioritized foundation stability
-
-Great questions. My opinion first, then I'll build.
-
-Build strategy: get this version solid first. The physics is the literal foundation — if nodes jump around and cluster wrong, every feature you add on top will feel broken. Nail the feel, then add features. You'll also understand the system better by the time you're adding complexity.
-
-On clustering: The sliders will help tune it, but for tight project grouping you need an additional force — a "cluster gravity" that pulls each node toward its project's center point. Links alone aren't enough because cross-project links fight the grouping. I'm adding both: cluster gravity as a slider, plus collision detection so nodes never overlap (that's the main cause of jumpiness).
-
-Building now — physics panel, better defaults, cluster force, collision, all of it.
-Ran a command, created a file, read a file
-
-Here's what's new and what changed:
-
-Physics fixes (the core jumpiness problem):
-
-    Each project now has a dedicated cluster centre on the canvas — nodes start near their project's home and the cluster gravity pulls them back. Same-project nodes naturally huddle together without relying only on links.
-    Collision detection now properly prevents overlap by calculating each node's actual radius. That was the main cause of the jittery bouncing — nodes were fighting each other from inside.
-    Velocity decay raised to 0.82 (was 0.72) — much more damping, much less bounce.
-    Nodes start spread around their cluster, not piled in the same spot, so the initial burst of energy is gone.
-
-Physics panel (the ⊕ button on the right edge, vertically centred):
-
-    Opens as a slide-in panel with 8 labelled sliders, each with a number input you can type into directly
-    Plain English descriptions under each slider explaining what it actually does
-    5 presets: Balanced, Tight clusters, Loose/airy, Orbital, Frozen — good starting points for testing
-    Reheat button kicks the simulation back to life if it's settled
-    Changes apply live while you drag sliders
-
-Recommended starting point for you to try: Open the physics panel and click Tight clusters — it should give you the Obsidian-style tight grouping you're after. Then drag the Cluster gravity slider up or down until the spacing feels right.
-Index
-Code · HTML 
-
-
-Claude is AI and can make mistakes. Please double-check responses.
-Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -478,7 +17,7 @@ Index · HTML
       --nav:  56px;
     }
     html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; }
- 
+
     /* ─── CANVAS ─── */
     #wrap {
       position:fixed; top:var(--nav); left:0; right:0; bottom:0;
@@ -494,7 +33,7 @@ Index · HTML
     #wrap.grabbing { cursor:grabbing; }
     #canvas { position:absolute; top:0; left:0; width:10000px; height:10000px; transform-origin:0 0; will-change:transform; }
     #svg    { position:absolute; top:0; left:0; width:10000px; height:10000px; pointer-events:none; overflow:visible; }
- 
+
     /* ─── NODES ─── */
     .node {
       position:absolute; overflow:hidden; cursor:pointer;
@@ -514,9 +53,17 @@ Index · HTML
     }
     .node.dimmed { opacity:.1!important; pointer-events:none!important; }
     .node.dragging { cursor:grabbing; z-index:30!important; transition:none; }
+    /* On selection: unrelated nodes fade back, tag-siblings glow subtly */
+    .node.sel-dim  { opacity:.22; transition:opacity .35s ease; }
+    .node.tag-sib  { opacity:1; z-index:12!important; }
+    .node.tag-sib::after {
+      content:''; position:absolute; inset:-3px; border-radius:4px;
+      border:1.5px dashed var(--c,#888);
+      opacity:.55; pointer-events:none;
+    }
     .node-img { width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; user-select:none; transition:transform .4s ease; }
     .node:hover .node-img { transform:scale(1.07); }
- 
+
     /* ─── NAV ─── */
     #nav {
       position:fixed; top:0; left:0; right:0; z-index:400;
@@ -550,7 +97,7 @@ Index · HTML
     .pg-btn:hover { background:var(--text); color:#fff; border-color:var(--text); }
     .icon-btn { width:25px; height:25px; border-radius:4px; border:1px solid rgba(0,0,0,.11); background:#fff; color:var(--text); font-size:13px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .18s; flex-shrink:0; }
     .icon-btn:hover { background:var(--text); color:#fff; border-color:var(--text); }
- 
+
     /* ─── PHYSICS PANEL BUTTON (side) ─── */
     #phys-toggle {
       position:fixed; right:0; top:50%; z-index:450;
@@ -567,7 +114,7 @@ Index · HTML
     #phys-toggle:hover { background:var(--text); color:#fff; }
     #phys-toggle svg { display:block; }
     #phys-toggle.panel-open { right:360px; }
- 
+
     /* ─── PHYSICS PANEL ─── */
     #phys-panel {
       position:fixed; top:var(--nav); right:0; bottom:0; width:360px; z-index:440;
@@ -581,23 +128,23 @@ Index · HTML
     #phys-panel.open { transform:translateX(0); box-shadow:-10px 0 44px rgba(0,0,0,.07); }
     #phys-panel::-webkit-scrollbar { width:3px; }
     #phys-panel::-webkit-scrollbar-thumb { background:rgba(0,0,0,.08); border-radius:2px; }
- 
+
     #phys-inner { padding:22px 22px 40px; }
     .pp-head { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; margin-bottom:4px; }
     .pp-sub  { font-size:10px; color:var(--dim); line-height:1.6; margin-bottom:22px; }
- 
+
     .pp-section { margin-bottom:24px; }
     .pp-section-title {
       font-size:8.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
       color:var(--dim); margin-bottom:14px;
       padding-bottom:8px; border-bottom:1px solid rgba(0,0,0,.07);
     }
- 
+
     .pp-row { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
     .pp-label-row { display:flex; align-items:baseline; justify-content:space-between; }
     .pp-label { font-size:11.5px; font-weight:500; color:var(--text); }
     .pp-desc  { font-size:10px; color:var(--dim); margin-top:2px; line-height:1.5; }
- 
+
     .pp-controls { display:flex; align-items:center; gap:8px; }
     .pp-slider {
       flex:1; -webkit-appearance:none; appearance:none;
@@ -621,7 +168,7 @@ Index · HTML
       transition:border-color .18s;
     }
     .pp-num:focus { border-color:var(--text); }
- 
+
     .pp-btn {
       width:100%; height:32px; border-radius:3px; border:1px solid rgba(0,0,0,.12);
       font-family:'DM Sans',sans-serif; font-size:10.5px; font-weight:500;
@@ -631,7 +178,7 @@ Index · HTML
     .pp-btn-primary:hover { background:#333; }
     .pp-btn-ghost { background:#fff; color:var(--text); }
     .pp-btn-ghost:hover { background:rgba(0,0,0,.04); }
- 
+
     /* preset chips */
     .pp-presets { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:18px; }
     .pp-preset {
@@ -641,7 +188,7 @@ Index · HTML
     }
     .pp-preset:hover { border-color:rgba(0,0,0,.28); color:var(--text); }
     .pp-preset.active { background:var(--text); color:#fff; border-color:var(--text); }
- 
+
     /* ─── TOOLTIP ─── */
     #tt {
       position:fixed; z-index:500; pointer-events:none;
@@ -654,7 +201,7 @@ Index · HTML
     #tt-title { font-family:'Cormorant Garamond',serif; font-size:13px; font-weight:500; }
     #tt-proj  { display:flex; align-items:center; gap:5px; font-size:9.5px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--dim); margin-top:3px; }
     #tt-dot   { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
- 
+
     /* ─── DETAIL PANEL ─── */
     #panel {
       position:fixed; top:var(--nav); right:0; bottom:0; width:390px; z-index:300;
@@ -696,7 +243,7 @@ Index · HTML
     .rt:hover img { transform:scale(1.1); opacity:.75; }
     .rt-lbl { position:absolute; bottom:0; left:0; right:0; padding:5px 6px 4px; background:linear-gradient(to top,rgba(0,0,0,.6),transparent); font-family:'Cormorant Garamond',serif; font-size:10px; color:#fff; opacity:0; transition:opacity .2s; }
     .rt:hover .rt-lbl { opacity:1; }
- 
+
     /* ─── OVERLAYS ─── */
     .overlay { position:fixed; inset:var(--nav) 0 0; background:rgba(248,247,245,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); z-index:350; overflow-y:auto; opacity:0; pointer-events:none; transition:opacity .4s ease; }
     .overlay.open { opacity:1; pointer-events:all; }
@@ -743,18 +290,18 @@ Index · HTML
     .cf-sub:hover { background:#333; }
     .cf-sub svg { transition:transform .2s; }
     .cf-sub:hover svg { transform:translateX(4px); }
- 
+
     /* ─── HUD ─── */
     #hint { position:fixed; bottom:22px; left:50%; transform:translateX(-50%); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); background:rgba(255,255,255,.92); backdrop-filter:blur(8px); padding:7px 18px; border-radius:100px; border:1px solid rgba(0,0,0,.08); pointer-events:none; z-index:100; transition:opacity 1.4s; }
     #hint.gone { opacity:0; }
     #zoom-pill { position:fixed; bottom:22px; right:22px; font-size:10px; color:var(--dim); background:rgba(255,255,255,.92); backdrop-filter:blur(8px); padding:5px 11px; border-radius:4px; border:1px solid rgba(0,0,0,.08); z-index:100; user-select:none; }
     #status-bar { position:fixed; bottom:22px; left:22px; font-size:10px; color:var(--dim); background:rgba(255,255,255,.92); backdrop-filter:blur(8px); padding:5px 11px; border-radius:4px; border:1px solid rgba(0,0,0,.08); z-index:100; user-select:none; }
- 
+
     @media(max-width:800px){ #panel{width:100%;} #filters{display:none;} #ab-inner,#ct-inner{grid-template-columns:1fr;gap:48px;padding:40px 24px;} .ct-left{position:static;} #phys-panel{width:100%;} }
   </style>
 </head>
 <body>
- 
+
 <!-- ══ NAV ══ -->
 <nav id="nav">
   <div id="logo" role="button" tabindex="0">Derek <em>Kwok</em></div>
@@ -777,14 +324,14 @@ Index · HTML
     <button class="icon-btn" id="btn-r"  title="Reset (R)" style="font-size:10px">↺</button>
   </div>
 </nav>
- 
+
 <!-- ══ CANVAS ══ -->
 <div id="wrap">
   <div id="canvas">
     <svg id="svg" aria-hidden="true"></svg>
   </div>
 </div>
- 
+
 <!-- ══ PHYSICS PANEL TOGGLE ══ -->
 <button id="phys-toggle" title="Physics editor" aria-label="Open physics editor" aria-expanded="false">
   <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
@@ -799,13 +346,13 @@ Index · HTML
     <line x1="1.8" y1="11.2" x2="3.2" y2="9.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
   </svg>
 </button>
- 
+
 <!-- ══ PHYSICS PANEL ══ -->
 <div id="phys-panel" aria-label="Physics editor" aria-hidden="true">
   <div id="phys-inner">
     <p class="pp-head">Physics</p>
     <p class="pp-sub">Tune the forces that shape the graph. Changes apply live. Drag any photo to feel the pull.</p>
- 
+
     <!-- Presets -->
     <div class="pp-section">
       <p class="pp-section-title">Presets</p>
@@ -817,7 +364,7 @@ Index · HTML
         <button class="pp-preset" data-preset="frozen">Frozen</button>
       </div>
     </div>
- 
+
     <!-- Repulsion -->
     <div class="pp-section">
       <p class="pp-section-title">Repulsion</p>
@@ -830,7 +377,7 @@ Index · HTML
         </div>
       </div>
     </div>
- 
+
     <!-- Links -->
     <div class="pp-section">
       <p class="pp-section-title">Links (Spring connections)</p>
@@ -851,7 +398,7 @@ Index · HTML
         </div>
       </div>
     </div>
- 
+
     <!-- Clustering -->
     <div class="pp-section">
       <p class="pp-section-title">Project clustering</p>
@@ -872,7 +419,7 @@ Index · HTML
         </div>
       </div>
     </div>
- 
+
     <!-- Damping -->
     <div class="pp-section">
       <p class="pp-section-title">Damping &amp; stability</p>
@@ -901,7 +448,7 @@ Index · HTML
         </div>
       </div>
     </div>
- 
+
     <!-- Actions -->
     <div class="pp-section">
       <p class="pp-section-title">Actions</p>
@@ -910,13 +457,13 @@ Index · HTML
     </div>
   </div>
 </div>
- 
+
 <!-- ══ TOOLTIP ══ -->
 <div id="tt" aria-hidden="true">
   <div id="tt-title"></div>
   <div id="tt-proj"><span id="tt-dot"></span><span id="tt-pname"></span></div>
 </div>
- 
+
 <!-- ══ DETAIL PANEL ══ -->
 <aside id="panel" aria-label="Photo detail" aria-hidden="true">
   <div id="p-img-wrap">
@@ -941,7 +488,7 @@ Index · HTML
     <div class="ps" id="rel-sec"><p class="pl">Related</p><div id="p-related"></div></div>
   </div>
 </aside>
- 
+
 <!-- ══ ABOUT ══ -->
 <div id="about-ov" class="overlay" aria-hidden="true">
   <button class="ov-close" id="ab-close">✕</button>
@@ -966,7 +513,7 @@ Index · HTML
     </div>
   </div>
 </div>
- 
+
 <!-- ══ CONTACT ══ -->
 <div id="contact-ov" class="overlay" aria-hidden="true">
   <button class="ov-close" id="ct-close">✕</button>
@@ -976,7 +523,7 @@ Index · HTML
       <h2 class="ct-h">Let's make<br><em>something.</em></h2>
       <p class="ct-body">Whether you have a full brief or just a feeling — reach out. I reply within 24 hours.</p>
       <div class="ct-deets">
-        <div><p class="cd-k">Email</p>   <p class="cd-v">hello@derekkwok.com</p></div>
+        <div><p class="cd-k">Email</p>   <p class="cd-v"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2048454c4c4f60444552454b4b574f4b0e434f4d">[email&#160;protected]</a></p></div>
         <div><p class="cd-k">Based In</p><p class="cd-v">[Your City] — Available Worldwide</p></div>
         <div><p class="cd-k">Response</p><p class="cd-v">Within 24 hours</p></div>
         <div><p class="cd-k">Follow</p>  <p class="cd-v">@derekkwok</p></div>
@@ -998,13 +545,13 @@ Index · HTML
     </form>
   </div>
 </div>
- 
+
 <!-- ══ HUD ══ -->
 <div id="hint" aria-hidden="true">Drag canvas to explore &nbsp;·&nbsp; Click a photo &nbsp;·&nbsp; Drag photos to reposition</div>
 <div id="zoom-pill" aria-live="polite">85%</div>
 <div id="status-bar"></div>
- 
-<script>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ══════════════════════════════════════════════
    DATA
 ══════════════════════════════════════════════ */
@@ -1015,7 +562,7 @@ const PROJ = {
   commercial: { name:'Commercial',  color:'#4E72B0', rgb:'78,114,176'  },
   fineart:    { name:'Fine Art',    color:'#8A5EAA', rgb:'138,94,170'  },
 };
- 
+
 // Cluster centres — where each project group wants to live on the canvas
 const CLUSTER_CENTRES = {
   portraits:  { x:4600, y:4700 },
@@ -1024,7 +571,7 @@ const CLUSTER_CENTRES = {
   commercial: { x:5700, y:5200 },
   fineart:    { x:5300, y:5800 },
 };
- 
+
 const PHOTOS = [
   { id:'p1', proj:'portraits',  title:'Emma, Golden Hour',    desc:'Placeholder — Describe the shoot, the light, the moment. Specific details make it memorable.',                                       meta:{loc:'New York',     yr:'2024',cam:'Canon R5',      fmt:'Digital'},       tags:['portrait','studio','natural light','editorial'], rel:['p2','p3','f1'], seed:'portA1x' },
   { id:'p2', proj:'portraits',  title:'Marco, Noon Light',    desc:'Placeholder — A brief story about this image or subject. Keep it personal and direct.',                                             meta:{loc:'Brooklyn',     yr:'2023',cam:'Leica M11',     fmt:'Digital'},       tags:['portrait','street','monochrome'],               rel:['p1','p4'],      seed:'portB2y' },
@@ -1047,7 +594,7 @@ const PHOTOS = [
   { id:'f3', proj:'fineart',    title:'Untitled, 2023',        desc:"Placeholder — No title because the image should do all the talking.",                                                               meta:{loc:'Studio',       yr:'2023',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['fine art','abstract','monochrome'],              rel:['f1','f4'],      seed:'artC3o'  },
   { id:'f4', proj:'fineart',    title:'Still, No. 7',          desc:'Placeholder — Part of a stillness study. Slowness as a subject, patience as a method.',                                            meta:{loc:'Studio',       yr:'2024',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['fine art','still life','minimal','color theory'],rel:['f2','f3'],      seed:'artD4p'  },
 ];
- 
+
 const LINKS = [
   ['p1','p2'],['p1','p3'],['p2','p4'],['p3','p4'],
   ['w1','w2'],['w1','w3'],['w2','w4'],['w3','w4'],
@@ -1056,7 +603,7 @@ const LINKS = [
   ['f1','f2'],['f1','f3'],['f2','f4'],['f3','f4'],
   ['p1','f1'],['p3','f2'],['l2','f1'],['w4','c1'],['c4','p1'],
 ];
- 
+
 /* ══════════════════════════════════════════════
    PHYSICS CONFIG
    These are the defaults, mirrored into the panel
@@ -1071,9 +618,9 @@ const DEFAULTS = {
   collide:  18,     // collision padding (px beyond node half-size)
   center:   0.002,  // global centre gravity
 };
- 
+
 const CFG = { ...DEFAULTS };
- 
+
 // Presets
 const PRESETS = {
   balanced: { repulse:3200, ldist:320, lstr:0.08,  cstr:0.022, cdist:220, decay:0.82, collide:18, center:0.002 },
@@ -1082,7 +629,7 @@ const PRESETS = {
   orbit:    { repulse:4500, ldist:400, lstr:0.06,  cstr:0.035, cdist:280, decay:0.76, collide:20, center:0.004 },
   frozen:   { repulse:2800, ldist:300, lstr:0.12,  cstr:0.03,  cdist:200, decay:0.97, collide:15, center:0.001 },
 };
- 
+
 /* ══════════════════════════════════════════════
    STATE
 ══════════════════════════════════════════════ */
@@ -1092,15 +639,18 @@ let selectedId=null, hoverNodeId=null;
 let filterProj='all', filterTag=null;
 let isDragging=false;
 let simAlpha=1;
- 
+let tagSiblingIds=new Set();   // IDs that share ≥1 tag with the selected node
+const TAG_PULL_DIST  = 160;    // target distance tag-siblings pull toward (px)
+const TAG_PULL_STR   = 0.055;  // spring strength of tag pull force
+
 const byId={};
 PHOTOS.forEach(p => byId[p.id]=p);
- 
+
 // Connection count per node (for sizing)
 const connCount={};
 PHOTOS.forEach(p => connCount[p.id]=0);
 LINKS.forEach(([a,b]) => { connCount[a]++; connCount[b]++; });
- 
+
 // Node physics state — start near their cluster centre with a small random offset
 const NS={};
 PHOTOS.forEach(p => {
@@ -1111,20 +661,20 @@ PHOTOS.forEach(p => {
     vx:0, vy:0, fixed:false
   };
 });
- 
+
 function nodeW(id) { return Math.min(145 + connCount[id]*11, 200); }
 function nodeH(id) { return Math.round(nodeW(id)*0.75); }
 function nodeR(id) { return Math.sqrt(nodeW(id)**2 + nodeH(id)**2)/2; }
- 
+
 /* ══════════════════════════════════════════════
    PHYSICS SIMULATION
 ══════════════════════════════════════════════ */
 function simTick() {
   const alpha = simAlpha;
   if (simAlpha > 0.001) simAlpha *= (1 - 0.016);
- 
+
   const ns = Object.values(NS);
- 
+
   // 1. Repulsion (Barnes-Hut approximation skipped for simplicity — O(n²) fine for 20 nodes)
   for (let i=0; i<ns.length; i++) {
     const a = ns[i];
@@ -1140,7 +690,7 @@ function simTick() {
       if (!b.fixed) { b.vx -= fx; b.vy -= fy; }
     }
   }
- 
+
   // 2. Link springs
   LINKS.forEach(([id1,id2]) => {
     const a=NS[id1], b=NS[id2];
@@ -1151,7 +701,26 @@ function simTick() {
     if (!a.fixed) { a.vx+=dx*diff; a.vy+=dy*diff; }
     if (!b.fixed) { b.vx-=dx*diff; b.vy-=dy*diff; }
   });
- 
+
+  // 2b. Tag attraction — when a node is selected, pull tag-siblings toward it
+  if (selectedId && tagSiblingIds.size > 0) {
+    const anchor = NS[selectedId];
+    if (anchor) {
+      tagSiblingIds.forEach(sibId => {
+        const sib = NS[sibId];
+        if (!sib || sib.fixed) return;
+        const dx = anchor.x - sib.x, dy = anchor.y - sib.y;
+        const d  = Math.sqrt(dx*dx + dy*dy) || 1;
+        // Spring: pull toward TAG_PULL_DIST from the anchor
+        const diff = (d - TAG_PULL_DIST) / d * TAG_PULL_STR * Math.max(alpha, 0.12);
+        if (d > TAG_PULL_DIST * 0.5) {   // only pull, never push past half distance
+          sib.vx += dx * diff;
+          sib.vy += dy * diff;
+        }
+      });
+    }
+  }
+
   // 3. Cluster gravity — pulls each node toward its project's target centre
   PHOTOS.forEach(p => {
     const n  = NS[p.id];
@@ -1165,7 +734,7 @@ function simTick() {
     n.vx += (dx/d)*f;
     n.vy += (dy/d)*f;
   });
- 
+
   // 4. Global centre gravity
   ns.forEach(n => {
     if (!n.fixed) {
@@ -1173,7 +742,7 @@ function simTick() {
       n.vy += (5000-n.y)*CFG.center*alpha;
     }
   });
- 
+
   // 5. Collision detection
   for (let i=0;i<ns.length;i++) {
     const a=ns[i];
@@ -1192,7 +761,7 @@ function simTick() {
       }
     }
   }
- 
+
   // 6. Integrate
   ns.forEach(n => {
     if (!n.fixed) {
@@ -1201,14 +770,15 @@ function simTick() {
     }
   });
 }
- 
+
 function reheat(a=0.5) { simAlpha = Math.max(simAlpha, a); }
- 
+
 /* ══════════════════════════════════════════════
    RENDER LOOP
 ══════════════════════════════════════════════ */
 const nodeEls={}, svgPaths={};
- 
+const tagLinePaths=[];   // dynamic tag-connection lines, rebuilt on each selection
+
 function loop() {
   simTick();
   PHOTOS.forEach(p => {
@@ -1221,7 +791,7 @@ function loop() {
   updateSVG();
   requestAnimationFrame(loop);
 }
- 
+
 /* ══════════════════════════════════════════════
    SVG CONNECTIONS
 ══════════════════════════════════════════════ */
@@ -1234,22 +804,24 @@ function initSVG() {
     svgPaths[id1+'|'+id2]=path;
   });
 }
- 
+
 function updateSVG() {
   const activeId = selectedId||hoverNodeId;
+
+  // ── Project/link connections ──
   LINKS.forEach(([id1,id2]) => {
     const a=NS[id1], b=NS[id2], path=svgPaths[id1+'|'+id2];
     if (!a||!b||!path) return;
     const aVis=nodeVisible(byId[id1]), bVis=nodeVisible(byId[id2]);
     if (!aVis||!bVis) { path.setAttribute('stroke','none'); return; }
- 
+
     const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
     const dx=b.x-a.x, dy=b.y-a.y;
     const len=Math.sqrt(dx*dx+dy*dy)||1;
     const bnd=Math.min(len*0.12,36);
     const cpx=mx-(dy/len)*bnd, cpy=my+(dx/len)*bnd;
     path.setAttribute('d',`M${a.x} ${a.y} Q${cpx} ${cpy} ${b.x} ${b.y}`);
- 
+
     const same=byId[id1].proj===byId[id2].proj;
     const lit=activeId&&(id1===activeId||id2===activeId);
     if (lit) {
@@ -1258,22 +830,89 @@ function updateSVG() {
       path.setAttribute('stroke-opacity','0.75');
       path.removeAttribute('stroke-dasharray');
     } else if (same) {
+      // Dim project links when something is selected (tag context takes over)
+      const dimmed = selectedId && !tagSiblingIds.has(id1) && !tagSiblingIds.has(id2) && id1!==selectedId && id2!==selectedId;
       path.setAttribute('stroke','#888');
       path.setAttribute('stroke-width','1.2');
-      path.setAttribute('stroke-opacity','0.4');
+      path.setAttribute('stroke-opacity', dimmed ? '0.1' : '0.4');
       path.removeAttribute('stroke-dasharray');
     } else {
+      const dimmed = selectedId && !tagSiblingIds.has(id1) && !tagSiblingIds.has(id2) && id1!==selectedId && id2!==selectedId;
       path.setAttribute('stroke','#AAAAAA');
       path.setAttribute('stroke-width','0.9');
-      path.setAttribute('stroke-opacity','0.28');
+      path.setAttribute('stroke-opacity', dimmed ? '0.06' : '0.28');
       path.setAttribute('stroke-dasharray','3 7');
     }
   });
+
+  // ── Tag connection lines (update positions live) ──
+  tagLinePaths.forEach(({ el, sibId }) => {
+    if (!selectedId) return;
+    const a = NS[selectedId], b = NS[sibId];
+    if (!a||!b) return;
+    // Straight line for tag connections (distinguished from curved project links)
+    el.setAttribute('d', `M${a.x} ${a.y} L${b.x} ${b.y}`);
+  });
 }
- 
+
 /* ══════════════════════════════════════════════
-   NODES
+   TAG LINES & SELECTION VISUALS
 ══════════════════════════════════════════════ */
+function buildTagLines(photo) {
+  clearTagLines();
+  const svg = document.getElementById('svg');
+  const projColor = PROJ[photo.proj].color;
+
+  tagSiblingIds.forEach(sibId => {
+    const sib = byId[sibId];
+    if (!sib || !nodeVisible(sib)) return;
+
+    // Find shared tags for label / potential future use
+    const sharedTags = photo.tags.filter(t => sib.tags.includes(t));
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke', projColor);
+    path.setAttribute('stroke-width','1');
+    path.setAttribute('stroke-opacity','0.45');
+    path.setAttribute('stroke-dasharray','4 5');
+    path.dataset.tagLine='1';
+    svg.appendChild(path);
+    tagLinePaths.push({ el:path, sibId });
+  });
+}
+
+function clearTagLines() {
+  tagLinePaths.forEach(({ el }) => el.parentNode?.removeChild(el));
+  tagLinePaths.length = 0;
+}
+
+function applySelectionVisuals(selectedPhoto) {
+  // Determine sibling sets
+  const projSibs = new Set(PHOTOS.filter(p => p.proj === selectedPhoto.proj && p.id !== selectedPhoto.id).map(p=>p.id));
+
+  PHOTOS.forEach(p => {
+    const el = nodeEls[p.id];
+    if (!el) return;
+    el.classList.remove('sel-dim','tag-sib');
+    if (p.id === selectedPhoto.id) return;   // selected node: keep .selected class, no dim
+
+    const isTagSib  = tagSiblingIds.has(p.id);
+    const isProjSib = projSibs.has(p.id);
+
+    if (isTagSib || isProjSib) {
+      el.classList.add('tag-sib');
+    } else {
+      el.classList.add('sel-dim');
+    }
+  });
+}
+
+function clearSelectionVisuals() {
+  PHOTOS.forEach(p => {
+    nodeEls[p.id]?.classList.remove('sel-dim','tag-sib');
+  });
+}
 function renderNodes() {
   const canvas=document.getElementById('canvas');
   PHOTOS.forEach((photo,i) => {
@@ -1296,7 +935,7 @@ function renderNodes() {
     nodeEls[photo.id]=el;
   });
 }
- 
+
 /* ══════════════════════════════════════════════
    FILTER
 ══════════════════════════════════════════════ */
@@ -1343,7 +982,7 @@ function applyVis() {
     else               { el.classList.add('dimmed');    el.style.pointerEvents='none'; }
   });
 }
- 
+
 /* ══════════════════════════════════════════════
    TOOLTIP
 ══════════════════════════════════════════════ */
@@ -1365,7 +1004,7 @@ document.addEventListener('mousemove',e => {
   if (!tt.classList.contains('show')) return;
   tt.style.left=(e.clientX+16)+'px'; tt.style.top=(e.clientY+14)+'px';
 });
- 
+
 /* ══════════════════════════════════════════════
    NODE DRAG & CLICK
 ══════════════════════════════════════════════ */
@@ -1394,19 +1033,36 @@ function onDown(e,photo,el) {
   window.addEventListener('mousemove',onMove);
   window.addEventListener('mouseup',onUp);
 }
- 
+
 /* ══════════════════════════════════════════════
    DETAIL PANEL
 ══════════════════════════════════════════════ */
 function openDetail(photo) {
   const p=PROJ[photo.proj];
   selectedId=photo.id;
+
+  // ── Compute tag siblings ──
+  tagSiblingIds.clear();
+  PHOTOS.forEach(other => {
+    if (other.id === photo.id) return;
+    const shared = photo.tags.some(t => other.tags.includes(t));
+    if (shared) tagSiblingIds.add(other.id);
+  });
+
+  // ── Node visuals ──
   document.querySelectorAll('.node').forEach(el=>el.classList.remove('selected'));
   nodeEls[photo.id]?.classList.add('selected');
- 
+  applySelectionVisuals(photo);
+
+  // ── Tag lines ──
+  buildTagLines(photo);
+
+  // ── Heat sim so pull-in is visible ──
+  reheat(0.38);
+
   document.getElementById('p-img').src=`https://picsum.photos/seed/${photo.seed}/800/600`;
   document.getElementById('p-img').alt=photo.title;
- 
+
   const badge=document.getElementById('p-badge');
   badge.style.color=p.color; badge.style.borderColor=p.color+'44'; badge.style.background=`rgba(${p.rgb},.07)`;
   document.getElementById('p-badge-txt').textContent=p.name;
@@ -1416,10 +1072,10 @@ function openDetail(photo) {
   document.getElementById('m-yr').textContent=photo.meta?.yr||'—';
   document.getElementById('m-cam').textContent=photo.meta?.cam||'—';
   document.getElementById('m-fmt').textContent=photo.meta?.fmt||'—';
- 
+
   document.getElementById('p-tags').innerHTML=photo.tags.map(t=>`<button class="tc${filterTag===t?' on':''}" data-tag="${t}"># ${t}</button>`).join('');
   document.querySelectorAll('.tc').forEach(c=>c.addEventListener('click',()=>setTag(c.dataset.tag)));
- 
+
   const rels=photo.rel.map(id=>byId[id]).filter(Boolean);
   const relSec=document.getElementById('rel-sec'), relEl=document.getElementById('p-related');
   if (rels.length) {
@@ -1431,18 +1087,22 @@ function openDetail(photo) {
       t.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
     });
   } else relSec.style.display='none';
- 
+
   document.getElementById('panel').classList.add('open');
   document.getElementById('panel').setAttribute('aria-hidden','false');
   document.getElementById('p-locate').onclick=()=>panTo(photo,500);
 }
 function closeDetail() {
   selectedId=null;
+  tagSiblingIds.clear();
+  clearTagLines();
+  clearSelectionVisuals();
   document.getElementById('panel').classList.remove('open');
   document.getElementById('panel').setAttribute('aria-hidden','true');
   document.querySelectorAll('.node').forEach(el=>el.classList.remove('selected'));
+  reheat(0.22);  // let nodes drift back to their clusters gently
 }
- 
+
 /* ══════════════════════════════════════════════
    PAN / ZOOM / TRANSFORM
 ══════════════════════════════════════════════ */
@@ -1475,7 +1135,7 @@ function zoomAt(factor,cx,cy) {
   const ns=Math.min(Math.max(sc*factor,.18),4);
   tx=cx-(cx-tx)*(ns/sc); ty=cy-(cy-ty)*(ns/sc); sc=ns; applyT();
 }
- 
+
 /* ══════════════════════════════════════════════
    CANVAS INTERACTION
 ══════════════════════════════════════════════ */
@@ -1503,7 +1163,7 @@ function initInteraction() {
   wrap.addEventListener('touchend',()=>lt=null);
   wrap.addEventListener('click',e=>{if(!e.target.closest('.node')&&!isDragging)closeDetail();});
 }
- 
+
 /* ══════════════════════════════════════════════
    CONTROLS & KEYBOARD
 ══════════════════════════════════════════════ */
@@ -1551,7 +1211,7 @@ function fitAll() {
   const tick=now=>{const t=Math.min((now-t0)/dur,1),e=t<.5?2*t*t:-1+(4-2*t)*t;sc=fSc+(nSc-fSc)*e;tx=fX+(toX-fX)*e;ty=fY+(toY-fY)*e;applyT();if(t<1)requestAnimationFrame(tick);};
   requestAnimationFrame(tick);
 }
- 
+
 /* ══════════════════════════════════════════════
    OVERLAYS
 ══════════════════════════════════════════════ */
@@ -1563,7 +1223,7 @@ function initOverlays() {
 }
 function openOv(id){document.getElementById(id).classList.add('open');document.getElementById(id).setAttribute('aria-hidden','false');}
 function closeOv(id){document.getElementById(id).classList.remove('open');document.getElementById(id).setAttribute('aria-hidden','true');}
- 
+
 /* ══════════════════════════════════════════════
    STATUS BAR
 ══════════════════════════════════════════════ */
@@ -1574,7 +1234,7 @@ function updateStatus() {
   else if (filterProj!=='all') sb.textContent=`${vis} photo${vis!==1?'s':''} — ${PROJ[filterProj].name}`;
   else sb.textContent=`${PHOTOS.length} photos · ${Object.keys(PROJ).length} projects`;
 }
- 
+
 /* ══════════════════════════════════════════════
    PHYSICS PANEL
 ══════════════════════════════════════════════ */
@@ -1582,7 +1242,7 @@ function initPhysicsPanel() {
   const toggle=document.getElementById('phys-toggle');
   const panel=document.getElementById('phys-panel');
   let open=false;
- 
+
   toggle.addEventListener('click',()=>{
     open=!open;
     panel.classList.toggle('open',open);
@@ -1590,7 +1250,7 @@ function initPhysicsPanel() {
     toggle.classList.toggle('panel-open',open);
     toggle.setAttribute('aria-expanded',String(open));
   });
- 
+
   // Slider ↔ Number input sync
   const pairs = [
     ['sl-repulse','nu-repulse','repulse'],
@@ -1602,19 +1262,19 @@ function initPhysicsPanel() {
     ['sl-collide','nu-collide','collide'],
     ['sl-center', 'nu-center', 'center'],
   ];
- 
+
   function syncSliderFill(sl) {
     const min=parseFloat(sl.min), max=parseFloat(sl.max), val=parseFloat(sl.value);
     const pct=((val-min)/(max-min)*100).toFixed(1)+'%';
     sl.style.setProperty('--pct',pct);
   }
- 
+
   pairs.forEach(([slId,nuId,key]) => {
     const sl=document.getElementById(slId), nu=document.getElementById(nuId);
     // Set initial values
     const decimals=sl.step.includes('.')?sl.step.split('.')[1].length:0;
     sl.value=CFG[key]; nu.value=CFG[key].toFixed(decimals); syncSliderFill(sl);
- 
+
     sl.addEventListener('input',()=>{
       const v=parseFloat(sl.value);
       CFG[key]=v; nu.value=v.toFixed(decimals);
@@ -1626,7 +1286,7 @@ function initPhysicsPanel() {
       syncSliderFill(sl); reheat(0.3);
     });
   });
- 
+
   // Presets
   document.querySelectorAll('.pp-preset').forEach(btn => {
     btn.addEventListener('click',()=>{
@@ -1644,7 +1304,7 @@ function initPhysicsPanel() {
       reheat(0.55);
     });
   });
- 
+
   document.getElementById('pp-reheat').addEventListener('click',()=>reheat(0.8));
   document.getElementById('pp-reset-defaults').addEventListener('click',()=>{
     Object.assign(CFG,DEFAULTS);
@@ -1658,7 +1318,7 @@ function initPhysicsPanel() {
     reheat(0.55);
   });
 }
- 
+
 /* ══════════════════════════════════════════════
    BOOT
 ══════════════════════════════════════════════ */
@@ -1671,7 +1331,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   initOverlays();
   initPhysicsPanel();
   updateStatus();
- 
+
   const cx=5050, cy=5200;
   tx=window.innerWidth/2-cx*sc;
   ty=(window.innerHeight-56)/2-cy*sc;
@@ -1682,5 +1342,3 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 </body>
 </html>
- 
-
