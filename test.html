@@ -100,6 +100,7 @@ let W, H, cells = [], mouse = { x: -9999, y: -9999 };
 
 /* ── build word grid from name brightness map ── */
 function buildGrid() {
+  if (!W || !H) return;   // called before resize() — skip
   const fontSize = Math.max(60, Math.round(W * cfg.nameScale));
   const cols = Math.ceil(W / CELL);
   const rows = Math.ceil(H / CELL);
