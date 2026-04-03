@@ -19,13 +19,12 @@
 <canvas id="c"></canvas>
 <script>
 /* ── constants ── */
-const NAME      = 'DEREK KWOK';
-const FONT_SIZE = 220;          // size to render name for sampling
-const CELL      = 18;           // word grid cell size (px)
-const FORCE     = 10;           // cursor repulsion strength
-const RADIUS    = 120;          // cursor influence radius (px)
-const SPRING    = 0.06;         // return spring strength
-const DAMPING   = 0.78;         // velocity damping
+const NAME    = 'DEREK KWOK';
+const CELL    = 26;           // word grid cell size (px) — wider to prevent word collisions
+const FORCE   = 10;           // cursor repulsion strength
+const RADIUS  = 120;          // cursor influence radius (px)
+const SPRING  = 0.06;         // return spring strength
+const DAMPING = 0.78;         // velocity damping
 
 const WORDS = [
   'light','shadow','frame','grain','moment','eye','lens','depth',
@@ -42,7 +41,9 @@ let W, H, cells = [], mouse = { x: -9999, y: -9999 };
 
 /* ── sample the name into a brightness map ── */
 function buildGrid() {
-  // render name offscreen
+  // scale name font to ~55% of window width so it fills the screen on any display
+  const FONT_SIZE = Math.max(80, Math.round(W * 0.55));
+
   const off  = document.createElement('canvas');
   const cols = Math.ceil(W / CELL);
   const rows = Math.ceil(H / CELL);
@@ -82,8 +83,14 @@ function buildGrid() {
 }
 
 function resize() {
-  W = canvas.width  = window.innerWidth;
-  H = canvas.height = window.innerHeight;
+  W = window.innerWidth;
+  H = window.innerHeight;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width  = Math.round(W * dpr);
+  canvas.height = Math.round(H * dpr);
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);  // all coords stay in CSS px
   buildGrid();
 }
 
@@ -126,7 +133,7 @@ function draw() {
     (c.brightness > 0.3 ? bright : dim).push(c);
   }
 
-  ctx.font         = `500 9px 'Helvetica Neue', Arial, sans-serif`;
+  ctx.font         = `500 11px 'Helvetica Neue', Arial, sans-serif`;
   ctx.textAlign    = 'center';
   ctx.textBaseline = 'middle';
 
