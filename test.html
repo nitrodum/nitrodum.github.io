@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Derek Kwok</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%;
+      background: #0e0e0e;
+      overflow: hidden;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+/* ── constants ── */
+const NAME      = 'DEREK KWOK';
+const FONT_SIZE = 220;          // size to render name for sampling
+const CELL      = 18;           // word grid cell size (px)
+const FORCE     = 10;           // cursor repulsion strength
+const RADIUS    = 120;          // cursor influence radius (px)
+const SPRING    = 0.06;         // return spring strength
+const DAMPING   = 0.78;         // velocity damping
+
+const WORDS = [
+  'light','shadow','frame','grain','moment','eye','lens','depth',
+  'exposure','shutter','aperture','focus','blur','tone','contrast',
+  'portrait','landscape','still','motion','time','color','dark',
+  'form','texture','layer','edge','silence','space','line','shape',
+];
+
+/* ── canvas setup ── */
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+
+let W, H, cells = [], mouse = { x: -9999, y: -9999 };
+
+/* ── sample the name into a brightness map ── */
+function buildGrid() {
+  // render name offscreen
+  const off  = document.createElement('canvas');
+  const cols = Math.ceil(W / CELL);
+  const rows = Math.ceil(H / CELL);
+
+  off.width  = cols * CELL;
+  off.height = rows * CELL;
+  const oc   = off.getContext('2d');
+
+  oc.fillStyle = '#000';
+  oc.fillRect(0, 0, off.width, off.height);
+  oc.fillStyle    = '#fff';
+  oc.font         = `900 ${FONT_SIZE}px Impact, Arial Black, sans-serif`;
+  oc.textAlign    = 'center';
+  oc.textBaseline = 'middle';
+  oc.fillText(NAME, off.width / 2, off.height / 2);
+
+  const px = oc.getImageData(0, 0, off.width, off.height).data;
+
+  cells = [];
+  let wi = 0;
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const ox = col * CELL + CELL / 2;
+      const oy = row * CELL + CELL / 2;
+      const i  = (Math.round(oy) * off.width + Math.round(ox)) * 4;
+      const brightness = (px[i] + px[i+1] + px[i+2]) / 3 / 255;
+
+      cells.push({
+        ox, oy,           // origin
+        x:  ox, y:  oy,  // current
+        vx: 0,  vy: 0,
+        brightness,
+        word: WORDS[wi++ % WORDS.length],
+      });
+    }
+  }
+}
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  buildGrid();
+}
+
+/* ── physics tick ── */
+function tick() {
+  for (const c of cells) {
+    const dx = mouse.x - c.x;
+    const dy = mouse.y - c.y;
+    const d2 = dx * dx + dy * dy;
+
+    if (d2 < RADIUS * RADIUS && d2 > 0) {
+      const d    = Math.sqrt(d2);
+      const t    = 1 - d / RADIUS;          // 0..1, quadratic falloff
+      const push = FORCE * t * t / d;
+      c.vx -= dx * push;
+      c.vy -= dy * push;
+    }
+
+    // spring back to origin
+    c.vx += (c.ox - c.x) * SPRING;
+    c.vy += (c.oy - c.y) * SPRING;
+
+    // damping
+    c.vx *= DAMPING;
+    c.vy *= DAMPING;
+
+    c.x += c.vx;
+    c.y += c.vy;
+  }
+}
+
+/* ── render ── */
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // two passes: dim background words, then bright name words
+  const dim    = [];
+  const bright = [];
+  for (const c of cells) {
+    (c.brightness > 0.3 ? bright : dim).push(c);
+  }
+
+  ctx.font         = `500 9px 'Helvetica Neue', Arial, sans-serif`;
+  ctx.textAlign    = 'center';
+  ctx.textBaseline = 'middle';
+
+  ctx.globalAlpha = 0.048;
+  ctx.fillStyle   = '#ffffff';
+  for (const c of dim)    ctx.fillText(c.word, c.x, c.y);
+
+  ctx.globalAlpha = 1;
+  for (const c of bright) {
+    const alpha = 0.55 + c.brightness * 0.45;
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle   = '#ffffff';
+    ctx.fillText(c.word, c.x, c.y);
+  }
+
+  ctx.globalAlpha = 1;
+}
+
+/* ── loop ── */
+function loop() {
+  tick();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+/* ── events ── */
+window.addEventListener('resize', resize);
+
+canvas.addEventListener('mousemove', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+canvas.addEventListener('mouseleave', () => {
+  mouse.x = -9999;
+  mouse.y = -9999;
+});
+
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  mouse.x = e.touches[0].clientX;
+  mouse.y = e.touches[0].clientY;
+}, { passive: false });
+canvas.addEventListener('touchend', () => {
+  mouse.x = -9999;
+  mouse.y = -9999;
+});
+
+/* ── init ── */
+resize();
+loop();
+</script>
+</body>
+</html>
