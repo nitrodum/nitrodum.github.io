@@ -7,7 +7,7 @@
   <meta name="description" content="Derek Kwok — photographer. An interactive visual portfolio.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     :root {
@@ -130,7 +130,7 @@
       position:absolute; bottom:0; left:0; right:0; z-index:2;
       padding:10px 14px 14px;
       background:linear-gradient(to top,rgba(0,0,0,.72) 0%,transparent 100%);
-      font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:400;
+      font-family:'Cal Sans',sans-serif; font-size:17px; font-weight:400;
       color:#fff; letter-spacing:.07em;
       pointer-events:none;
       transition:opacity .4s ease;
@@ -145,8 +145,7 @@
       background:rgba(248,247,245,.94); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
       border-bottom:1px solid rgba(0,0,0,.08);
     }
-    #logo { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:500; letter-spacing:.08em; cursor:pointer; flex-shrink:0; margin-right:18px; white-space:nowrap; }
-    #logo em { font-style:italic; font-weight:300; }
+    #logo { font-family:'Cal Sans',sans-serif; font-size:14px; font-weight:400; letter-spacing:.12em; cursor:pointer; flex-shrink:0; margin-right:18px; white-space:nowrap; }
     .sep { width:1px; height:16px; background:rgba(0,0,0,.11); margin:0 16px; flex-shrink:0; }
     #filters { display:flex; align-items:center; gap:4px; flex:1; min-width:0; overflow:hidden; }
     .pill {
@@ -203,7 +202,7 @@
     #phys-panel::-webkit-scrollbar-thumb { background:rgba(0,0,0,.08); border-radius:2px; }
 
     #phys-inner { padding:22px 22px 40px; }
-    .pp-head { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; margin-bottom:4px; }
+    .pp-head { font-family:'Cal Sans',sans-serif; font-size:20px; font-weight:400; margin-bottom:4px; }
     .pp-sub  { font-size:10px; color:var(--dim); line-height:1.6; margin-bottom:22px; }
 
     .pp-section { margin-bottom:24px; }
@@ -271,7 +270,7 @@
       opacity:0; transition:opacity .14s; white-space:nowrap;
     }
     #tt.show { opacity:1; }
-    #tt-title { font-family:'Cormorant Garamond',serif; font-size:13px; font-weight:500; }
+    #tt-title { font-family:'Cal Sans',sans-serif; font-size:13px; font-weight:500; }
     #tt-proj  { display:flex; align-items:center; gap:5px; font-size:9.5px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--dim); margin-top:3px; }
     #tt-dot   { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
 
@@ -297,7 +296,7 @@
     #p-body::-webkit-scrollbar-thumb { background:rgba(0,0,0,.08); border-radius:2px; }
     #p-badge { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:100px; font-size:9px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; border:1px solid; margin-bottom:12px; }
     #p-badge .bd { width:5px; height:5px; border-radius:50%; background:currentColor; }
-    #p-title { font-family:'Cormorant Garamond',serif; font-size:27px; font-weight:400; line-height:1.15; margin-bottom:11px; }
+    #p-title { font-family:'Cal Sans',sans-serif; font-size:27px; font-weight:400; line-height:1.15; margin-bottom:11px; }
     #p-desc  { font-size:12.5px; line-height:1.82; color:#666; margin-bottom:20px; }
     #p-meta { display:grid; grid-template-columns:1fr 1fr; border:1px solid rgba(0,0,0,.07); border-radius:3px; overflow:hidden; margin-bottom:22px; }
     .mi { padding:9px 12px; border-right:1px solid rgba(0,0,0,.07); border-bottom:1px solid rgba(0,0,0,.07); }
@@ -314,7 +313,7 @@
     .rt { aspect-ratio:4/3; overflow:hidden; border-radius:2px; border:1px solid rgba(0,0,0,.08); cursor:pointer; position:relative; }
     .rt img { width:100%; height:100%; object-fit:cover; transition:transform .3s,opacity .3s; }
     .rt:hover img { transform:scale(1.1); opacity:.75; }
-    .rt-lbl { position:absolute; bottom:0; left:0; right:0; padding:5px 6px 4px; background:linear-gradient(to top,rgba(0,0,0,.6),transparent); font-family:'Cormorant Garamond',serif; font-size:10px; color:#fff; opacity:0; transition:opacity .2s; }
+    .rt-lbl { position:absolute; bottom:0; left:0; right:0; padding:5px 6px 4px; background:linear-gradient(to top,rgba(0,0,0,.6),transparent); font-family:'Cal Sans',sans-serif; font-size:10px; color:#fff; opacity:0; transition:opacity .2s; }
     .rt:hover .rt-lbl { opacity:1; }
 
     /* ─── OVERLAYS ─── */
@@ -327,14 +326,13 @@
     .ab-frame::before { content:''; position:absolute; inset:-16px -16px auto auto; width:100%; height:100%; border:1px solid rgba(0,0,0,.07); z-index:-1; }
     .ab-frame img { width:100%; height:100%; object-fit:cover; display:block; }
     .ab-eyebrow { font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin-bottom:16px; }
-    .ab-name { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,5vw,5rem); font-weight:400; line-height:.92; letter-spacing:-.02em; margin-bottom:30px; }
-    .ab-name em { font-style:italic; }
+    .ab-name { font-family:'Cal Sans',sans-serif; font-size:clamp(3rem,5vw,5rem); font-weight:400; line-height:.92; letter-spacing:.04em; margin-bottom:30px; }
     .ab-bio { font-size:13.5px; line-height:1.82; color:#555; margin-bottom:34px; }
     .ab-bio p+p { margin-top:16px; }
     .ab-stats { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(0,0,0,.08); padding-top:30px; margin-bottom:36px; }
     .ast { padding-right:18px; }
     .ast+.ast { padding-left:18px; border-left:1px solid rgba(0,0,0,.08); }
-    .ast-n { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:400; line-height:1; }
+    .ast-n { font-family:'Cal Sans',sans-serif; font-size:2.4rem; font-weight:400; line-height:1; }
     .ast-l { font-size:9px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-top:5px; }
     .ab-avail { display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--dim); }
     .av-dot { width:7px; height:7px; border-radius:50%; background:#4E8A6A; flex-shrink:0; animation:pulse 2.4s ease-in-out infinite; }
@@ -342,7 +340,7 @@
     #ct-inner { max-width:1000px; margin:0 auto; padding:64px 56px; display:grid; grid-template-columns:1fr 1.3fr; gap:88px; align-items:start; }
     .ct-left { position:sticky; top:64px; }
     .ct-eyebrow { font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin-bottom:16px; }
-    .ct-h { font-family:'Cormorant Garamond',serif; font-size:clamp(2.4rem,4vw,3.8rem); font-weight:400; line-height:.95; margin-bottom:22px; }
+    .ct-h { font-family:'Cal Sans',sans-serif; font-size:clamp(2.4rem,4vw,3.8rem); font-weight:400; line-height:.95; margin-bottom:22px; }
     .ct-h em { font-style:italic; }
     .ct-body { font-size:13px; line-height:1.8; color:#666; margin-bottom:34px; }
     .ct-deets { display:flex; flex-direction:column; gap:20px; }
@@ -377,7 +375,7 @@
 
 <!-- ══ NAV ══ -->
 <nav id="nav">
-  <div id="logo" role="button" tabindex="0">Derek <em>Kwok</em></div>
+  <div id="logo" role="button" tabindex="0">DEREK KWOK</div>
   <div class="sep"></div>
   <div id="filters" role="group">
     <button class="pill on" data-f="all">All</button>
@@ -573,7 +571,7 @@
     </div>
     <div>
       <p class="ab-eyebrow">The Photographer</p>
-      <h2 class="ab-name">Derek<br><em>Kwok</em></h2>
+      <h2 class="ab-name">DEREK<br>KWOK</h2>
       <div class="ab-bio">
         <p>Placeholder — Introduce yourself here. Your style, your background, what drives your work. Keep it direct and confident. Don't explain photography — embody it.</p>
         <p>Second paragraph. Your philosophy: how you approach a shoot, what you believe makes an image last.</p>

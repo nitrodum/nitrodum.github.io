@@ -3,7 +3,9 @@
     "allow": [
       "Bash(head:*)",
       "Bash(cp index.html gallery.html)",
-      "Bash(cp test.html index.html)"
+      "Bash(cp test.html index.html)",
+      "Bash(exiftool:*)",
+      "Bash(python3:*)"
     ]
   }
 }
