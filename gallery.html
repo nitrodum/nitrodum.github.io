@@ -99,15 +99,15 @@
 
     /* ─── NODES ─── */
     .node {
-      position:absolute; overflow:visible; cursor:pointer;
+      position:absolute; overflow:hidden; cursor:pointer;
       background:#fff; border:1px solid rgba(0,0,0,.09); border-radius:3px;
       box-shadow:0 2px 7px rgba(0,0,0,.07),0 6px 22px rgba(0,0,0,.05);
       will-change:transform; user-select:none;
       transition:box-shadow .22s,border-color .22s;
     }
-    .node-frame { position:absolute; inset:0; overflow:hidden; border-radius:inherit; }
+    .node-frame { position:absolute; top:24px; left:0; right:0; bottom:0; overflow:hidden; }
     .node-dot {
-      position:absolute; top:-5px; left:-5px;
+      position:absolute; top:8px; left:10px;
       width:8px; height:8px; border-radius:50%;
       background:#E53935; z-index:5; pointer-events:none;
       transition:background .3s ease;
@@ -1015,16 +1015,19 @@ function renderNodes() {
     el.style.setProperty('--g',`rgba(${p.rgb},.15)`);
     el.setAttribute('role','button'); el.setAttribute('tabindex','0');
     el.setAttribute('aria-label',`${photo.title} — ${p.name}`);
-    el.innerHTML=`<div class="node-frame"><img class="node-img" src="${photo.img}" alt="${photo.title}" width="${w}" height="${h}" loading="${i<4?'eager':'lazy'}" draggable="false"></div>`;
+    const dot=document.createElement('div');
+    dot.className='node-dot';
+    el.appendChild(dot);
+    const frame=document.createElement('div');
+    frame.className='node-frame';
+    frame.innerHTML=`<img class="node-img" src="${photo.img}" alt="${photo.title}" width="${w}" height="${h}" loading="${i<4?'eager':'lazy'}" draggable="false">`;
     if (photo.cover) {
       const lbl=document.createElement('div');
       lbl.className='cover-label';
       lbl.textContent=p.name;
-      el.appendChild(lbl);
+      frame.appendChild(lbl);
     }
-    const dot=document.createElement('div');
-    dot.className='node-dot';
-    el.appendChild(dot);
+    el.appendChild(frame);
     el.addEventListener('mouseenter', ()=>onEnter(photo));
     el.addEventListener('mouseleave', ()=>onLeave());
     el.addEventListener('mousedown',  e =>onDown(e,photo,el));
