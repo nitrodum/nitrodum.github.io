@@ -1,0 +1,6 @@
+# Original high-res photos — too large for git, use Pictures/web/ instead
+Pictures/Kozaburo/
+Pictures/PlantShed/
+
+# Claude local settings
+.claude/settings.local.json

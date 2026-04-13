@@ -126,6 +126,16 @@
     }
     .node-img { width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; user-select:none; transition:transform .4s ease; }
     .node:hover .node-img { transform:scale(1.07); }
+    .cover-label {
+      position:absolute; bottom:0; left:0; right:0; z-index:2;
+      padding:10px 14px 14px;
+      background:linear-gradient(to top,rgba(0,0,0,.72) 0%,transparent 100%);
+      font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:400;
+      color:#fff; letter-spacing:.07em;
+      pointer-events:none;
+      transition:opacity .4s ease;
+    }
+    .cover-label.dismissed { opacity:0; }
 
     /* ─── NAV ─── */
     #nav {
@@ -621,52 +631,43 @@
    DATA
 ══════════════════════════════════════════════ */
 const PROJ = {
-  portraits:  { name:'Portraiture', color:'#B0705A', rgb:'176,112,90'  },
-  weddings:   { name:'Weddings',    color:'#9E8838', rgb:'158,136,56'  },
-  landscapes: { name:'Landscapes',  color:'#4E8A6A', rgb:'78,138,106'  },
-  commercial: { name:'Commercial',  color:'#4E72B0', rgb:'78,114,176'  },
-  fineart:    { name:'Fine Art',    color:'#8A5EAA', rgb:'138,94,170'  },
+  kozaburo:  { name:'Kozaburo',  color:'#8B7B6B', rgb:'139,123,107' },
+  plantshed: { name:'Plantshed', color:'#5A8A6A', rgb:'90,138,106'  },
 };
 
 // Cluster centres — where each project group wants to live on the canvas
 const CLUSTER_CENTRES = {
-  portraits:  { x:4600, y:4700 },
-  weddings:   { x:5400, y:4700 },
-  landscapes: { x:5000, y:5400 },
-  commercial: { x:5700, y:5200 },
-  fineart:    { x:5300, y:5800 },
+  kozaburo:  { x:4500, y:5000 },
+  plantshed: { x:5600, y:5000 },
 };
 
 const PHOTOS = [
-  { id:'p1', proj:'portraits',  title:'Emma, Golden Hour',    desc:'Placeholder — Describe the shoot, the light, the moment. Specific details make it memorable.',                                       meta:{loc:'New York',     yr:'2024',cam:'Canon R5',      fmt:'Digital'},       tags:['portrait','studio','natural light','editorial'], rel:['p2','p3','f1'], seed:'portA1x' },
-  { id:'p2', proj:'portraits',  title:'Marco, Noon Light',    desc:'Placeholder — A brief story about this image or subject. Keep it personal and direct.',                                             meta:{loc:'Brooklyn',     yr:'2023',cam:'Leica M11',     fmt:'Digital'},       tags:['portrait','street','monochrome'],               rel:['p1','p4'],      seed:'portB2y' },
-  { id:'p3', proj:'portraits',  title:'Self, Series I',        desc:'Placeholder — Fine art self-portraiture exploring identity. Part of an ongoing series.',                                           meta:{loc:'Studio',       yr:'2023',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['portrait','fine art','self-portrait'],           rel:['p1','f2'],      seed:'portC3z' },
-  { id:'p4', proj:'portraits',  title:'Unnamed, Blue',         desc:'Placeholder — Describe the atmosphere and intent. The more specific, the more memorable.',                                         meta:{loc:'Studio',       yr:'2024',cam:'Canon R5',      fmt:'Digital'},       tags:['portrait','studio','blue','minimal'],            rel:['p2','p3'],      seed:'portD4w' },
-  { id:'w1', proj:'weddings',   title:'The First Look',        desc:'Placeholder — The moment before anything is said. Replace with a real anecdote from the day.',                                     meta:{loc:'Hudson Valley',yr:'2024',cam:'Sony A1',       fmt:'Digital'},       tags:['wedding','ceremony','emotion','documentary'],    rel:['w2','w3'],      seed:'wedA1a'  },
-  { id:'w2', proj:'weddings',   title:'Reception, Evening',    desc:'Placeholder — When the night takes over and everyone forgets the camera is there.',                                                 meta:{loc:'Manhattan',    yr:'2023',cam:'Canon R5',      fmt:'Digital'},       tags:['wedding','reception','available light'],         rel:['w1','w4'],      seed:'wedB2b'  },
-  { id:'w3', proj:'weddings',   title:'Garden Ceremony',       desc:'Placeholder — Outdoor ceremony in soft afternoon light. Describe the setting.',                                                     meta:{loc:'Hamptons',     yr:'2024',cam:'Sony A1',       fmt:'Digital'},       tags:['wedding','outdoor','ceremony','golden hour'],    rel:['w1','w2'],      seed:'wedC3c'  },
-  { id:'w4', proj:'weddings',   title:'Table, Before',         desc:'Placeholder — Details matter. The quiet before the guests arrive.',                                                                 meta:{loc:'Brooklyn',     yr:'2023',cam:'Canon R5',      fmt:'Digital'},       tags:['wedding','detail','still life'],                 rel:['w2','c1'],      seed:'wedD4d'  },
-  { id:'l1', proj:'landscapes', title:'Desert, Dawn',          desc:'Placeholder — Five hours before anyone else arrived. The silence before the light changed everything.',                             meta:{loc:'Utah',         yr:'2022',cam:'Phase One',     fmt:'Medium Format'}, tags:['landscape','desert','dawn','long exposure'],     rel:['l2','l3'],      seed:'lanA1e'  },
-  { id:'l2', proj:'landscapes', title:'Fog, Coast',            desc:"Placeholder — Pacific coast in mid-October. The fog never fully lifted, which turned out to be the whole point.",                 meta:{loc:'Oregon Coast', yr:'2023',cam:'Phase One',     fmt:'Medium Format'}, tags:['landscape','coastal','fog','moody'],             rel:['l1','f1'],      seed:'lanB2f'  },
-  { id:'l3', proj:'landscapes', title:'Mountain, Last Light',  desc:"Placeholder — The last thirty seconds of light before full dark.",                                                                  meta:{loc:'Colorado',     yr:'2022',cam:'Canon R5',      fmt:'Digital'},       tags:['landscape','mountain','dusk','golden hour'],     rel:['l1','l4'],      seed:'lanC3g'  },
-  { id:'l4', proj:'landscapes', title:'River, Autumn',         desc:'Placeholder — The river always changes; autumn makes it dramatic.',                                                                 meta:{loc:'Vermont',      yr:'2023',cam:'Phase One',     fmt:'Medium Format'}, tags:['landscape','river','autumn','color'],            rel:['l3','l2'],      seed:'lanD4h'  },
-  { id:'c1', proj:'commercial', title:'Brand, Minimal',        desc:'Placeholder — Product photography for a skincare brand. The object is the story.',                                                 meta:{loc:'Studio NY',    yr:'2024',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['commercial','product','minimal','studio'],       rel:['c2','c3'],      seed:'comA1i'  },
-  { id:'c2', proj:'commercial', title:'Campaign, Spring',      desc:'Placeholder — Lifestyle campaign for an outdoor clothing brand. Real locations, natural light.',                                    meta:{loc:'Catskills',    yr:'2024',cam:'Sony A1',       fmt:'Digital'},       tags:['commercial','lifestyle','campaign','outdoor'],   rel:['c1','c4'],      seed:'comB2j'  },
-  { id:'c3', proj:'commercial', title:'Interior, Restaurant',  desc:'Placeholder — Architectural and food photography. The space tells the story before the food arrives.',                             meta:{loc:'Manhattan',    yr:'2023',cam:'Canon R5',      fmt:'Digital'},       tags:['commercial','interior','food','architecture'],   rel:['c1','c2'],      seed:'comC3k'  },
-  { id:'c4', proj:'commercial', title:'Portrait, Corporate',   desc:"Placeholder — Executive portraits that feel human, not corporate.",                                                                 meta:{loc:'Midtown NY',   yr:'2024',cam:'Canon R5',      fmt:'Digital'},       tags:['commercial','portrait','corporate'],             rel:['c2','p1'],      seed:'comD4l'  },
-  { id:'f1', proj:'fineart',    title:'Threshold I',           desc:'Placeholder — An ongoing series about in-between spaces and liminal moments.',                                                      meta:{loc:'New York',     yr:'2023',cam:'Leica M11',     fmt:'Digital'},       tags:['fine art','series','abstract','conceptual'],     rel:['f2','f3','p1'], seed:'artA1m'  },
-  { id:'f2', proj:'fineart',    title:'Threshold II',          desc:'Placeholder — Second part of the Threshold series. Different light, same unresolved question.',                                    meta:{loc:'New York',     yr:'2023',cam:'Leica M11',     fmt:'Digital'},       tags:['fine art','series','light','conceptual'],        rel:['f1','f4','l2'], seed:'artB2n'  },
-  { id:'f3', proj:'fineart',    title:'Untitled, 2023',        desc:"Placeholder — No title because the image should do all the talking.",                                                               meta:{loc:'Studio',       yr:'2023',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['fine art','abstract','monochrome'],              rel:['f1','f4'],      seed:'artC3o'  },
-  { id:'f4', proj:'fineart',    title:'Still, No. 7',          desc:'Placeholder — Part of a stillness study. Slowness as a subject, patience as a method.',                                            meta:{loc:'Studio',       yr:'2024',cam:'Hasselblad X2D',fmt:'Medium Format'}, tags:['fine art','still life','minimal','color theory'],rel:['f2','f3'],      seed:'artD4p'  },
+  // ── Kozaburo ──
+  { id:'kz1', proj:'kozaburo', cover:true, title:'Kozaburo I',    img:'Pictures/web/Kozaburo/NIK_6631.jpg',             desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['fashion','editorial','portrait'], rel:['kz2','kz3'] },
+  { id:'kz2', proj:'kozaburo',             title:'Kozaburo II',   img:'Pictures/web/Kozaburo/NIK_6637.jpg',             desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['fashion','editorial'],            rel:['kz1','kz3','kz4'] },
+  { id:'kz3', proj:'kozaburo',             title:'Kozaburo III',  img:'Pictures/web/Kozaburo/NIK_6643.jpg',             desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['fashion','portrait'],             rel:['kz2','kz4'] },
+  { id:'kz4', proj:'kozaburo',             title:'Kozaburo IV',   img:'Pictures/web/Kozaburo/NIK_6731-Enhanced-NR.jpg', desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['fashion','editorial'],            rel:['kz3','kz5'] },
+  { id:'kz5', proj:'kozaburo',             title:'Kozaburo V',    img:'Pictures/web/Kozaburo/NIK_6747.jpg',             desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['fashion','portrait'],             rel:['kz4','kz6'] },
+  { id:'kz6', proj:'kozaburo',             title:'Kozaburo VI',   img:'Pictures/web/Kozaburo/NIK_6791.jpg',             desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['fashion','editorial'],            rel:['kz5','kz7'] },
+  { id:'kz7', proj:'kozaburo',             title:'Kozaburo VII',  img:'Pictures/web/Kozaburo/NIK_6844.jpg',             desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['fashion','portrait'],             rel:['kz6','kz8'] },
+  { id:'kz8', proj:'kozaburo',             title:'Kozaburo VIII', img:'Pictures/web/Kozaburo/NIK_6850.jpg',             desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['fashion','editorial'],            rel:['kz7','kz1'] },
+  // ── Plantshed ──
+  { id:'ps1', proj:'plantshed', cover:true, title:'Plantshed I',   img:'Pictures/web/PlantShed/DSC_3987.jpg',           desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['commercial','nature','lifestyle'], rel:['ps2','ps3'] },
+  { id:'ps2', proj:'plantshed',             title:'Plantshed II',  img:'Pictures/web/PlantShed/DSC_4046.jpg',           desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['commercial','nature'],             rel:['ps1','ps3','ps4'] },
+  { id:'ps3', proj:'plantshed',             title:'Plantshed III', img:'Pictures/web/PlantShed/DSC_4068.jpg',           desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['commercial','lifestyle'],          rel:['ps2','ps4'] },
+  { id:'ps4', proj:'plantshed',             title:'Plantshed IV',  img:'Pictures/web/PlantShed/DSC_4126.jpg',           desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['commercial','nature'],             rel:['ps3','ps5'] },
+  { id:'ps5', proj:'plantshed',             title:'Plantshed V',   img:'Pictures/web/PlantShed/DSC_4155.jpg',           desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['commercial','lifestyle'],          rel:['ps4','ps6'] },
+  { id:'ps6', proj:'plantshed',             title:'Plantshed VI',  img:'Pictures/web/PlantShed/DSC_4163.jpg',           desc:'', meta:{loc:'—',yr:'—',cam:'—',fmt:'—'}, tags:['commercial','nature'],             rel:['ps5','ps1'] },
 ];
 
 const LINKS = [
-  ['p1','p2'],['p1','p3'],['p2','p4'],['p3','p4'],
-  ['w1','w2'],['w1','w3'],['w2','w4'],['w3','w4'],
-  ['l1','l2'],['l1','l3'],['l2','l4'],['l3','l4'],
-  ['c1','c2'],['c1','c3'],['c2','c4'],['c3','c4'],
-  ['f1','f2'],['f1','f3'],['f2','f4'],['f3','f4'],
-  ['p1','f1'],['p3','f2'],['l2','f1'],['w4','c1'],['c4','p1'],
+  // Kozaburo ring + cross-links
+  ['kz1','kz2'],['kz2','kz3'],['kz3','kz4'],['kz4','kz5'],
+  ['kz5','kz6'],['kz6','kz7'],['kz7','kz8'],['kz8','kz1'],
+  ['kz1','kz5'],['kz2','kz6'],
+  // Plantshed ring + cross-link
+  ['ps1','ps2'],['ps2','ps3'],['ps3','ps4'],['ps4','ps5'],['ps5','ps6'],['ps6','ps1'],
+  ['ps2','ps5'],
 ];
 
 /* ══════════════════════════════════════════════
@@ -727,9 +728,14 @@ PHOTOS.forEach(p => {
   };
 });
 
-function nodeW(id) { return Math.min(145 + connCount[id]*11, 200); }
-function nodeH(id) { return Math.round(nodeW(id)*0.75); }
-function nodeR(id) { return Math.sqrt(nodeW(id)**2 + nodeH(id)**2)/2; }
+const coverIds = new Set(PHOTOS.filter(p => p.cover).map(p => p.id));
+
+function nodeW(id) {
+  const base = Math.min(145 + connCount[id] * 11, 200);
+  return coverIds.has(id) ? Math.round(base * 1.5) : base;
+}
+function nodeH(id) { return Math.round(nodeW(id) * 0.75); }
+function nodeR(id) { return Math.sqrt(nodeW(id)**2 + nodeH(id)**2) / 2; }
 
 /* ══════════════════════════════════════════════
    PHYSICS SIMULATION
@@ -983,15 +989,20 @@ function renderNodes() {
   PHOTOS.forEach((photo,i) => {
     const p=PROJ[photo.proj], w=nodeW(photo.id), h=nodeH(photo.id);
     const el=document.createElement('div');
-    el.className='node'; el.id='n-'+photo.id; el.dataset.id=photo.id;
+    el.className='node'+(photo.cover?' cover':''); el.id='n-'+photo.id; el.dataset.id=photo.id;
     el.style.width=w+'px'; el.style.height=h+'px';
-    el.style.zIndex=2+i;
+    el.style.zIndex=photo.cover ? 20+i : 2+i;
     el.style.setProperty('--c',p.color);
     el.style.setProperty('--g',`rgba(${p.rgb},.15)`);
     el.setAttribute('role','button'); el.setAttribute('tabindex','0');
     el.setAttribute('aria-label',`${photo.title} — ${p.name}`);
-    /* Replace picsum with your actual image src */
-    el.innerHTML=`<img class="node-img" src="https://picsum.photos/seed/${photo.seed}/${w*2}/${h*2}" alt="${photo.title}" width="${w}" height="${h}" loading="${i<8?'eager':'lazy'}" draggable="false">`;
+    el.innerHTML=`<img class="node-img" src="${photo.img}" alt="${photo.title}" width="${w}" height="${h}" loading="${i<4?'eager':'lazy'}" draggable="false">`;
+    if (photo.cover) {
+      const lbl=document.createElement('div');
+      lbl.className='cover-label';
+      lbl.textContent=p.name;
+      el.appendChild(lbl);
+    }
     el.addEventListener('mouseenter', ()=>onEnter(photo));
     el.addEventListener('mouseleave', ()=>onLeave());
     el.addEventListener('mousedown',  e =>onDown(e,photo,el));
@@ -1103,6 +1114,7 @@ function onDown(e,photo,el) {
    DETAIL PANEL
 ══════════════════════════════════════════════ */
 function openDetail(photo) {
+  document.querySelectorAll('.cover-label').forEach(l => l.classList.add('dismissed'));
   const p=PROJ[photo.proj];
   selectedId=photo.id;
 
