@@ -45,10 +45,23 @@
       -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%;
       background: #fff; cursor: pointer;
     }
+
+    /* ── zoom-out transition overlay ── */
+    #zoom-out {
+      position: fixed; inset: 0; z-index: 1000;
+      background: #111110;
+      clip-path: circle(0% at 50% 50%);
+      transition: clip-path 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    #zoom-out.active {
+      clip-path: circle(150vmax at var(--ox, 50%) var(--oy, 50%));
+    }
   </style>
 </head>
 <body>
 <canvas id="c"></canvas>
+<div id="zoom-out"></div>
 
 <button id="gear" title="Settings">⚙</button>
 <div id="panel">
@@ -86,12 +99,7 @@ const cfg = {
 
 const CELL = 26;
 
-const WORDS = [
-  'light','shadow','frame','grain','moment','eye','lens','depth',
-  'exposure','shutter','aperture','focus','blur','tone','contrast',
-  'portrait','landscape','still','motion','time','color','dark',
-  'form','texture','layer','edge','silence','space','line','shape',
-];
+const WORDS = ['derek', 'kwok'];
 
 /* ── canvas ── */
 const canvas = document.getElementById('c');
@@ -126,8 +134,15 @@ function buildGrid() {
     for (let col = 0; col < cols; col++) {
       const ox = col * CELL + CELL / 2;
       const oy = row * CELL + CELL / 2;
-      const i  = (Math.round(oy) * off.width + Math.round(ox)) * 4;
-      const brightness = (px[i] + px[i+1] + px[i+2]) / 3 / 255;
+      let total = 0;
+      const x0 = col * CELL, y0 = row * CELL;
+      for (let sy = y0; sy < Math.min(y0 + CELL, off.height); sy++) {
+        for (let sx = x0; sx < Math.min(x0 + CELL, off.width); sx++) {
+          const idx = (sy * off.width + sx) * 4;
+          total += (px[idx] + px[idx + 1] + px[idx + 2]) / 3;
+        }
+      }
+      const brightness = total / (CELL * CELL) / 255;
       cells.push({ ox, oy, x: ox, y: oy, vx: 0, vy: 0, brightness, word: WORDS[wi++ % WORDS.length] });
     }
   }
@@ -179,12 +194,12 @@ function draw() {
   ctx.textAlign    = 'center';
   ctx.textBaseline = 'middle';
 
-  ctx.globalAlpha = 0.048;
+  ctx.globalAlpha = 0.025;
   ctx.fillStyle   = '#fff';
   for (const c of dim) ctx.fillText(c.word, c.x, c.y);
 
   for (const c of bright) {
-    ctx.globalAlpha = 0.55 + c.brightness * 0.45;
+    ctx.globalAlpha = 0.6 + c.brightness * 0.4;
     ctx.fillText(c.word, c.x, c.y);
   }
   ctx.globalAlpha = 1;
@@ -220,6 +235,19 @@ document.getElementById('gear').addEventListener('click', () => {
 
 /* ── events ── */
 window.addEventListener('resize', resize);
+
+canvas.addEventListener('contextmenu', e => {
+  e.preventDefault();
+  const ox = (e.clientX / window.innerWidth  * 100).toFixed(1) + '%';
+  const oy = (e.clientY / window.innerHeight * 100).toFixed(1) + '%';
+  const ov = document.getElementById('zoom-out');
+  ov.style.setProperty('--ox', ox);
+  ov.style.setProperty('--oy', oy);
+  ov.style.pointerEvents = 'all';
+  requestAnimationFrame(() => ov.classList.add('active'));
+  ov.addEventListener('transitionend', () => { window.location.href = 'gallery.html'; }, { once: true });
+});
+
 canvas.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
 canvas.addEventListener('touchmove', e => {
