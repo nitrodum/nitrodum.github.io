@@ -106,12 +106,8 @@
       transition:box-shadow .22s,border-color .22s;
     }
     .node-frame { position:absolute; top:24px; left:0; right:0; bottom:0; overflow:hidden; }
-    .node-dot {
-      position:absolute; top:8px; left:10px;
-      width:8px; height:8px; border-radius:50%;
-      background:#E53935; z-index:5; pointer-events:none;
-      transition:background .3s ease;
-    }
+    .node-dots { position:absolute; top:8px; left:10px; display:flex; gap:5px; z-index:5; pointer-events:none; }
+    .node-dot  { width:8px; height:8px; border-radius:50%; flex-shrink:0; transition:background .3s ease; }
     .node:hover {
       box-shadow:0 8px 28px rgba(0,0,0,.13),0 18px 52px rgba(0,0,0,.08);
       z-index:10!important;
@@ -534,10 +530,11 @@
       <p class="pp-section-title">Photo dots</p>
       <p class="pp-desc" style="margin-bottom:12px">Colour of the marker above each photo.</p>
       <div class="pp-presets" id="dot-presets">
-        <button class="pp-preset active" data-dot="red">Red</button>
+        <button class="pp-preset active" data-dot="mac">Mac</button>
+        <button class="pp-preset" data-dot="mono">Project</button>
+        <button class="pp-preset" data-dot="red">Red</button>
         <button class="pp-preset" data-dot="white">White</button>
         <button class="pp-preset" data-dot="gold">Gold</button>
-        <button class="pp-preset" data-dot="project">Project</button>
         <button class="pp-preset" data-dot="random">Random</button>
       </div>
     </div>
@@ -743,7 +740,7 @@ PHOTOS.forEach(p => {
     x: cc.x + (Math.random()-.5)*180,
     y: cc.y + (Math.random()-.5)*180,
     vx:0, vy:0, fixed:false,
-    dotColor: `hsl(${Math.random()*360|0},60%,62%)`
+    dotColors: [0,1,2].map(()=>`hsl(${Math.random()*360|0},60%,62%)`)
   };
 });
 
@@ -1015,9 +1012,10 @@ function renderNodes() {
     el.style.setProperty('--g',`rgba(${p.rgb},.15)`);
     el.setAttribute('role','button'); el.setAttribute('tabindex','0');
     el.setAttribute('aria-label',`${photo.title} — ${p.name}`);
-    const dot=document.createElement('div');
-    dot.className='node-dot';
-    el.appendChild(dot);
+    const dots=document.createElement('div');
+    dots.className='node-dots';
+    dots.innerHTML='<div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>';
+    el.appendChild(dots);
     const frame=document.createElement('div');
     frame.className='node-frame';
     frame.innerHTML=`<img class="node-img" src="${photo.img}" alt="${photo.title}" width="${w}" height="${h}" loading="${i<4?'eager':'lazy'}" draggable="false">`;
@@ -1440,18 +1438,20 @@ function initPhysicsPanel() {
    BOOT
 ══════════════════════════════════════════════ */
 /* ── Dot colours ── */
-const DOT_COLORS = {
-  red:     id => '#E53935',
-  white:   id => '#F0EDE8',
-  gold:    id => '#C9A84C',
-  project: id => PROJ[byId[id].proj].color,
-  random:  id => NS[id].dotColor,
+const DOT_PRESETS = {
+  mac:     id => ['#FF5F57','#FEBC2E','#28C840'],
+  mono:    id => { const c=PROJ[byId[id].proj].color; return [c,c,c]; },
+  red:     id => ['#E53935','#EF6C6A','#F5A09F'],
+  white:   id => ['#E8E5E0','#D0CDC8','#B8B5B0'],
+  gold:    id => ['#C9A84C','#D4B86A','#DFC888'],
+  random:  id => NS[id].dotColors,
 };
-let dotMode = 'red';
+let dotMode = 'mac';
 function applyDotColors() {
   PHOTOS.forEach(p => {
-    const dot = document.querySelector(`#n-${p.id} .node-dot`);
-    if (dot) dot.style.background = DOT_COLORS[dotMode](p.id);
+    const dotEls=[...document.querySelectorAll(`#n-${p.id} .node-dot`)];
+    const colors=DOT_PRESETS[dotMode](p.id);
+    dotEls.forEach((d,i)=>{ if(colors[i]) d.style.background=colors[i]; });
   });
 }
 
