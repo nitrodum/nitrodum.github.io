@@ -277,31 +277,108 @@
     #tt-proj  { display:flex; align-items:center; gap:5px; font-size:9.5px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--dim); margin-top:3px; }
     #tt-dot   { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
 
-    /* ─── DETAIL PANEL ─── */
-    #panel {
-      position:fixed; top:var(--nav); right:0; bottom:0; width:390px; z-index:300;
-      background:rgba(255,255,255,.97); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-      border-left:1px solid rgba(0,0,0,.08);
-      display:flex; flex-direction:column;
-      transform:translateX(100%); transition:transform .42s cubic-bezier(.22,1,.36,1);
-      overflow:hidden;
+    /* ─── PHOTO WINDOW ─── */
+    #photo-window {
+      position:fixed; z-index:380; display:none; flex-direction:column;
+      border-radius:10px; overflow:hidden;
+      box-shadow:0 28px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.07);
+      /* colour tokens — dark default */
+      --pw-bar:     #2C2B2A;
+      --pw-bg:      #1A1918;
+      --pw-info-bg: #222120;
+      --pw-border:  rgba(255,255,255,.07);
+      --pw-text:    #E8E6E2;
+      --pw-dim:     #6A6A6A;
+      --pw-tab-c:   rgba(255,255,255,.36);
+      --pw-tab-act: rgba(255,255,255,.07);
     }
-    #panel.open { transform:translateX(0); box-shadow:-10px 0 44px rgba(0,0,0,.07); }
-    #p-img-wrap { position:relative; flex-shrink:0; width:100%; aspect-ratio:4/3; overflow:hidden; background:#ECEAE6; }
-    #p-img { width:100%; height:100%; object-fit:cover; display:block; }
-    #p-close,#p-locate { position:absolute; top:11px; border:1px solid rgba(0,0,0,.1); cursor:pointer; color:var(--text); background:rgba(255,255,255,.92); backdrop-filter:blur(8px); font-family:'DM Sans',sans-serif; transition:all .18s; }
-    #p-close { left:11px; width:29px; height:29px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; }
-    #p-close:hover { background:var(--text); color:#fff; }
-    #p-locate { right:11px; height:27px; padding:0 11px; border-radius:100px; display:flex; align-items:center; gap:5px; font-size:9.5px; font-weight:500; letter-spacing:.07em; text-transform:uppercase; }
-    #p-locate:hover { background:var(--text); color:#fff; }
-    #p-body { padding:20px 22px 40px; overflow-y:auto; flex:1; }
-    #p-body::-webkit-scrollbar { width:3px; }
-    #p-body::-webkit-scrollbar-thumb { background:rgba(0,0,0,.08); border-radius:2px; }
-    #p-badge { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:100px; font-size:9px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; border:1px solid; margin-bottom:12px; }
-    #p-badge .bd { width:5px; height:5px; border-radius:50%; background:currentColor; }
-    #p-title { font-family:'Cal Sans',sans-serif; font-size:27px; font-weight:400; line-height:1.15; margin-bottom:11px; }
-    #p-desc  { font-size:12.5px; line-height:1.82; color:#666; margin-bottom:20px; }
-    #p-meta { display:grid; grid-template-columns:1fr 1fr; border:1px solid rgba(0,0,0,.07); border-radius:3px; overflow:hidden; margin-bottom:22px; }
+    [data-theme="light"] #photo-window {
+      box-shadow:0 28px 80px rgba(0,0,0,.22),0 0 0 1px rgba(0,0,0,.09);
+      --pw-bar:     #E8E8E8;
+      --pw-bg:      #FFFFFF;
+      --pw-info-bg: #F8F7F5;
+      --pw-border:  rgba(0,0,0,.08);
+      --pw-text:    #1A1A1A;
+      --pw-dim:     #999;
+      --pw-tab-c:   rgba(0,0,0,.42);
+      --pw-tab-act: rgba(0,0,0,.05);
+    }
+    #photo-window.open { display:flex; }
+
+    #pw-titlebar {
+      height:40px; flex-shrink:0; background:var(--pw-bar);
+      border-bottom:1px solid var(--pw-border);
+      display:flex; align-items:center; cursor:grab; user-select:none;
+    }
+    #pw-titlebar.grabbing { cursor:grabbing; }
+
+    .pw-trafficlights { display:flex; gap:6px; align-items:center; padding:0 14px; flex-shrink:0; }
+    .pw-tl { width:12px; height:12px; border-radius:50%; cursor:pointer; flex-shrink:0; transition:opacity .15s; }
+    .pw-tl:hover { opacity:.75; }
+
+    #pw-tabs { display:flex; align-items:stretch; flex:1; overflow-x:auto; height:100%; min-width:0; }
+    #pw-tabs::-webkit-scrollbar { display:none; }
+    .pw-tab {
+      display:flex; align-items:center; gap:7px;
+      padding:0 13px; height:100%; flex-shrink:0; max-width:160px;
+      border-right:1px solid var(--pw-border); cursor:pointer;
+      color:var(--pw-tab-c); font-size:11px; white-space:nowrap; overflow:hidden;
+      transition:background .14s,color .14s;
+    }
+    .pw-tab:hover { background:var(--pw-tab-act); color:var(--pw-text); }
+    .pw-tab.active { background:var(--pw-tab-act); color:var(--pw-text); }
+    .pw-tab-thumb { width:18px; height:14px; border-radius:2px; object-fit:cover; flex-shrink:0; opacity:.65; pointer-events:none; }
+    .pw-tab.active .pw-tab-thumb { opacity:1; }
+    .pw-tab-name { overflow:hidden; text-overflow:ellipsis; pointer-events:none; }
+
+    #pw-locate-btn {
+      margin:0 10px; flex-shrink:0; height:22px; padding:0 10px; border-radius:100px;
+      font-size:9px; font-weight:500; letter-spacing:.07em; text-transform:uppercase;
+      border:1px solid var(--pw-border); background:transparent; color:var(--pw-tab-c);
+      cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:5px;
+      font-family:'DM Sans',sans-serif;
+    }
+    #pw-locate-btn:hover { background:var(--pw-tab-act); color:var(--pw-text); }
+
+    #pw-body { display:flex; flex:1; overflow:hidden; background:var(--pw-bg); }
+    #pw-img-wrap { flex:0 0 55%; overflow:hidden; background:#000; }
+    #pw-img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    #pw-info {
+      flex:1; overflow-y:auto; padding:20px 18px 40px;
+      background:var(--pw-info-bg); color:var(--pw-text);
+      border-left:1px solid var(--pw-border);
+    }
+    #pw-info::-webkit-scrollbar { width:3px; }
+    #pw-info::-webkit-scrollbar-thumb { background:var(--pw-border); border-radius:2px; }
+
+    #pw-badge {
+      display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:100px;
+      font-size:9px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+      border:1px solid; margin-bottom:11px;
+    }
+    #pw-title { font-family:'Cal Sans',sans-serif; font-size:20px; font-weight:400; line-height:1.15; margin-bottom:10px; }
+    #pw-desc  { font-size:11.5px; line-height:1.8; color:var(--pw-dim); margin-bottom:16px; }
+    #pw-meta  { display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--pw-border); border-radius:3px; overflow:hidden; margin-bottom:18px; }
+    .pw-mi { padding:8px 10px; border-right:1px solid var(--pw-border); border-bottom:1px solid var(--pw-border); }
+    .pw-mi:nth-child(2n)        { border-right:none; }
+    .pw-mi:nth-last-child(-n+2) { border-bottom:none; }
+    .pw-mk { font-size:8px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--pw-dim); margin-bottom:3px; }
+    .pw-mv { font-size:11px; color:var(--pw-text); }
+    .pw-sl { font-size:8.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--pw-dim); margin-bottom:8px; }
+    #pw-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:18px; }
+    .pw-tag {
+      padding:3px 9px; border-radius:100px; font-size:10px;
+      border:1px solid var(--pw-border); color:var(--pw-dim);
+      background:transparent; cursor:pointer; transition:all .15s; font-family:'DM Sans',sans-serif;
+    }
+    .pw-tag:hover,.pw-tag.on { background:var(--pw-text); color:var(--pw-bg); border-color:var(--pw-text); }
+    #pw-related { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; }
+    .pw-rt { aspect-ratio:4/3; overflow:hidden; border-radius:2px; border:1px solid var(--pw-border); cursor:pointer; position:relative; }
+    .pw-rt img { width:100%; height:100%; object-fit:cover; transition:transform .3s; display:block; }
+    .pw-rt:hover img { transform:scale(1.08); }
+    .pw-rt-lbl { position:absolute; bottom:0; left:0; right:0; padding:4px 5px 3px; background:linear-gradient(to top,rgba(0,0,0,.6),transparent); font-family:'Cal Sans',sans-serif; font-size:9px; color:#fff; opacity:0; transition:opacity .2s; }
+    .pw-rt:hover .pw-rt-lbl { opacity:1; }
     .mi { padding:9px 12px; border-right:1px solid rgba(0,0,0,.07); border-bottom:1px solid rgba(0,0,0,.07); }
     .mi:nth-child(2n)        { border-right:none; }
     .mi:nth-last-child(-n+2) { border-bottom:none; }
@@ -552,6 +629,42 @@
 <div id="tt" aria-hidden="true">
   <div id="tt-title"></div>
   <div id="tt-proj"><span id="tt-dot"></span><span id="tt-pname"></span></div>
+</div>
+
+<!-- ══ PHOTO WINDOW ══ -->
+<div id="photo-window" role="dialog" aria-label="Photo detail" aria-hidden="true">
+  <div id="pw-titlebar">
+    <div class="pw-trafficlights">
+      <div class="pw-tl" id="pw-close-btn" style="background:#FF5F57" title="Close"></div>
+      <div class="pw-tl" style="background:#FEBC2E"></div>
+      <div class="pw-tl" style="background:#28C840"></div>
+    </div>
+    <div id="pw-tabs"></div>
+    <button id="pw-locate-btn">
+      <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><line x1="5" y1="0" x2="5" y2="1.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="5" y1="8.3" x2="5" y2="10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="0" y1="5" x2="1.7" y2="5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="8.3" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Locate
+    </button>
+  </div>
+  <div id="pw-body">
+    <div id="pw-img-wrap">
+      <img id="pw-img" src="" alt="" draggable="false">
+    </div>
+    <div id="pw-info">
+      <div id="pw-badge"></div>
+      <h2 id="pw-title"></h2>
+      <p id="pw-desc"></p>
+      <div id="pw-meta">
+        <div class="pw-mi"><p class="pw-mk">Location</p><p class="pw-mv" id="pw-m-loc">—</p></div>
+        <div class="pw-mi"><p class="pw-mk">Year</p>    <p class="pw-mv" id="pw-m-yr">—</p></div>
+        <div class="pw-mi"><p class="pw-mk">Camera</p>  <p class="pw-mv" id="pw-m-cam">—</p></div>
+        <div class="pw-mi"><p class="pw-mk">Format</p>  <p class="pw-mv" id="pw-m-fmt">—</p></div>
+      </div>
+      <p class="pw-sl">Tags</p>
+      <div id="pw-tags"></div>
+      <p class="pw-sl" id="pw-rel-lbl" style="margin-top:18px">Related</p>
+      <div id="pw-related"></div>
+    </div>
+  </div>
 </div>
 
 <!-- ══ DETAIL PANEL ══ -->
@@ -1134,75 +1247,168 @@ function onDown(e,photo,el) {
 }
 
 /* ══════════════════════════════════════════════
-   DETAIL PANEL
+   PHOTO WINDOW
 ══════════════════════════════════════════════ */
-function openDetail(photo) {
-  document.querySelectorAll('.cover-label').forEach(l => l.classList.add('dismissed'));
-  const p=PROJ[photo.proj];
-  selectedId=photo.id;
+let pwCurrentPhoto = null;
 
-  // ── Compute tag siblings ──
+function openPhotoWindow(photo) {
+  document.querySelectorAll('.cover-label').forEach(l => l.classList.add('dismissed'));
+  selectedId = photo.id;
+  pwCurrentPhoto = photo;
+
+  // Tag siblings
   tagSiblingIds.clear();
   PHOTOS.forEach(other => {
     if (other.id === photo.id) return;
-    const shared = photo.tags.some(t => other.tags.includes(t));
-    if (shared) tagSiblingIds.add(other.id);
+    if (photo.tags.some(t => other.tags.includes(t))) tagSiblingIds.add(other.id);
   });
 
-  // ── Node visuals ──
-  document.querySelectorAll('.node').forEach(el=>el.classList.remove('selected'));
+  // Node visuals
+  document.querySelectorAll('.node').forEach(el => el.classList.remove('selected'));
   nodeEls[photo.id]?.classList.add('selected');
   applySelectionVisuals(photo);
-
-  // ── Tag lines ──
   buildTagLines(photo);
-
-  // ── Heat sim so pull-in is visible ──
   reheat(0.38);
 
-  document.getElementById('p-img').src=photo.img;
-  document.getElementById('p-img').alt=photo.title;
+  // Build project tabs
+  const projPhotos = PHOTOS.filter(p => p.proj === photo.proj);
+  const tabsEl = document.getElementById('pw-tabs');
+  tabsEl.innerHTML = projPhotos.map(p => `<div class="pw-tab${p.id===photo.id?' active':''}" data-id="${p.id}"><img class="pw-tab-thumb" src="${p.img}" alt="${p.title}"><span class="pw-tab-name">${p.title}</span></div>`).join('');
+  tabsEl.querySelectorAll('.pw-tab').forEach(tab => {
+    tab.addEventListener('click', () => loadWindowPhoto(byId[tab.dataset.id]));
+  });
 
-  const badge=document.getElementById('p-badge');
-  badge.style.color=p.color; badge.style.borderColor=p.color+'44'; badge.style.background=`rgba(${p.rgb},.07)`;
-  document.getElementById('p-badge-txt').textContent=p.name;
-  document.getElementById('p-title').textContent=photo.title;
-  document.getElementById('p-desc').textContent=photo.desc;
-  document.getElementById('m-loc').textContent=photo.meta?.loc||'—';
-  document.getElementById('m-yr').textContent=photo.meta?.yr||'—';
-  document.getElementById('m-cam').textContent=photo.meta?.cam||'—';
-  document.getElementById('m-fmt').textContent=photo.meta?.fmt||'—';
+  // Size & center on first open
+  const win = document.getElementById('photo-window');
+  if (!win.classList.contains('open')) {
+    const ww = Math.min(window.innerWidth  * 0.72, 1000);
+    const wh = Math.min(window.innerHeight * 0.72, 680);
+    win.style.width  = ww + 'px';
+    win.style.height = wh + 'px';
+    win.style.left   = Math.round((window.innerWidth  - ww) / 2) + 'px';
+    win.style.top    = Math.round((window.innerHeight - wh) / 2) + 'px';
+  }
 
-  document.getElementById('p-tags').innerHTML=photo.tags.map(t=>`<button class="tc${filterTag===t?' on':''}" data-tag="${t}"># ${t}</button>`).join('');
-  document.querySelectorAll('.tc').forEach(c=>c.addEventListener('click',()=>setTag(c.dataset.tag)));
-
-  const rels=photo.rel.map(id=>byId[id]).filter(Boolean);
-  const relSec=document.getElementById('rel-sec'), relEl=document.getElementById('p-related');
-  if (rels.length) {
-    relSec.style.display='';
-    relEl.innerHTML=rels.map(r=>`<div class="rt" data-id="${r.id}" role="button" tabindex="0" title="${r.title}"><img src="${r.img}" alt="${r.title}" loading="lazy" width="240" height="180"><div class="rt-lbl">${r.title}</div></div>`).join('');
-    relEl.querySelectorAll('.rt').forEach(t=>{
-      const go=()=>{const rp=byId[t.dataset.id]; panTo(rp,520,()=>openDetail(rp));};
-      t.addEventListener('click',go);
-      t.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
-    });
-  } else relSec.style.display='none';
-
-  document.getElementById('panel').classList.add('open');
-  document.getElementById('panel').setAttribute('aria-hidden','false');
-  document.getElementById('p-locate').onclick=()=>panTo(photo,500);
+  win.classList.add('open');
+  win.setAttribute('aria-hidden', 'false');
+  loadWindowPhoto(photo);
 }
-function closeDetail() {
-  selectedId=null;
+
+function loadWindowPhoto(photo) {
+  pwCurrentPhoto = photo;
+  const p = PROJ[photo.proj];
+
+  // Active tab
+  document.querySelectorAll('.pw-tab').forEach(t => t.classList.toggle('active', t.dataset.id === photo.id));
+
+  // Image
+  document.getElementById('pw-img').src = photo.img;
+  document.getElementById('pw-img').alt = photo.title;
+
+  // Badge
+  const badge = document.getElementById('pw-badge');
+  badge.style.color       = p.color;
+  badge.style.borderColor = p.color + '55';
+  badge.style.background  = `rgba(${p.rgb},.1)`;
+  badge.innerHTML = `<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:${p.color};margin-right:4px;vertical-align:middle;"></span>${p.name}`;
+
+  // Title / desc
+  document.getElementById('pw-title').textContent = photo.title;
+  document.getElementById('pw-desc').textContent  = photo.desc;
+
+  // Meta
+  document.getElementById('pw-m-loc').textContent = photo.meta?.loc || '—';
+  document.getElementById('pw-m-yr').textContent  = photo.meta?.yr  || '—';
+  document.getElementById('pw-m-cam').textContent = photo.meta?.cam || '—';
+  document.getElementById('pw-m-fmt').textContent = photo.meta?.fmt || '—';
+
+  // Tags
+  document.getElementById('pw-tags').innerHTML = photo.tags.map(t =>
+    `<button class="pw-tag${filterTag===t?' on':''}" data-tag="${t}"># ${t}</button>`
+  ).join('');
+  document.querySelectorAll('.pw-tag').forEach(c => c.addEventListener('click', () => setTag(c.dataset.tag)));
+
+  // Related
+  const rels = photo.rel.map(id => byId[id]).filter(Boolean);
+  const relEl  = document.getElementById('pw-related');
+  const relLbl = document.getElementById('pw-rel-lbl');
+  if (rels.length) {
+    relLbl.style.display = '';
+    relEl.innerHTML = rels.map(r =>
+      `<div class="pw-rt" data-id="${r.id}" role="button" tabindex="0" title="${r.title}"><img src="${r.img}" alt="${r.title}" loading="lazy"><div class="pw-rt-lbl">${r.title}</div></div>`
+    ).join('');
+    relEl.querySelectorAll('.pw-rt').forEach(t => {
+      const go = () => loadWindowPhoto(byId[t.dataset.id]);
+      t.addEventListener('click', go);
+      t.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+    });
+  } else {
+    relLbl.style.display = 'none';
+    relEl.innerHTML = '';
+  }
+
+  // Locate
+  document.getElementById('pw-locate-btn').onclick = () => panTo(photo, 500);
+
+  // Sync node selection to newly loaded photo
+  selectedId = photo.id;
+  tagSiblingIds.clear();
+  PHOTOS.forEach(other => {
+    if (other.id === photo.id) return;
+    if (photo.tags.some(t => other.tags.includes(t))) tagSiblingIds.add(other.id);
+  });
+  document.querySelectorAll('.node').forEach(el => el.classList.remove('selected'));
+  nodeEls[photo.id]?.classList.add('selected');
+  applySelectionVisuals(photo);
+  buildTagLines(photo);
+}
+
+function closePhotoWindow() {
+  document.getElementById('photo-window').classList.remove('open');
+  document.getElementById('photo-window').setAttribute('aria-hidden', 'true');
+  selectedId = null;
+  pwCurrentPhoto = null;
   tagSiblingIds.clear();
   clearTagLines();
   clearSelectionVisuals();
-  document.getElementById('panel').classList.remove('open');
-  document.getElementById('panel').setAttribute('aria-hidden','true');
-  document.querySelectorAll('.node').forEach(el=>el.classList.remove('selected'));
-  document.querySelectorAll('.cover-label').forEach(l=>l.classList.remove('dismissed'));
-  reheat(0.22);  // let nodes drift back to their clusters gently
+  document.querySelectorAll('.node').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.cover-label').forEach(l => l.classList.remove('dismissed'));
+  reheat(0.22);
 }
+
+function initPhotoWindow() {
+  const win      = document.getElementById('photo-window');
+  const titlebar = document.getElementById('pw-titlebar');
+
+  // Close on red dot
+  document.getElementById('pw-close-btn').addEventListener('click', closePhotoWindow);
+
+  // Drag via titlebar
+  let dragging = false, dragDx = 0, dragDy = 0;
+  titlebar.addEventListener('mousedown', e => {
+    if (e.target.closest('.pw-tl')) return;
+    dragging = true;
+    const rect = win.getBoundingClientRect();
+    dragDx = e.clientX - rect.left;
+    dragDy = e.clientY - rect.top;
+    titlebar.classList.add('grabbing');
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    win.style.left = (e.clientX - dragDx) + 'px';
+    win.style.top  = (e.clientY - dragDy) + 'px';
+  });
+  window.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    titlebar.classList.remove('grabbing');
+  });
+}
+
+/* ── openDetail / closeDetail — thin wrappers kept for existing call-sites ── */
+function openDetail(photo)  { openPhotoWindow(photo); }
+function closeDetail()      { closePhotoWindow(); }
 
 /* ══════════════════════════════════════════════
    PAN / ZOOM / TRANSFORM
@@ -1472,6 +1678,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   initControls();
   initOverlays();
   initPhysicsPanel();
+  initPhotoWindow();
   updateStatus();
 
   const cx=5050, cy=5200;
