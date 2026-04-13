@@ -99,11 +99,18 @@
 
     /* ─── NODES ─── */
     .node {
-      position:absolute; overflow:hidden; cursor:pointer;
+      position:absolute; overflow:visible; cursor:pointer;
       background:#fff; border:1px solid rgba(0,0,0,.09); border-radius:3px;
       box-shadow:0 2px 7px rgba(0,0,0,.07),0 6px 22px rgba(0,0,0,.05);
       will-change:transform; user-select:none;
       transition:box-shadow .22s,border-color .22s;
+    }
+    .node-frame { position:absolute; inset:0; overflow:hidden; border-radius:inherit; }
+    .node-dot {
+      position:absolute; top:-5px; left:-5px;
+      width:8px; height:8px; border-radius:50%;
+      background:#E53935; z-index:5; pointer-events:none;
+      transition:background .3s ease;
     }
     .node:hover {
       box-shadow:0 8px 28px rgba(0,0,0,.13),0 18px 52px rgba(0,0,0,.08);
@@ -522,6 +529,19 @@
       </div>
     </div>
 
+    <!-- Dot -->
+    <div class="pp-section">
+      <p class="pp-section-title">Photo dots</p>
+      <p class="pp-desc" style="margin-bottom:12px">Colour of the marker above each photo.</p>
+      <div class="pp-presets" id="dot-presets">
+        <button class="pp-preset active" data-dot="red">Red</button>
+        <button class="pp-preset" data-dot="white">White</button>
+        <button class="pp-preset" data-dot="gold">Gold</button>
+        <button class="pp-preset" data-dot="project">Project</button>
+        <button class="pp-preset" data-dot="random">Random</button>
+      </div>
+    </div>
+
     <!-- Actions -->
     <div class="pp-section">
       <p class="pp-section-title">Actions</p>
@@ -722,7 +742,8 @@ PHOTOS.forEach(p => {
   NS[p.id] = {
     x: cc.x + (Math.random()-.5)*180,
     y: cc.y + (Math.random()-.5)*180,
-    vx:0, vy:0, fixed:false
+    vx:0, vy:0, fixed:false,
+    dotColor: `hsl(${Math.random()*360|0},60%,62%)`
   };
 });
 
@@ -994,13 +1015,16 @@ function renderNodes() {
     el.style.setProperty('--g',`rgba(${p.rgb},.15)`);
     el.setAttribute('role','button'); el.setAttribute('tabindex','0');
     el.setAttribute('aria-label',`${photo.title} — ${p.name}`);
-    el.innerHTML=`<img class="node-img" src="${photo.img}" alt="${photo.title}" width="${w}" height="${h}" loading="${i<4?'eager':'lazy'}" draggable="false">`;
+    el.innerHTML=`<div class="node-frame"><img class="node-img" src="${photo.img}" alt="${photo.title}" width="${w}" height="${h}" loading="${i<4?'eager':'lazy'}" draggable="false"></div>`;
     if (photo.cover) {
       const lbl=document.createElement('div');
       lbl.className='cover-label';
       lbl.textContent=p.name;
       el.appendChild(lbl);
     }
+    const dot=document.createElement('div');
+    dot.className='node-dot';
+    el.appendChild(dot);
     el.addEventListener('mouseenter', ()=>onEnter(photo));
     el.addEventListener('mouseleave', ()=>onLeave());
     el.addEventListener('mousedown',  e =>onDown(e,photo,el));
@@ -1135,7 +1159,7 @@ function openDetail(photo) {
   // ── Heat sim so pull-in is visible ──
   reheat(0.38);
 
-  document.getElementById('p-img').src=`https://picsum.photos/seed/${photo.seed}/800/600`;
+  document.getElementById('p-img').src=photo.img;
   document.getElementById('p-img').alt=photo.title;
 
   const badge=document.getElementById('p-badge');
@@ -1155,7 +1179,7 @@ function openDetail(photo) {
   const relSec=document.getElementById('rel-sec'), relEl=document.getElementById('p-related');
   if (rels.length) {
     relSec.style.display='';
-    relEl.innerHTML=rels.map(r=>`<div class="rt" data-id="${r.id}" role="button" tabindex="0" title="${r.title}"><img src="https://picsum.photos/seed/${r.seed}/240/180" alt="${r.title}" loading="lazy" width="240" height="180"><div class="rt-lbl">${r.title}</div></div>`).join('');
+    relEl.innerHTML=rels.map(r=>`<div class="rt" data-id="${r.id}" role="button" tabindex="0" title="${r.title}"><img src="${r.img}" alt="${r.title}" loading="lazy" width="240" height="180"><div class="rt-lbl">${r.title}</div></div>`).join('');
     relEl.querySelectorAll('.rt').forEach(t=>{
       const go=()=>{const rp=byId[t.dataset.id]; panTo(rp,520,()=>openDetail(rp));};
       t.addEventListener('click',go);
@@ -1175,6 +1199,7 @@ function closeDetail() {
   document.getElementById('panel').classList.remove('open');
   document.getElementById('panel').setAttribute('aria-hidden','true');
   document.querySelectorAll('.node').forEach(el=>el.classList.remove('selected'));
+  document.querySelectorAll('.cover-label').forEach(l=>l.classList.remove('dismissed'));
   reheat(0.22);  // let nodes drift back to their clusters gently
 }
 
@@ -1411,10 +1436,35 @@ function initPhysicsPanel() {
 /* ══════════════════════════════════════════════
    BOOT
 ══════════════════════════════════════════════ */
+/* ── Dot colours ── */
+const DOT_COLORS = {
+  red:     id => '#E53935',
+  white:   id => '#F0EDE8',
+  gold:    id => '#C9A84C',
+  project: id => PROJ[byId[id].proj].color,
+  random:  id => NS[id].dotColor,
+};
+let dotMode = 'red';
+function applyDotColors() {
+  PHOTOS.forEach(p => {
+    const dot = document.querySelector(`#n-${p.id} .node-dot`);
+    if (dot) dot.style.background = DOT_COLORS[dotMode](p.id);
+  });
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
   buildPills();
   initSVG();
   renderNodes();
+  applyDotColors();
+  document.querySelectorAll('[data-dot]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      dotMode = btn.dataset.dot;
+      document.querySelectorAll('[data-dot]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyDotColors();
+    });
+  });
   initInteraction();
   initControls();
   initOverlays();
